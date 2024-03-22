@@ -22,15 +22,18 @@ use App\Http\Controllers\FakultasController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\KelasController;
 
-Route::get('/', function () {
-    return view('auth.login');
+use App\Http\Controllers\StokController;
+/* Route::get('/', function () { */
+/*     return view('auth.login'); */
+/* }); */
+
+Route::get('/', function() {
+    return view('include.welcome');
 });
 
 Route::middleware(['auth', 'verified', 'rolesChecker:admin'])->group(function() {
     Route::get('/dashboard', function () {
-        return view('include.welcome');
-    })->name('dashboard');
-});
+        return view('include.welcome'); })->name('dashboard'); });
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -46,6 +49,10 @@ Route::resources([
     'fakultas' => FakultasController::class,
     'prodi' => ProdiController::class,
     'kelas' => kelasController::class,
+]);
+
+Route::resources([
+    'stok' => StokController::class,
 ]);
 
 Route::controller(CustomController::class)->group(function() {

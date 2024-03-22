@@ -30,7 +30,7 @@ class TahunAkademikController extends Controller
         $rec =\DB::table('tahun_akademik')
             ->where('kode_tahun_akademik', $r->kode_tahun_akademik)
             ->first();
-        
+
             if($rec == null) {
                 \DB::table('tahun_akademik')
                         ->InsertGetId($x);
@@ -69,7 +69,7 @@ class TahunAkademikController extends Controller
 
                 return redirect()->route('tahunakademik.index')
                         ->with('id_tahun_akademik', $id_tahun_akademik);
-        
+
 
     }
 }
