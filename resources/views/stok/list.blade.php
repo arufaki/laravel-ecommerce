@@ -14,12 +14,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Data Tahun Akademik</h1>
+                        <h1>Data Stok</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Data Tahun Akademik</li>
+                            <li class="breadcrumb-item active">Data Stok</li>
                         </ol>
                     </div>
                 </div>
@@ -65,13 +65,13 @@
                                                 <td>{{ $record->deskripsi_barang?? '-' }}</td>
                                                 <td>{{ $record->pajang?? '-' }}</td>
                                                 <td>{{ $record->foto_barang?? '-' }}</td>
-                                                <td><a href="{{--Route('tahunakademik.edit', $record->id_tahun_akademik)--}}"
+                                                <td><a href="{{Route('stok.edit', $record->id_stok)}}"
                                                         class="btn btn-primary">Edit</a>
                                                 </td>
 
                                                 <td>
                                                     <form
-                                                        action="{{--Route('tahunakademik.destroy', $record->id_tahun_akademik)--}}"
+                                                        action="{{Route('stok.destroy', $record->id_stok)}}"
                                                         method="POST" onsubmit="return confirm('Yakin Ingin Menghapus ?')">
                                                         @csrf
                                                         @method('DELETE')
@@ -84,7 +84,7 @@
                                 </table>
                                 <div class="d-flex justify-content-between mt-3">
                                     <a href="{{ url('/') }}" class="btn btn-danger">Kembali</a>
-                                    <a href="{{ url('tahunakademik/create') }}" class="btn btn-primary">Tambah Data</a>
+                                    <a href="{{ url('stok/create') }}" class="btn btn-primary">Tambah Data</a>
                                 </div>
                             </div>
                             <!-- /.card-body -->
