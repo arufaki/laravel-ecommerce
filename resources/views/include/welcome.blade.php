@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Web Dinamis | Dashboard KRS</title>
+    <title>Web Dinamis | Dashboard Stok</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -64,7 +64,7 @@
             <a href="{{url('/')}}" class="brand-link">
                 <img src="{{ url('lte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">Dasboard KRS</span>
+                <span class="brand-text font-weight-light">Dashboard Seller</span>
             </a>
 
             <!-- Sidebar -->

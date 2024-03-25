@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 27, 2024 at 02:10 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Host: localhost
+-- Generation Time: Mar 25, 2024 at 08:12 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,22 @@ SET time_zone = "+00:00";
 --
 -- Database: `dbuniv`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `beli`
+--
+
+CREATE TABLE `beli` (
+  `id_pembelian` bigint(20) UNSIGNED NOT NULL,
+  `no_bukti` int(11) NOT NULL,
+  `tanggal` date NOT NULL,
+  `keterangan` varchar(255) NOT NULL,
+  `id_pemasok` bigint(20) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -102,6 +118,22 @@ INSERT INTO `jenjang` (`id_jenjang`, `nama_jenjang`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `jual`
+--
+
+CREATE TABLE `jual` (
+  `id_penjualan` bigint(20) UNSIGNED NOT NULL,
+  `no_bukti` int(11) NOT NULL,
+  `tanggal` date NOT NULL,
+  `keterangan` varchar(255) NOT NULL,
+  `id_pelanggan` bigint(20) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `kelas`
 --
 
@@ -143,7 +175,33 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_000000_create_users_table', 1),
 (2, '2014_10_12_100000_create_password_reset_tokens_table', 1),
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
-(4, '2019_12_14_000001_create_personal_access_tokens_table', 1);
+(4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(5, '2024_03_11_151624_create_tbsatuan', 2),
+(6, '2024_03_11_151657_create_tbpelanggan', 2),
+(7, '2024_03_11_151701_create_tbpemasok', 2),
+(8, '2024_03_18_080840_create_tbkategori', 2),
+(9, '2024_03_11_151717_create_jual', 3),
+(10, '2024_03_11_151720_create_beli', 3),
+(11, '2024_03_18_073803_create_tbstok', 3),
+(12, '2024_03_11_151727_create_mutasi', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mutasi`
+--
+
+CREATE TABLE `mutasi` (
+  `id_mutasi` bigint(20) UNSIGNED NOT NULL,
+  `no_bukti` int(11) NOT NULL,
+  `masuk_keluar` varchar(255) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `harga` int(11) NOT NULL,
+  `keterangan` varchar(255) NOT NULL,
+  `id_stok` bigint(20) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -255,6 +313,18 @@ INSERT INTO `tahun_akademik` (`id_tahun_akademik`, `kode_tahun_akademik`, `nama_
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbkategori`
+--
+
+CREATE TABLE `tbkategori` (
+  `id_kategori` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbldosen`
 --
 
@@ -316,6 +386,83 @@ INSERT INTO `tblmhs` (`id`, `nim`, `nama`, `jenis_kelamin`, `alamat`, `nohp`, `i
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbpelanggan`
+--
+
+CREATE TABLE `tbpelanggan` (
+  `id_pelanggan` bigint(20) UNSIGNED NOT NULL,
+  `kode_pelanggan` int(11) NOT NULL,
+  `nama_pelanggan` varchar(255) NOT NULL,
+  `alamat_pelanggan` varchar(255) NOT NULL,
+  `nohp` varchar(255) NOT NULL,
+  `top` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbpemasok`
+--
+
+CREATE TABLE `tbpemasok` (
+  `id_pemasok` bigint(20) UNSIGNED NOT NULL,
+  `kode_pemasok` int(11) NOT NULL,
+  `nama_pemasok` varchar(255) NOT NULL,
+  `alamat_pemasok` varchar(255) NOT NULL,
+  `nohp` varchar(255) NOT NULL,
+  `top` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbsatuan`
+--
+
+CREATE TABLE `tbsatuan` (
+  `id_satuan` bigint(20) UNSIGNED NOT NULL,
+  `nama_satuan` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbstok`
+--
+
+CREATE TABLE `tbstok` (
+  `id_stok` bigint(20) UNSIGNED NOT NULL,
+  `kode_stok` int(11) NOT NULL,
+  `nama_stok` varchar(255) NOT NULL,
+  `saldo_awal` varchar(255) NOT NULL,
+  `harga_beli` varchar(255) NOT NULL,
+  `harga_jual` varchar(255) NOT NULL,
+  `harga_modal` varchar(255) NOT NULL,
+  `foto_barang` varchar(255) NOT NULL,
+  `deskripsi_barang` varchar(255) NOT NULL,
+  `pajang` varchar(255) NOT NULL,
+  `id_satuan` bigint(20) UNSIGNED DEFAULT NULL,
+  `id_kategori` bigint(20) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tbstok`
+--
+
+INSERT INTO `tbstok` (`id_stok`, `kode_stok`, `nama_stok`, `saldo_awal`, `harga_beli`, `harga_jual`, `harga_modal`, `foto_barang`, `deskripsi_barang`, `pajang`, `id_satuan`, `id_kategori`, `created_at`, `updated_at`) VALUES
+(3, 1234, 'Sweat Pullover Long Sleeve Hoodie', '400000', '400000', '499000', '400000', 'Hoodie.jpg', 'Fine texture with a pilling-resistant lining. Hood has a stylish contoured appearance.', 'Ya', NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -344,6 +491,13 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 --
 
 --
+-- Indexes for table `beli`
+--
+ALTER TABLE `beli`
+  ADD PRIMARY KEY (`id_pembelian`),
+  ADD KEY `beli_id_pemasok_index` (`id_pemasok`);
+
+--
 -- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -370,6 +524,13 @@ ALTER TABLE `jenjang`
   ADD PRIMARY KEY (`id_jenjang`);
 
 --
+-- Indexes for table `jual`
+--
+ALTER TABLE `jual`
+  ADD PRIMARY KEY (`id_penjualan`),
+  ADD KEY `jual_id_pelanggan_index` (`id_pelanggan`);
+
+--
 -- Indexes for table `kelas`
 --
 ALTER TABLE `kelas`
@@ -381,6 +542,13 @@ ALTER TABLE `kelas`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `mutasi`
+--
+ALTER TABLE `mutasi`
+  ADD PRIMARY KEY (`id_mutasi`),
+  ADD KEY `mutasi_id_stok_index` (`id_stok`);
 
 --
 -- Indexes for table `password_reset_tokens`
@@ -418,6 +586,12 @@ ALTER TABLE `tahun_akademik`
   ADD PRIMARY KEY (`id_tahun_akademik`);
 
 --
+-- Indexes for table `tbkategori`
+--
+ALTER TABLE `tbkategori`
+  ADD PRIMARY KEY (`id_kategori`);
+
+--
 -- Indexes for table `tbldosen`
 --
 ALTER TABLE `tbldosen`
@@ -433,6 +607,32 @@ ALTER TABLE `tblmhs`
   ADD KEY `id_prodi` (`id_prodi`);
 
 --
+-- Indexes for table `tbpelanggan`
+--
+ALTER TABLE `tbpelanggan`
+  ADD PRIMARY KEY (`id_pelanggan`);
+
+--
+-- Indexes for table `tbpemasok`
+--
+ALTER TABLE `tbpemasok`
+  ADD PRIMARY KEY (`id_pemasok`);
+
+--
+-- Indexes for table `tbsatuan`
+--
+ALTER TABLE `tbsatuan`
+  ADD PRIMARY KEY (`id_satuan`);
+
+--
+-- Indexes for table `tbstok`
+--
+ALTER TABLE `tbstok`
+  ADD PRIMARY KEY (`id_stok`),
+  ADD KEY `tbstok_id_satuan_index` (`id_satuan`),
+  ADD KEY `tbstok_id_kategori_index` (`id_kategori`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -442,6 +642,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `beli`
+--
+ALTER TABLE `beli`
+  MODIFY `id_pembelian` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -468,6 +674,12 @@ ALTER TABLE `jenjang`
   MODIFY `id_jenjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `jual`
+--
+ALTER TABLE `jual`
+  MODIFY `id_penjualan` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
@@ -477,7 +689,13 @@ ALTER TABLE `kelas`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `mutasi`
+--
+ALTER TABLE `mutasi`
+  MODIFY `id_mutasi` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -504,6 +722,12 @@ ALTER TABLE `tahun_akademik`
   MODIFY `id_tahun_akademik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
+-- AUTO_INCREMENT for table `tbkategori`
+--
+ALTER TABLE `tbkategori`
+  MODIFY `id_kategori` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `tbldosen`
 --
 ALTER TABLE `tbldosen`
@@ -516,6 +740,30 @@ ALTER TABLE `tblmhs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
+-- AUTO_INCREMENT for table `tbpelanggan`
+--
+ALTER TABLE `tbpelanggan`
+  MODIFY `id_pelanggan` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbpemasok`
+--
+ALTER TABLE `tbpemasok`
+  MODIFY `id_pemasok` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbsatuan`
+--
+ALTER TABLE `tbsatuan`
+  MODIFY `id_satuan` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbstok`
+--
+ALTER TABLE `tbstok`
+  MODIFY `id_stok` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
@@ -526,16 +774,34 @@ ALTER TABLE `users`
 --
 
 --
+-- Constraints for table `beli`
+--
+ALTER TABLE `beli`
+  ADD CONSTRAINT `beli_id_pemasok_foreign` FOREIGN KEY (`id_pemasok`) REFERENCES `tbpemasok` (`id_pemasok`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `fakultas`
 --
 ALTER TABLE `fakultas`
   ADD CONSTRAINT `fakultas_ibfk_1` FOREIGN KEY (`id_dosen`) REFERENCES `tbldosen` (`id_dosen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `jual`
+--
+ALTER TABLE `jual`
+  ADD CONSTRAINT `jual_id_pelanggan_foreign` FOREIGN KEY (`id_pelanggan`) REFERENCES `tbpelanggan` (`id_pelanggan`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `kelas`
 --
 ALTER TABLE `kelas`
   ADD CONSTRAINT `kelas_ibfk_1` FOREIGN KEY (`id_tahun_akademik`) REFERENCES `tahun_akademik` (`id_tahun_akademik`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `mutasi`
+--
+ALTER TABLE `mutasi`
+  ADD CONSTRAINT `mutasi_id_stok_foreign` FOREIGN KEY (`id_stok`) REFERENCES `tbstok` (`id_stok`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `prodi`
@@ -551,6 +817,13 @@ ALTER TABLE `prodi`
 ALTER TABLE `tblmhs`
   ADD CONSTRAINT `tblmhs_ibfk_1` FOREIGN KEY (`id_dosen`) REFERENCES `tbldosen` (`id_dosen`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tblmhs_ibfk_2` FOREIGN KEY (`id_prodi`) REFERENCES `prodi` (`id_prodi`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tbstok`
+--
+ALTER TABLE `tbstok`
+  ADD CONSTRAINT `tbstok_id_kategori_foreign` FOREIGN KEY (`id_kategori`) REFERENCES `tbkategori` (`id_kategori`) ON DELETE CASCADE,
+  ADD CONSTRAINT `tbstok_id_satuan_foreign` FOREIGN KEY (`id_satuan`) REFERENCES `tbsatuan` (`id_satuan`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
