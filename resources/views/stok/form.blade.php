@@ -63,8 +63,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="pajang">Pajang</label>
-                                        <input type="text" class="form-control" id="pajang"
-                                            name="pajang">
+                                        <select class="form-control select2" style="width: 100%;" name="pajang"
+                                        id="pajang" required>
+                                                <option value="tidak">Tidak</option>
+                                                <option value="ya">Ya</option>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="foto_barang">Foto</label>
