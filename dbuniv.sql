@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 25, 2024 at 08:12 AM
+-- Generation Time: Apr 03, 2024 at 07:38 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -444,7 +444,7 @@ CREATE TABLE `tbstok` (
   `harga_beli` varchar(255) NOT NULL,
   `harga_jual` varchar(255) NOT NULL,
   `harga_modal` varchar(255) NOT NULL,
-  `foto_barang` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
   `deskripsi_barang` varchar(255) NOT NULL,
   `pajang` varchar(255) NOT NULL,
   `id_satuan` bigint(20) UNSIGNED DEFAULT NULL,
@@ -457,8 +457,8 @@ CREATE TABLE `tbstok` (
 -- Dumping data for table `tbstok`
 --
 
-INSERT INTO `tbstok` (`id_stok`, `kode_stok`, `nama_stok`, `saldo_awal`, `harga_beli`, `harga_jual`, `harga_modal`, `foto_barang`, `deskripsi_barang`, `pajang`, `id_satuan`, `id_kategori`, `created_at`, `updated_at`) VALUES
-(3, 1234, 'Sweat Pullover Long Sleeve Hoodie', '400000', '400000', '499000', '400000', 'Hoodie.jpg', 'Fine texture with a pilling-resistant lining. Hood has a stylish contoured appearance.', 'Ya', NULL, NULL, NULL, NULL);
+INSERT INTO `tbstok` (`id_stok`, `kode_stok`, `nama_stok`, `saldo_awal`, `harga_beli`, `harga_jual`, `harga_modal`, `image`, `deskripsi_barang`, `pajang`, `id_satuan`, `id_kategori`, `created_at`, `updated_at`) VALUES
+(10, 123, 'Hoddie', '400000', '400000', '499000', '400000', 'foto-barang/fGb9XgGmYfdp44LYAv2ZkxYuOiCme8jsl5ZaX6F6.png', 'Fine texture with a pilling-resistant lining. Hood has a stylish contoured appearance.', 'tidak', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -761,7 +761,7 @@ ALTER TABLE `tbsatuan`
 -- AUTO_INCREMENT for table `tbstok`
 --
 ALTER TABLE `tbstok`
-  MODIFY `id_stok` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_stok` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`
