@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 03, 2024 at 07:38 AM
+-- Generation Time: Apr 04, 2024 at 04:07 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -126,9 +126,7 @@ CREATE TABLE `jual` (
   `no_bukti` int(11) NOT NULL,
   `tanggal` date NOT NULL,
   `keterangan` varchar(255) NOT NULL,
-  `id_pelanggan` bigint(20) UNSIGNED DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `id_pelanggan` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -400,6 +398,13 @@ CREATE TABLE `tbpelanggan` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `tbpelanggan`
+--
+
+INSERT INTO `tbpelanggan` (`id_pelanggan`, `kode_pelanggan`, `nama_pelanggan`, `alamat_pelanggan`, `nohp`, `top`, `created_at`, `updated_at`) VALUES
+(2, 12333123, 'Azura Kaimaru', 'Jl. Nangka No. 04', '083384742', '12444213', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -416,6 +421,13 @@ CREATE TABLE `tbpemasok` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tbpemasok`
+--
+
+INSERT INTO `tbpemasok` (`id_pemasok`, `kode_pemasok`, `nama_pemasok`, `alamat_pemasok`, `nohp`, `top`, `created_at`, `updated_at`) VALUES
+(2, 124142, 'Rehan', 'Jl. Todak No. 3', '08338332', '213123', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -743,13 +755,13 @@ ALTER TABLE `tblmhs`
 -- AUTO_INCREMENT for table `tbpelanggan`
 --
 ALTER TABLE `tbpelanggan`
-  MODIFY `id_pelanggan` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pelanggan` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbpemasok`
 --
 ALTER TABLE `tbpemasok`
-  MODIFY `id_pemasok` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pemasok` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbsatuan`
