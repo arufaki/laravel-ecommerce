@@ -12,7 +12,7 @@ class StokController extends Controller
         $no = 1;
 
         return view('stok.list', compact('recordStok', 'no'))
-            ->with('judul', 'Daftar Tahun Akademik');
+            ->with('judul', 'Daftar Stok');
     }
 
     public function create()

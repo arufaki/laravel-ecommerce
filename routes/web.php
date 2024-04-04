@@ -23,17 +23,25 @@ use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\KelasController;
 
 use App\Http\Controllers\StokController;
+use App\Http\Controllers\PemasokController;
+use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\JualController;
+
+
+
 /* Route::get('/', function () { */
 /*     return view('auth.login'); */
 /* }); */
 
-Route::get('/', function() {
+Route::get('/', function () {
     return view('include.welcome');
 });
 
-Route::middleware(['auth', 'verified', 'rolesChecker:admin'])->group(function() {
+Route::middleware(['auth', 'verified', 'rolesChecker:admin'])->group(function () {
     Route::get('/dashboard', function () {
-        return view('include.welcome'); })->name('dashboard'); });
+        return view('include.welcome');
+    })->name('dashboard');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -53,9 +61,12 @@ Route::resources([
 
 Route::resources([
     'stok' => StokController::class,
+    'pemasok' => PemasokController::class,
+    'pelanggan' => PelangganController::class,
+    'jual' => JualController::class,
 ]);
 
-Route::controller(CustomController::class)->group(function() {
+Route::controller(CustomController::class)->group(function () {
     Route::get('/perkalian', 'perkalian');
     Route::get('/penjumlahan', 'penjumlahan');
     Route::get('/berita/{idBerita}', 'berita');
@@ -69,4 +80,4 @@ Route::controller(CustomController::class)->group(function() {
 });
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

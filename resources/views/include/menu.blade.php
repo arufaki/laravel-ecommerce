@@ -72,19 +72,19 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('fakultas') }}" class="nav-link">
+                    <a href="{{ url('pemasok') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Pemasok</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('/prodi') }}" class="nav-link ">
+                    <a href="{{ url('/pelanggan') }}" class="nav-link ">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Pelanggan</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('/ruang') }}" class="nav-link ">
+                    <a href="{{ url('/jual') }}" class="nav-link ">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Jual</p>
                     </a>
