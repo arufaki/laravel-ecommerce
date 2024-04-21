@@ -64,8 +64,8 @@ class JualController extends Controller
 
         $dataPelanggan = \DB::table('tbpelanggan')->get();
 
-        return view('pelanggan.edit', compact('recordStorePelanggan', 'dataPelanggan'))
-            ->with('judul', 'Form Edit Stok')
+        return view('jual.edit', compact('recordStorePenjualan', 'dataPelanggan'))
+            ->with('judul', 'Form Edit Penjualan')
             ->with('id_penjualan', $id_penjualan);
     }
 
@@ -82,7 +82,7 @@ class JualController extends Controller
             ->where('id_penjualan', $r->id_penjualan)
             ->update($x);
 
-        return redirect()->route('penjualan.index')->with('sukses', 'Penjualan Berhasil Diedit');
+        return redirect()->route('jual.index')->with('sukses', 'Penjualan Berhasil Diedit');
     }
 
     public function destroy($id_penjualan)
@@ -91,7 +91,7 @@ class JualController extends Controller
             ->where('id_penjualan', $id_penjualan)
             ->delete();
 
-        return redirect()->route('penjualan.index')
+        return redirect()->route('jual.index')
             ->with('id_penjualan', $id_penjualan);
     }
 }
