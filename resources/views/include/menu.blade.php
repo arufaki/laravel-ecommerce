@@ -90,29 +90,30 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('kelas') }}" class="nav-link">
+                    <a href="{{ url('/beli') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Beli</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('dosen') }}" class="nav-link ">
+                    <a href="{{ url('/mutasi') }}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Mutasi</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('/satuan') }}" class="nav-link ">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Satuan</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('mahasiswa') }}" class="nav-link">
+                    <a href="{{ url('/kategori') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Kategori</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ url('mahasiswa') }}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Mutasi</p>
-                    </a>
-                </li>
+
             </ul>
         </li>
     </ul>

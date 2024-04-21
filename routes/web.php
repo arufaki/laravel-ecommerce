@@ -26,6 +26,9 @@ use App\Http\Controllers\StokController;
 use App\Http\Controllers\PemasokController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\JualController;
+use App\Http\Controllers\BeliController;
+use App\Http\Controllers\SatuanController;
+use App\Http\Controllers\KategoriController;
 
 
 
@@ -64,6 +67,9 @@ Route::resources([
     'pemasok' => PemasokController::class,
     'pelanggan' => PelangganController::class,
     'jual' => JualController::class,
+    'beli' => BeliController::class,
+    'satuan' => SatuanController::class,
+    'kategori' => KategoriController::class,
 ]);
 
 Route::controller(CustomController::class)->group(function () {

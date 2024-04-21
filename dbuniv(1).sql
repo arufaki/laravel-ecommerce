@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 21, 2024 at 12:16 PM
+-- Generation Time: Apr 21, 2024 at 02:23 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.6
 
@@ -36,6 +36,14 @@ CREATE TABLE `beli` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `beli`
+--
+
+INSERT INTO `beli` (`id_pembelian`, `no_bukti`, `tanggal`, `keterangan`, `id_pemasok`, `created_at`, `updated_at`) VALUES
+(2, 8493, '2024-04-18', 'Strawberry Clothes 300 Pcs', 5, NULL, NULL),
+(3, 9402, '2024-05-01', 'Banana Jacket 400 Pcs', 4, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -135,7 +143,7 @@ CREATE TABLE `jual` (
 
 INSERT INTO `jual` (`id_penjualan`, `no_bukti`, `tanggal`, `keterangan`, `id_pelanggan`) VALUES
 (3, 132, '2024-04-05', 'ASWG-114', 3),
-(4, 423, '2024-04-04', 'ASWG-115', 2);
+(4, 442, '2024-04-04', 'ASWG-115', 2);
 
 -- --------------------------------------------------------
 
@@ -324,9 +332,21 @@ INSERT INTO `tahun_akademik` (`id_tahun_akademik`, `kode_tahun_akademik`, `nama_
 
 CREATE TABLE `tbkategori` (
   `id_kategori` bigint UNSIGNED NOT NULL,
+  `nama_kategori` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tbkategori`
+--
+
+INSERT INTO `tbkategori` (`id_kategori`, `nama_kategori`, `created_at`, `updated_at`) VALUES
+(1, 'Jacket', NULL, NULL),
+(2, 'Clothes', NULL, NULL),
+(3, 'Pants', NULL, NULL),
+(4, 'Hat', NULL, NULL),
+(5, 'Outer', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -436,7 +456,10 @@ CREATE TABLE `tbpemasok` (
 --
 
 INSERT INTO `tbpemasok` (`id_pemasok`, `kode_pemasok`, `nama_pemasok`, `alamat_pemasok`, `nohp`, `top`, `created_at`, `updated_at`) VALUES
-(2, 124142, 'Rehan Sudrajat', 'Jl. Todak No. 3', '08338332', '213123', NULL, NULL);
+(2, 1241, 'Rehan Sudrajat', 'Jl. Todak No. 3', '08338332', 'Hoodie Supply', NULL, NULL),
+(3, 4232, 'Riki Hermansyah', 'Jl. Garuda No.3', '082393231', 'Tofu Speed', NULL, NULL),
+(4, 9402, 'Aji Pisang', 'Jl. Lokomotif No.98', '08392783', 'Pisang Design', NULL, NULL),
+(5, 5232, 'Asep Stroberi', 'Jl. Limau No.44', '08392783', 'Strawberry Clothes', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -450,6 +473,17 @@ CREATE TABLE `tbsatuan` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tbsatuan`
+--
+
+INSERT INTO `tbsatuan` (`id_satuan`, `nama_satuan`, `created_at`, `updated_at`) VALUES
+(2, 'kg', NULL, NULL),
+(3, 'g', NULL, NULL),
+(4, 'oz', NULL, NULL),
+(5, 'ton', NULL, NULL),
+(6, 'pcs', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -668,7 +702,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `beli`
 --
 ALTER TABLE `beli`
-  MODIFY `id_pembelian` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pembelian` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -746,7 +780,7 @@ ALTER TABLE `tahun_akademik`
 -- AUTO_INCREMENT for table `tbkategori`
 --
 ALTER TABLE `tbkategori`
-  MODIFY `id_kategori` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kategori` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbldosen`
@@ -770,13 +804,13 @@ ALTER TABLE `tbpelanggan`
 -- AUTO_INCREMENT for table `tbpemasok`
 --
 ALTER TABLE `tbpemasok`
-  MODIFY `id_pemasok` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pemasok` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbsatuan`
 --
 ALTER TABLE `tbsatuan`
-  MODIFY `id_satuan` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_satuan` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbstok`
