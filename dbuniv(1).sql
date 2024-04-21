@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 21, 2024 at 02:23 PM
+-- Generation Time: Apr 21, 2024 at 03:02 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.6
 
@@ -43,7 +43,7 @@ CREATE TABLE `beli` (
 
 INSERT INTO `beli` (`id_pembelian`, `no_bukti`, `tanggal`, `keterangan`, `id_pemasok`, `created_at`, `updated_at`) VALUES
 (2, 8493, '2024-04-18', 'Strawberry Clothes 300 Pcs', 5, NULL, NULL),
-(3, 9402, '2024-05-01', 'Banana Jacket 400 Pcs', 4, NULL, NULL);
+(3, 9402, '2024-05-01', 'Banana Clothes 400 Pcs', 4, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -216,6 +216,14 @@ CREATE TABLE `mutasi` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `mutasi`
+--
+
+INSERT INTO `mutasi` (`id_mutasi`, `no_bukti`, `masuk_keluar`, `qty`, `harga`, `keterangan`, `id_stok`, `created_at`, `updated_at`) VALUES
+(1, 94823, 'Ok', 100, 200000, 'Hoodie 100 Pcs', 10, NULL, NULL),
+(2, 9748, 'Approve', 400, 299999, 'Banana Clothes 400 Pcs', 11, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -513,7 +521,8 @@ CREATE TABLE `tbstok` (
 --
 
 INSERT INTO `tbstok` (`id_stok`, `kode_stok`, `nama_stok`, `saldo_awal`, `harga_beli`, `harga_jual`, `harga_modal`, `image`, `deskripsi_barang`, `pajang`, `id_satuan`, `id_kategori`, `created_at`, `updated_at`) VALUES
-(10, 123, 'Hoddie', '400000', '400000', '499000', '400000', 'foto-barang/fGb9XgGmYfdp44LYAv2ZkxYuOiCme8jsl5ZaX6F6.png', 'Fine texture with a pilling-resistant lining. Hood has a stylish contoured appearance.', 'tidak', NULL, NULL, NULL, NULL);
+(10, 123, 'Hoddie', '400000', '400000', '499000', '400000', 'foto-barang/fGb9XgGmYfdp44LYAv2ZkxYuOiCme8jsl5ZaX6F6.png', 'Fine texture with a pilling-resistant lining. Hood has a stylish contoured appearance.', 'tidak', NULL, NULL, NULL, NULL),
+(11, 9402, 'Banana Clothes', '400000', '400000', '499999', '400000', 'foto-barang/rCZuGemu12avYxjhWHTxME6PUrney0yEqovNCGxm.jpg', 'Baju Logo Pisang', 'tidak', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -750,7 +759,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `mutasi`
 --
 ALTER TABLE `mutasi`
-  MODIFY `id_mutasi` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_mutasi` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -816,7 +825,7 @@ ALTER TABLE `tbsatuan`
 -- AUTO_INCREMENT for table `tbstok`
 --
 ALTER TABLE `tbstok`
-  MODIFY `id_stok` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_stok` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`
