@@ -29,6 +29,7 @@ use App\Http\Controllers\JualController;
 use App\Http\Controllers\BeliController;
 use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\MutasiController;
 
 
 
@@ -70,6 +71,7 @@ Route::resources([
     'beli' => BeliController::class,
     'satuan' => SatuanController::class,
     'kategori' => KategoriController::class,
+    'mutasi' => MutasiController::class,
 ]);
 
 Route::controller(CustomController::class)->group(function () {
