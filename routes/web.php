@@ -41,6 +41,10 @@ Route::get('/', function () {
     return view('include.welcome');
 });
 
+Route::get('/homepage', function () {
+    return view('ecomPages.index');
+});
+
 Route::middleware(['auth', 'verified', 'rolesChecker:admin'])->group(function () {
     Route::get('/dashboard', function () {
         return view('include.welcome');

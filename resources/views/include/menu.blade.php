@@ -68,7 +68,7 @@
                 <li class="nav-item">
                     <a href="{{ url('stok') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Stok</p>
+                        <p>Barang</p>
                     </a>
                 </li>
                 <li class="nav-item">
