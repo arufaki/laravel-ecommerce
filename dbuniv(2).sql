@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 24, 2024 at 04:14 PM
+-- Generation Time: May 05, 2024 at 06:34 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.6
 
@@ -499,7 +499,7 @@ CREATE TABLE `tbstok` (
   `harga_beli` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `harga_jual` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `harga_modal` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `deskripsi_barang` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `pajang` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_satuan` bigint UNSIGNED NOT NULL,
@@ -511,9 +511,9 @@ CREATE TABLE `tbstok` (
 --
 
 INSERT INTO `tbstok` (`id_stok`, `kode_stok`, `nama_stok`, `saldo_awal`, `harga_beli`, `harga_jual`, `harga_modal`, `image`, `deskripsi_barang`, `pajang`, `id_satuan`, `id_kategori`) VALUES
-(12, 4231, 'Hoodie', '400000', '400000', '499999', '400000', 'foto-barang/st3wcorPw7oLUqxEVr5jlGETCMB2LgLuzz6gT0MI.png', 'This product is made from the material composition options below. At this time, it is not permitted to choose the material composition for the product you purchase.', 'tidak', 6, 1),
-(13, 8472, 'Long Pants', '450000', '420000', '599000', '450000', 'foto-barang/H9JGrMZS3pJ9SkKTh88uaWQiZKg3pJfKI5SlDB1g.png', 'Depending on the length of the cut, traces of the original stitching may still be visible after the alteration process. Especially for products with damaged accents on the ends, the damaged accents will disappear after the alteration process. Thank you for your understanding.', 'tidak', 6, 3),
-(14, 5932, 'UV Protection Knit Bucket Hat', '120000', '120000', '299000', '120000', 'foto-barang/Q0PJG07DGDir4IcYJhVwchJx9YpvM9SBq4aKgSmI.png', 'Made from polyester and nylon for a soft feel to the touch.  A structure specially formed so that its shape does not change easily.', 'tidak', 6, 4);
+(33, 4231, 'Hoodie', '450000', '400000', '499999', '450000', '[\"171491936894.jpg\",\"171491936830.png\",\"171491936823.jpg\"]', 'This product is made from the material composition options below. At this time, it is not permitted to choose the material composition for the product you purchase.', 'tidak', 6, 1),
+(36, 1242, 'Bomber Jacket', '450000', '420000', '520000', '420000', '[\"171493275397.jpg\",\"17149327535.jpg\",\"171493275346.png\"]', 'Jaket bomber adalah salah satu jenis jaket yang memiliki desain khas dengan potongan yang ramping di bagian pinggang dan lengan. Biasanya terbuat dari bahan yang tebal seperti nilon atau kulit sintetis, jaket ini awalnya dirancang untuk para pilot pesawat tempur pada Perang Dunia II. Namun, seiring berjalannya waktu, jaket bomber menjadi ikon mode yang populer di kalangan masyarakat umum. Desainnya yang sederhana namun stylish membuatnya menjadi pilihan yang cocok untuk berbagai kesempatan, mulai dari casual hingga semi-formal.', 'tidak', 6, 1),
+(37, 5312, 'FURTALK Panama Hat Sun Hats for Women Men Wide Brim Fedora Straw Beach Hat UV UPF 50', '320000', '250000', '440000', '250000', '[\"17149333971.jpg\",\"171493339746.jpg\",\"171493339740.jpg\"]', 'FURTALK Panama Hat Sun Hats for Women Men Wide Brim Fedora Straw Beach Hat UV UPF 50 offers both style and protection for sunny days. Crafted with a wide brim, this fedora-style hat provides ample shade while lounging on the beach or strolling around town. Made from durable straw material, it\'s lightweight and breathable, perfect for summer adventures. With UV UPF 50 protection, it shields your skin from harmful sun rays. Whether for women or men, this hat adds a touch of elegance to any outdoor ensemble.', 'tidak', 6, 4);
 
 -- --------------------------------------------------------
 
@@ -816,7 +816,7 @@ ALTER TABLE `tbsatuan`
 -- AUTO_INCREMENT for table `tbstok`
 --
 ALTER TABLE `tbstok`
-  MODIFY `id_stok` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_stok` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `users`
