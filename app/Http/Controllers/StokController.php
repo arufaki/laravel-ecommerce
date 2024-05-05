@@ -34,17 +34,33 @@ class StokController extends Controller
 
     public function store(Request $r)
     {
-        $r->validate(['image' => 'image|mimes:png,jpg,jpeg|max:10240']);
-        if ($r->hasFile('image')) {
-            $imagePath = $r->file('image')->storeAs('foto-barang', $r->file('image')->hashName());
+        $r->validate([
+            'image' => 'required',
+            'image.*' => 'required|image|mimes:png,jpg,jpeg|max:10240'
+        ]);
+
+        $image=[];
+
+        if ($r->image) {
+            foreach($r->image as $images) {
+
+                $imagePath = $images->hashName();
+                // $image->move(public_path('foto-barang'), $imagePath);
+                $images->storeAs('foto-barang', $imagePath);
+
+
+                // $imagePath = $image->storeAs('foto-barang', $image->hashName());
+                $image[]['image']=$imagePath;
+            }
         }
+        
         $x = array(
             'kode_stok' => $r->kode_stok,
             'nama_stok' => $r->nama_stok,
             'saldo_awal' => $r->saldo_awal,
             'harga_beli' => $r->harga_beli,
             'harga_jual' => $r->harga_jual,
-            'image' => $imagePath,
+            'image' => $image,
             'harga_modal' => $r->harga_modal,
             'deskripsi_barang' => $r->deskripsi_barang,
             'pajang' => $r->pajang,

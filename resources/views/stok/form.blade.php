@@ -94,7 +94,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="foto_barang">Foto</label>
-                                    <input type="file" class="form-control" id="image" name="image">
+                                    <input type="file" class="form-control" id="image" name="image[]" multiple>
                                 </div>
                             </div>
                             <!-- /.card-body -->
