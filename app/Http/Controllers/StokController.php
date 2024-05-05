@@ -36,7 +36,7 @@ class StokController extends Controller
     {
         $r->validate([
             'image' => 'required',
-            'image.*' => 'required|image|mimes:png,jpg,jpeg|max:10240'
+            'image.*' => 'image|mimes:png,jpg,jpeg|max:10240'
         ]);
 
         $image=[];
@@ -50,17 +50,17 @@ class StokController extends Controller
 
 
                 // $imagePath = $image->storeAs('foto-barang', $image->hashName());
-                $image[]['image']=$imagePath;
+                $image[]=$imagePath;
             }
         }
-        
+
         $x = array(
             'kode_stok' => $r->kode_stok,
             'nama_stok' => $r->nama_stok,
             'saldo_awal' => $r->saldo_awal,
             'harga_beli' => $r->harga_beli,
             'harga_jual' => $r->harga_jual,
-            'image' => $image,
+            'image' => implode(',', $image),
             'harga_modal' => $r->harga_modal,
             'deskripsi_barang' => $r->deskripsi_barang,
             'pajang' => $r->pajang,
