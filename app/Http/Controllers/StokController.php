@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class StokController extends Controller
 {
@@ -42,15 +43,19 @@ class StokController extends Controller
         $image=[];
 
         if ($r->image) {
-            foreach($r->image as $images) {
+            foreach($r->image as $key => $images) {
 
-                $imagePath = $images->hashName();
+                $imageName = time().rand(1,99).'.'.$images->extension();  
+
+                $images->storeAs('foto-produk', $imageName);
+
+                // $imagePath = 'foto-barang/'.$images->hashName();
                 // $image->move(public_path('foto-barang'), $imagePath);
-                $images->storeAs('foto-barang', $imagePath);
+                // $images->storeAs($imagePath);
 
 
                 // $imagePath = $image->storeAs('foto-barang', $image->hashName());
-                $image[]=$imagePath;
+                $image[]=$imageName;
             }
         }
 
@@ -60,7 +65,7 @@ class StokController extends Controller
             'saldo_awal' => $r->saldo_awal,
             'harga_beli' => $r->harga_beli,
             'harga_jual' => $r->harga_jual,
-            'image' => implode(',', $image),
+            'image' => json_encode($image),
             'harga_modal' => $r->harga_modal,
             'deskripsi_barang' => $r->deskripsi_barang,
             'pajang' => $r->pajang,
@@ -94,17 +99,35 @@ class StokController extends Controller
 
     public function destroy($id_stok)
     {
-        $dbImg = \DB::Table('tbstok')
-                    ->where('id_stok', $id_stok)->first();
+        $stok = \DB::Table('tbstok')
+                    ->where('id_stok', $id_stok)
+                    ->first();
 
-                    if($dbImg && $dbImg->image !== null) {
-                        Storage::delete($dbImg->image);
-                    }
-        $del = \DB::table('tbstok')
-            ->where('id_stok', $id_stok)
-            ->delete();
 
-        return redirect()->route('stok.index')
-            ->with('id_stok', $id_stok);
+        if($stok) {
+            $imgArray = json_decode($stok->image, true);
+
+            foreach($imgArray as $images) {
+                if (Storage::exists('foto-produk/' . $images)) {
+                    Storage::delete('foto-produk/' . $images);
+                }
+            }
+
+            \DB::table('tbstok')->where('id_stok', $id_stok)->delete();
+
+            return redirect()->route('stok.index')->with('sukses', 'Stok Berhasil Dihapus');
+        } else {
+            return redirect()->route('stok.index')->with('gagal', 'Stok Tidak Ditemukan');
+        }
+                    
+                   
+                    
+        // $del = \DB::table('tbstok')
+        //     ->where('id_stok', $id_stok)
+        //     ->delete();
+
+        // return redirect()->route('stok.index')
+        //     ->with('id_stok', $id_stok);
     }
 }
+

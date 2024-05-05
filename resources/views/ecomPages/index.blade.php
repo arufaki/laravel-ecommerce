@@ -80,106 +80,36 @@
                 <h1>NEW ARRIVALS</h1>
                 <div class="swiper">
                     <div class="swiper-wrapper cards">
-                        <div class="swiper-slide card">
-                            <div class="image-wrap">
-                                <img src="{{ url('fkhco/assets/png/products/hoodie.png') }}" alt="product-image"
-                                    loading="lazy" />
-                            </div>
-                            <div class="product-detail">
-                                <p class="product-title">White Hoodie</p>
-                                <div class="rating">
-                                    <div class="stars">
-                                        <img src="{{ url('fkhco/assets/svg/rating.svg') }}" alt="rating" />
-                                        <img src="{{ url('fkhco/assets/svg/rating.svg') }}" alt="rating" />
-                                        <img src="{{ url('fkhco/assets/svg/rating.svg') }}" alt="rating" />
-                                        <img src="{{ url('fkhco/assets/svg/rating.svg') }}" alt="rating" />
-                                        <img src="{{ url('fkhco/assets/svg/rating.svg') }}" alt="rating" />
+                        @foreach ($newProduct as $product)
+                            @php
+                                $imageCover = json_decode($product->image);
+                            @endphp
+                            <div class="swiper-slide card">
+                                <a href="{{ Route('ecomPages.product-detail', $product->id_stok) }}">
+                                    <div class="image-wrap">
+                                        {{-- @foreach ($imageCover as $image) --}}
+                                        <img src="{{ asset('storage/foto-produk/' . $imageCover[0]) }}"
+                                            alt="product-image" loading="lazy" />
+                                        {{-- @endforeach --}}
                                     </div>
-                                    <p class="rate">4.5/5</p>
-                                </div>
-                                <p class="price">$120</p>
-                            </div>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="image-wrap">
-                                <img src="{{ url('fkhco/assets/png/products/hoodie.png') }}" alt="product-image"
-                                    loading="lazy" />
-                            </div>
-                            <div class="product-detail">
-                                <p class="product-title">White Hoodie</p>
-                                <div class="rating">
-                                    <div class="stars">
-                                        <img src="{{ url('fkhco/assets/svg/rating.svg') }}" alt="rating" />
-                                        <img src="{{ url('fkhco/assets/svg/rating.svg') }}" alt="rating" />
-                                        <img src="{{ url('fkhco/assets/svg/rating.svg') }}" alt="rating" />
-                                        <img src="{{ url('fkhco/assets/svg/rating.svg') }}" alt="rating" />
-                                        <img src="{{ url('fkhco/assets/svg/rating.svg') }}" alt="rating" />
+                                    <div class="product-detail">
+                                        <p class="product-title">{{ $product->nama_stok }}</p>
+                                        <div class="rating">
+                                            <div class="stars">
+                                                @for ($i = 0; $i < 5; $i++)
+                                                    <img src="{{ url('fkhco/assets/svg/rating.svg') }}"
+                                                        alt="rating" />
+                                                @endfor
+                                            </div>
+                                            <p class="rate">4.5/5</p>
+                                        </div>
+                                        <p class="price">
+                                            {{ 'Rp. ' . number_format($product->harga_jual, 0, ',', '.') }}
+                                        </p>
                                     </div>
-                                    <p class="rate">4.5/5</p>
-                                </div>
-                                <p class="price">$120</p>
+                                </a>
                             </div>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="image-wrap">
-                                <img src="{{ url('fkhco/assets/png/products/hoodie.png') }}" alt="product-image"
-                                    loading="lazy" />
-                            </div>
-                            <div class="product-detail">
-                                <p class="product-title">White Hoodie</p>
-                                <div class="rating">
-                                    <div class="stars">
-                                        <img src="{{ url('fkhco/assets/svg/rating.svg') }}" alt="rating" />
-                                        <img src="{{ url('fkhco/assets/svg/rating.svg') }}" alt="rating" />
-                                        <img src="{{ url('fkhco/assets/svg/rating.svg') }}" alt="rating" />
-                                        <img src="{{ url('fkhco/assets/svg/rating.svg') }}" alt="rating" />
-                                        <img src="{{ url('fkhco/assets/svg/rating.svg') }}" alt="rating" />
-                                    </div>
-                                    <p class="rate">4.5/5</p>
-                                </div>
-                                <p class="price">$120</p>
-                            </div>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="image-wrap">
-                                <img src="{{ url('fkhco/assets/png/products/hoodie.png') }}" alt="product-image"
-                                    loading="lazy" />
-                            </div>
-                            <div class="product-detail">
-                                <p class="product-title">White Hoodie</p>
-                                <div class="rating">
-                                    <div class="stars">
-                                        <img src="{{ url('fkhco/assets/svg/rating.svg') }}" alt="rating" />
-                                        <img src="{{ url('fkhco/assets/svg/rating.svg') }}" alt="rating" />
-                                        <img src="{{ url('fkhco/assets/svg/rating.svg') }}" alt="rating" />
-                                        <img src="{{ url('fkhco/assets/svg/rating.svg') }}" alt="rating" />
-                                        <img src="{{ url('fkhco/assets/svg/rating.svg') }}" alt="rating" />
-                                    </div>
-                                    <p class="rate">4.5/5</p>
-                                </div>
-                                <p class="price">$120</p>
-                            </div>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="image-wrap">
-                                <img src="{{ url('fkhco/assets/png/products/hoodie.png') }}" alt="product-image"
-                                    loading="lazy" />
-                            </div>
-                            <div class="product-detail">
-                                <p class="product-title">White Hoodie</p>
-                                <div class="rating">
-                                    <div class="stars">
-                                        <img src="{{ url('fkhco/assets/svg/rating.svg') }}" alt="rating" />
-                                        <img src="{{ url('fkhco/assets/svg/rating.svg') }}" alt="rating" />
-                                        <img src="{{ url('fkhco/assets/svg/rating.svg') }}" alt="rating" />
-                                        <img src="{{ url('fkhco/assets/svg/rating.svg') }}" alt="rating" />
-                                        <img src="{{ url('fkhco/assets/svg/rating.svg') }}" alt="rating" />
-                                    </div>
-                                    <p class="rate">4.5/5</p>
-                                </div>
-                                <p class="price">$120</p>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="btn-wrap">

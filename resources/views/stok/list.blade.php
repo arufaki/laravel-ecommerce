@@ -116,7 +116,16 @@
                     </div>
                     <div class="modal-body">
                         <div class="cart-body">
-                            <img src="" class="fotoBarang" alt="foto-barang" class="rounded" width="450">
+                            @foreach ($recordStok as $stok)
+                                @php
+                                    $images = json_decode($stok->image);
+                                @endphp
+                                @foreach ($images as $image)
+                                    <img src="{{ asset('storage/foto-produk/' . $image) }}" class="fotoBarang rounded"
+                                        alt="foto-barang" width="450">
+                                @endforeach
+                            @endforeach
+
                             <input type="hidden" id="selectedOrderId" name="selectedOrderId" value="">
                         </div>
                     </div>
@@ -132,7 +141,7 @@
                 button.addEventListener('click', () => {
                     const selectedOrderId = button.getAttribute('data-order-id');
                     const selectedImageSrc = button.getAttribute('data-image');
-                    fotoBarang.src = `{{ asset('storage/${selectedImageSrc}') }}`;
+                    fotoBarang.alt = `{{ asset('storage/${selectedImageSrc}') }}`;
                     selectingOrderId.value = button.getAttribute('data-order-id');
                 });
             });

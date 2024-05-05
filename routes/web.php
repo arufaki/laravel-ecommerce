@@ -30,6 +30,7 @@ use App\Http\Controllers\BeliController;
 use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MutasiController;
+use App\Http\Controllers\IndexController;
 
 
 
@@ -37,13 +38,23 @@ use App\Http\Controllers\MutasiController;
 /*     return view('auth.login'); */
 /* }); */
 
-Route::get('/', function () {
+// ECOMMERCE ROUTE
+
+Route::get('/admin', function () {
     return view('include.welcome');
 });
 
-Route::get('/homepage', function () {
-    return view('ecomPages.index');
-});
+// Route::get('/', function () {
+//     return view('ecomPages.index');
+// });
+Route::get('/', [IndexController::class, 'index']);
+Route::get('/product/{id_stok}', [IndexController::class, 'productDetail'])->name('ecomPages.product-detail');
+
+
+
+// END ECOMMERCE ROUTE
+
+
 
 Route::middleware(['auth', 'verified', 'rolesChecker:admin'])->group(function () {
     Route::get('/dashboard', function () {
