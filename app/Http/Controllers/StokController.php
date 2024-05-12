@@ -48,13 +48,6 @@ class StokController extends Controller
                 $imageName = time().rand(1,99).'.'.$images->extension();  
 
                 $images->storeAs('foto-produk', $imageName);
-
-                // $imagePath = 'foto-barang/'.$images->hashName();
-                // $image->move(public_path('foto-barang'), $imagePath);
-                // $images->storeAs($imagePath);
-
-
-                // $imagePath = $image->storeAs('foto-barang', $image->hashName());
                 $image[]=$imageName;
             }
         }

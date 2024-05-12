@@ -35,26 +35,14 @@
                                 class="currentImg" />
                         </div>
                         <div class="child-image">
-                            {{-- @foreach ($selectedProduct as $image)
-                                @php
-                                    dd(json_decode($image));
-                                    $image = json_decode($image);
-                                @endphp --}}
+                           
                             @foreach ($extractImage as $image)
                                 <div class="image">
                                     <img src="{{ asset('storage/foto-produk/' . $image) }}" alt="product-image"
                                         class="thumb" />
                                 </div>
                             @endforeach
-                            {{-- @endforeach --}}
-                            {{-- <div class="image">
-                                <img src="{{ url('fkhco/assets/png/products/model.png') }}" alt=""
-                                    class="thumb" />
-                            </div>
-                            <div class="image">
-                                <img src="{{ url('fkhco/assets/png/products/real-hoodies.png') }}" alt="product-image"
-                                    class="thumb" />
-                            </div> --}}
+                           
                         </div>
                     </div>
                     <div class="product-description">
