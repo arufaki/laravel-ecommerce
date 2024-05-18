@@ -87,10 +87,8 @@
                             <div class="swiper-slide card">
                                 <a href="{{ Route('ecomPages.product-detail', $product->id_stok) }}">
                                     <div class="image-wrap">
-                                        {{-- @foreach ($imageCover as $image) --}}
                                         <img src="{{ asset('storage/foto-produk/' . $imageCover[0]) }}"
                                             alt="product-image" loading="lazy" />
-                                        {{-- @endforeach --}}
                                     </div>
                                     <div class="product-detail">
                                         <p class="product-title">{{ $product->nama_stok }}</p>

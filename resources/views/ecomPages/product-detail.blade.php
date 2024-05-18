@@ -35,14 +35,14 @@
                                 class="currentImg" />
                         </div>
                         <div class="child-image">
-                           
+
                             @foreach ($extractImage as $image)
                                 <div class="image">
                                     <img src="{{ asset('storage/foto-produk/' . $image) }}" alt="product-image"
                                         class="thumb" />
                                 </div>
                             @endforeach
-                           
+
                         </div>
                     </div>
                     <div class="product-description">
