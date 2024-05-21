@@ -41,13 +41,15 @@ use App\Http\Controllers\IndexController;
 // ECOMMERCE ROUTE
 
 Route::get('/admin', function () {
-    return view('include.welcome');
+    return view('auth.login');
 });
 
 // Route::get('/', function () {
 //     return view('ecomPages.index');
 // });
 Route::get('/', [IndexController::class, 'index']);
+Route::get('/cart', [IndexController::class, 'cart'])->name('ecomPages.cart');
+Route::get('/signin', [IndexController::class, 'signin'])->name('ecomPages.signin');
 Route::get('/product/{id_stok}', [IndexController::class, 'productDetail'])->name('ecomPages.product-detail');
 
 
@@ -61,6 +63,12 @@ Route::middleware(['auth', 'verified', 'rolesChecker:admin'])->group(function ()
         return view('include.welcome');
     })->name('dashboard');
 });
+
+// Route::middleware(['auth', 'verified', 'rolesChecker:user'])->group(function () {
+//     Route::get('/cart', function () {
+//         return view('ecomPages.cart');
+//     })->name('cart');
+// });
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

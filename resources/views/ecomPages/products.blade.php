@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FKH.CO</title>
-    <link rel="stylesheet" href="css/products.css" />
+    <link rel="stylesheet"  href="{{ url('fkhco/css/products.css') }} />
   </head>
   <body>
     <header>
@@ -17,13 +17,13 @@
             class="search-wrap"
           />
           <div class="icons-wrap">
-            <button class="cart-btn">
-              <img src="assets/svg/shopping-cart.svg" alt="cart-icon" />
-            </button>
-            <button class="user-btn">
-              <img src="assets/svg/user.svg" alt="user-icon" />
-            </button>
-          </div>
+            <a href={{ Route('ecomPages.cart') }} class="cart-btn obj-href">
+                <img src="{{ url('fkhco/assets/svg/shopping-cart.svg') }}" alt="cart-icon" />
+            </a>
+            <a href={{ Route('ecomPages.signin') }} class="user-btn obj-href">
+                <img src="{{ url('fkhco/assets/svg/user.svg') }}" alt="user-icon" />
+            </a>
+        </div>
         </div>
       </nav>
     </header>

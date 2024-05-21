@@ -19,4 +19,13 @@ class IndexController extends Controller
 
         return view('ecomPages.product-detail', compact('selectedProduct', 'extractImage'));
     }
+
+
+    public function signin() {
+        return view('ecomPages.login');
+    }
+
+    public function cart() {
+        return view('ecomPages.cart');
+    }
 }

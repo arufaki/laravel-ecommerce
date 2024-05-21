@@ -15,12 +15,12 @@
                 <h1 class="logos logo">FKH.CO</h1>
                 <input type="text" placeholder="Search product..." class="search-wrap" />
                 <div class="icons-wrap">
-                    <button class="cart-btn">
+                    <a href={{ Route('ecomPages.cart') }} class="cart-btn obj-href">
                         <img src="{{ url('fkhco/assets/svg/shopping-cart.svg') }}" alt="cart-icon" />
-                    </button>
-                    <button class="user-btn">
+                    </a>
+                    <a href={{ Route('ecomPages.signin') }} class="user-btn obj-href">
                         <img src="{{ url('fkhco/assets/svg/user.svg') }}" alt="user-icon" />
-                    </button>
+                    </a>
                 </div>
             </div>
         </nav>
