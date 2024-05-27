@@ -17,26 +17,31 @@
     <main>
       <section id="login">
         <div class="container login-form">
-          <form class="form-login">
+          <form class="form-login" method="POST" action="{{ route('login') }}">
+            @csrf
             <h1>Sign In</h1>
             <label for="username"
               >Username<input
                 type="text"
-                placeholder="Username"
-                name="username"
+                placeholder="Email"
+                name="email"
                 class="username"
-            /></label>
+            />
+            <x-input-error :messages="$errors->get('email')" class="mt-2" /></label>
             <label for="password"
               >Password<input
                 type="password"
                 placeholder="Password"
-                name="password"
                 class="password"
-            /></label>
+                id="password" 
+                name="password"
+            />
+            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+          </label>
             <p class="sign-up-acc">
               Don't have an account ? <span class="sign-up">Sign Up</span>
             </p>
-            <button class="login-btn">Sign In</button>
+            <button class="login-btn" type="submit">Sign In</button>
           </form>
         </div>
       </section>

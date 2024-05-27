@@ -10,7 +10,13 @@ const selectCard = document.querySelectorAll(".card"),
     productTitle = Array.from(document.querySelectorAll(".product-title")),
     userLogin = document.querySelector(".user-btn"),
     signUp = document.querySelector(".sign-up"),
-    signIn = document.querySelector(".sign-in");
+    signIn = document.querySelector(".sign-in"),
+    imageDetail = document.querySelectorAll(".image"),
+    sizeProduct = document.querySelectorAll(".size"),
+    inputUkuran = document.querySelectorAll("#ukuran"),
+    inputQty = document.getElementById("qty"),
+    increaseButton = document.getElementById("increase"),
+    decreaseButton = document.getElementById("decrease");
 
 // Links to Multiple Page
 if (shopBtn) {
@@ -57,12 +63,39 @@ if (signIn) {
 
 // DOM Manipulation Gallery Product
 if (containerGallery) {
-    containerGallery.addEventListener("mouseover", (e) => {
+    containerGallery.addEventListener("click", (e) => {
         if (e.target.className == "thumb") {
             mainImage.src = e.target.src;
         }
     });
 }
+
+imageDetail.forEach((img) => {
+    img.addEventListener("click", () => {
+        imageDetail.forEach((image) => {
+            image.classList.remove("product-border");
+        });
+        img.classList.add("product-border");
+    });
+});
+
+inputUkuran.forEach((uk, index) => {
+    uk.addEventListener("click", () => {
+        sizeProduct.forEach((sz) => {
+            sz.classList.remove("product-border");
+        });
+        sizeProduct[index].classList.add("product-border");
+    });
+});
+
+increaseButton.addEventListener("click", () => {
+    inputQty.value = parseInt(inputQty.value, 10) + 1;
+});
+
+decreaseButton.addEventListener("click", () => {
+    inputQty.value =
+        parseInt(inputQty.value) <= 1 ? 1 : parseInt(inputQty.value) - 1;
+});
 
 // FILTER Category Product
 if (selectContainer) {

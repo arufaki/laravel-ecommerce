@@ -15,7 +15,7 @@
                 <h1 class="logos logo">FKH.CO</h1>
                 <input type="text" placeholder="Search product..." class="search-wrap" />
                 <div class="icons-wrap">
-                    <a href={{ Route('ecomPages.cart') }} class="cart-btn obj-href">
+                    <a href={{ url('/cart') }} class="cart-btn obj-href">
                         <img src="{{ url('fkhco/assets/svg/shopping-cart.svg') }}" alt="cart-icon" />
                     </a>
                     <a href={{ Route('ecomPages.signin') }} class="user-btn obj-href">
@@ -62,35 +62,44 @@
                                 {{ $selectedProduct->deskripsi_barang }}
                             </p>
                         </div>
-                        <div class="product-size">
-                            <p class="choose-size">Choose Size</p>
-                            <div class="size-wrap">
-                                <div class="size">
-                                    <p>S</p>
-                                </div>
-                                <div class="size">
-                                    <p>M</p>
-                                </div>
-                                <div class="size">
-                                    <p>L</p>
-                                </div>
-                                <div class="size">
-                                    <p>XL</p>
-                                </div>
-                                <div class="size">
-                                    <p>XXL</p>
+                        <form action="{{url('cart')}}" method="POST">
+                            @csrf
+                            <div class="product-size">
+                                <input type="hidden" name="id_stok" value="{{$selectedProduct->id_stok}}">
+                                <p class="choose-size">Choose Size</p>
+                                <div class="size-wrap">
+                                    <div class="size">
+                                        <input type="radio" id="ukuran" name="ukuran" value="s" checked />
+                                        <p>S</p>
+                                    </div>
+                                    <div class="size">
+                                        <input type="radio" id="ukuran" name="ukuran" value="m" />
+                                        <p>M</p>
+                                    </div>
+                                    <div class="size">
+                                        <input type="radio" id="ukuran" name="ukuran" value="l" />
+                                        <p>L</p>
+                                    </div>
+                                    <div class="size">
+                                        <input type="radio" id="ukuran" name="ukuran" value="xl" />
+                                        <p>XL</p>
+                                    </div>
+                                    <div class="size">
+                                        <input type="radio" id="ukuran" name="ukuran" value="xxl" />
+                                        <p>XXL</p>
+                                    </div>      
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="cart">
-                            <div class="quantity">
-                                <button>-</button>
-                                <p>1</p>
-                                <button>+</button>
+                            <div class="cart">
+                                <div class="quantity">
+                                    <span id="decrease" class="counter">-</span>
+                                    <input type="number" class="qty" name="qty" id="qty" value="1" max="100" required   />
+                                    <span id="increase" class="counter">+</span>
+                                </div>
+                                <button class="add-to-cart" type="submit">Add To Cart</button>
                             </div>
-                            <button class="add-to-cart">Add To Cart</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

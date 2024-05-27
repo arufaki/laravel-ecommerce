@@ -16,10 +16,10 @@
                 <h1 class="logos logo">FKH.CO</h1>
                 <input type="text" placeholder="Search product..." class="search-wrap" />
                 <div class="icons-wrap">
-                    <a href={{ Route('ecomPages.cart') }} class="cart-btn obj-href">
+                    <a href={{ url('/cart') }} class="cart-btn obj-href">
                         <img src="{{ url('fkhco/assets/svg/shopping-cart.svg') }}" alt="cart-icon" />
                     </a>
-                    <a href={{ Route('ecomPages.signin') }} class="user-btn obj-href">
+                    <a href={{ Route('login') }} class="user-btn obj-href">
                         <img src="{{ url('fkhco/assets/svg/user.svg') }}" alt="user-icon" />
                     </a>
                 </div>

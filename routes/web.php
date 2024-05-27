@@ -31,6 +31,7 @@ use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MutasiController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\CartController;
 
 
 
@@ -48,7 +49,7 @@ Route::get('/admin', function () {
 //     return view('ecomPages.index');
 // });
 Route::get('/', [IndexController::class, 'index']);
-Route::get('/cart', [IndexController::class, 'cart'])->name('ecomPages.cart');
+
 Route::get('/signin', [IndexController::class, 'signin'])->name('ecomPages.signin');
 Route::get('/product/{id_stok}', [IndexController::class, 'productDetail'])->name('ecomPages.product-detail');
 
@@ -70,21 +71,14 @@ Route::middleware(['auth', 'verified', 'rolesChecker:admin'])->group(function ()
 //     })->name('cart');
 // });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-Route::resources([
-    'mahasiswa' => CRUDController::class,
-    'dosen' => DosenController::class,
-    'tahunakademik' => TahunAkademikController::class,
-    'ruang' => RuangController::class,
-    'fakultas' => FakultasController::class,
-    'prodi' => ProdiController::class,
-    'kelas' => kelasController::class,
-]);
+// CART
+// Route::get('/carts', [CartController::class, 'index'])->name('cart');
+// Route::post('/cart', [CartController::class, 'addToCart'])->name('addToCart');
+
+Route::resource('/cart', CartController::class);
+
+// END CART
 
 Route::resources([
     'stok' => StokController::class,
@@ -95,6 +89,33 @@ Route::resources([
     'satuan' => SatuanController::class,
     'kategori' => KategoriController::class,
     'mutasi' => MutasiController::class,
+]);
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+
+
+
+
+
+
+
+
+
+// MAHASISWA
+
+Route::resources([
+    'mahasiswa' => CRUDController::class,
+    'dosen' => DosenController::class,
+    'tahunakademik' => TahunAkademikController::class,
+    'ruang' => RuangController::class,
+    'fakultas' => FakultasController::class,
+    'prodi' => ProdiController::class,
+    'kelas' => kelasController::class,
 ]);
 
 Route::controller(CustomController::class)->group(function () {

@@ -21,11 +21,11 @@ class IndexController extends Controller
     }
 
 
-    public function signin() {
-        return view('ecomPages.login');
-    }
+    // public function signin() {
+    //     return view('ecomPages.login');
+    // }
 
-    public function cart() {
-        return view('ecomPages.cart');
-    }
+    // public function cart() {
+    //     return view('ecomPages.cart');
+    // }
 }

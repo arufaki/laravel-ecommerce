@@ -17,7 +17,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('auth.login');
+        return view('ecomPages.login');
     }
 
     /**
@@ -28,8 +28,17 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+        $url = "";
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        if($request->user()->role === "admin") {
+            $url = "/dashboard";
+        } else if($request->user()->role === "user") {
+            $url = "/";
+        } else {
+            $url = "/";
+        }
+
+        return redirect()->intended($url);
     }
 
     /**

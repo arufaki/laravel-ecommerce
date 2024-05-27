@@ -15,7 +15,7 @@
                 <h1 class="logos logo">FKH.CO</h1>
                 <input type="text" placeholder="Search product..." class="search-wrap" />
                 <div class="icons-wrap">
-                    <a href={{ Route('ecomPages.cart') }} class="cart-btn obj-href">
+                    <a href={{ url('/cart') }} class="cart-btn obj-href">
                         <img src="{{ url('fkhco/assets/svg/shopping-cart.svg') }}" alt="cart-icon" />
                     </a>
                     <a href={{ Route('ecomPages.signin') }} class="user-btn obj-href">
@@ -31,81 +31,42 @@
                 <div class="products-cart">
                     <h1>YOUR CART</h1>
                     <div class="cart-master">
-                        <div class="cart-wrapping">
-                            <div class="product-wishlist">
-                                <div class="detail-cart">
-                                    <div class="image images">
-                                        <img src="{{ url('fkhco/assets/png/products/hoodie.png') }}"
-                                            alt="product-image" />
+                        
+                        @foreach($recordCarts as $cart)
+                            <div class="cart-wrapping">
+                                <div class="product-wishlist">
+                                    <div class="detail-cart">
+                                        <div class="image images">
+                                            @php
+                                                $imageExtract = json_decode($cart->image);
+                                            @endphp
+                                            <img src="{{ asset('storage/foto-produk/' . $imageExtract[0]) }}"
+                                                alt="product-image" />
+                                        </div>
+                                        <div class="product-details">
+                                            <h3 class="product-title price">{{$cart->nama_stok}}</h3>
+                                            <p class="size-chart">Size: <span>{{strtoupper($cart->ukuran)}}</span></p>
+                                            <p class="price cart-price">{{ 'Rp. ' . number_format($cart->harga_jual, 0, ',', '.') }}</p>
+                                        </div>
                                     </div>
-                                    <div class="product-details">
-                                        <h3 class="product-title price">PULLOVER SWEAT HOODIE</h3>
-                                        <p class="size-chart">Size: <span>L</span></p>
-                                        <p class="price cart-price">$120</p>
-                                    </div>
-                                </div>
-                                <div class="btn-feat">
-                                    <button class="trash-btn">
-                                        <img src="{{ url('fkhco/assets/svg/trash.svg') }}" alt="trash-icon" />
-                                    </button>
-                                    <div class="quantity qty">
-                                        <button>-</button>
-                                        <p>1</p>
-                                        <button>+</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cart-wrapping">
-                            <div class="product-wishlist">
-                                <div class="detail-cart">
-                                    <div class="image images">
-                                        <img src="{{ url('fkhco/assets/png/products/hoodie.png') }}"
-                                            alt="product-image" />
-                                    </div>
-                                    <div class="product-details">
-                                        <h3 class="product-title price">PULLOVER SWEAT HOODIE</h3>
-                                        <p class="size-chart">Size: <span>L</span></p>
-                                        <p class="price cart-price">$120</p>
+                                    <div class="btn-feat">
+                                        <button class="trash-btn">
+                                            <img src="{{ url('fkhco/assets/svg/trash.svg') }}" alt="trash-icon" />
+                                        </button>
+                                        <form action="{{Route("cart.update", $cart->id_cart)}}" method="POST">
+                                            @csrf
+                                            @method("PUT")
+                                            <input type="hidden" name="id_cart" value="{{$cart->id_cart}}">
+                                            <div class="quantity qty">
+                                                <button id="decrease" name="action" value="decrease" class="counter" type="submit">-</button>
+                                                <input type="number" class="qty" name="qty" id="qty" value="{{$cart->qty}}" max="100" required />
+                                                <button id="increase" name="action" value="increase" class="counter" type="submit">+</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
-                                <div class="btn-feat">
-                                    <button class="trash-btn">
-                                        <img src="{{ url('fkhco/assets/svg/trash.svg') }}" alt="trash-icon" />
-                                    </button>
-                                    <div class="quantity qty">
-                                        <button>-</button>
-                                        <p>1</p>
-                                        <button>+</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cart-wrapping">
-                            <div class="product-wishlist">
-                                <div class="detail-cart">
-                                    <div class="image images">
-                                        <img src="{{ url('fkhco/assets/png/products/hoodie.png') }}"
-                                            alt="product-image" />
-                                    </div>
-                                    <div class="product-details">
-                                        <h3 class="product-title price">PULLOVER SWEAT HOODIE</h3>
-                                        <p class="size-chart">Size: <span>L</span></p>
-                                        <p class="price cart-price">$120</p>
-                                    </div>
-                                </div>
-                                <div class="btn-feat">
-                                    <button class="trash-btn">
-                                        <img src="{{ url('fkhco/assets/svg/trash.svg') }}" alt="trash-icon" />
-                                    </button>
-                                    <div class="quantity qty">
-                                        <button>-</button>
-                                        <p>1</p>
-                                        <button>+</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            </div> 
+                        @endforeach
                     </div>
                 </div>
                 <div class="order-summary">

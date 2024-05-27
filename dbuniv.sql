@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 21, 2024 at 05:17 PM
+-- Generation Time: May 27, 2024 at 08:11 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.7
 
@@ -53,10 +53,20 @@ INSERT INTO `beli` (`id_pembelian`, `no_bukti`, `tanggal`, `keterangan`, `id_pem
 
 CREATE TABLE `cart` (
   `id_cart` int NOT NULL,
-  `nama_barang` varchar(250) NOT NULL,
   `ukuran` varchar(100) NOT NULL,
-  `jumlah` int NOT NULL
+  `qty` int NOT NULL,
+  `id_stok` bigint UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id_cart`, `ukuran`, `qty`, `id_stok`) VALUES
+(2, 's', 5, 33),
+(3, 'm', 6, 33),
+(4, 'xl', 4, 36),
+(5, 'm', 5, 40);
 
 -- --------------------------------------------------------
 
@@ -343,6 +353,13 @@ ALTER TABLE `beli`
   ADD KEY `beli_id_pemasok_index` (`id_pemasok`);
 
 --
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id_cart`),
+  ADD KEY `id_stok` (`id_stok`);
+
+--
 -- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -433,6 +450,12 @@ ALTER TABLE `beli`
   MODIFY `id_pembelian` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `id_cart` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -507,6 +530,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `beli`
   ADD CONSTRAINT `beli_id_pemasok_foreign` FOREIGN KEY (`id_pemasok`) REFERENCES `tbpemasok` (`id_pemasok`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`id_stok`) REFERENCES `tbstok` (`id_stok`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `jual`
