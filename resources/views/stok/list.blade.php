@@ -43,7 +43,7 @@
                                             <th>No</th>
                                             <th>Kode Barang</th>
                                             <th>Nama Barang</th>
-                                            <th>Saldo Awal</th>
+                                            <th>Stok Barang</th>
                                             <th>Harga Beli</th>
                                             <th>Harga Jual</th>
                                             <th>Harga Modal</th>
@@ -141,7 +141,7 @@
                 button.addEventListener('click', () => {
                     const selectedOrderId = button.getAttribute('data-order-id');
                     const selectedImageSrc = button.getAttribute('data-image');
-                    fotoBarang.alt = `{{ asset('storage/${selectedImageSrc}') }}`;
+                    fotoBarang.src = `{{ asset('storage/foto-produk/${selectedImageSrc}') }}`;
                     selectingOrderId.value = button.getAttribute('data-order-id');
                 });
             });

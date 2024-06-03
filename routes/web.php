@@ -35,15 +35,15 @@ use App\Http\Controllers\CartController;
 
 
 
-/* Route::get('/', function () { */
-/*     return view('auth.login'); */
-/* }); */
+ Route::get('/', function () { 
+    return view('auth.login');
+}); 
 
 // ECOMMERCE ROUTE
 
-Route::get('/admin', function () {
-    return view('auth.login');
-});
+// Route::get('/admin', function () {
+//     return view('auth.login');
+// });
 
 // Route::get('/', function () {
 //     return view('ecomPages.index');
@@ -53,17 +53,22 @@ Route::get('/', [IndexController::class, 'index']);
 Route::get('/signin', [IndexController::class, 'signin'])->name('ecomPages.signin');
 Route::get('/product/{id_stok}', [IndexController::class, 'productDetail'])->name('ecomPages.product-detail');
 
+Route::middleware(['auth', 'verified', 'rolesChecker:admin'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('include.welcome');
+    })->name('dashboard');  
 
+    Route::resource('/cart', CartController::class);
+});
+
+
+Route::get('/checkout', [IndexController::class, 'checkout']);
 
 // END ECOMMERCE ROUTE
 
 
 
-Route::middleware(['auth', 'verified', 'rolesChecker:admin'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('include.welcome');
-    })->name('dashboard');
-});
+
 
 // Route::middleware(['auth', 'verified', 'rolesChecker:user'])->group(function () {
 //     Route::get('/cart', function () {
@@ -76,7 +81,7 @@ Route::middleware(['auth', 'verified', 'rolesChecker:admin'])->group(function ()
 // Route::get('/carts', [CartController::class, 'index'])->name('cart');
 // Route::post('/cart', [CartController::class, 'addToCart'])->name('addToCart');
 
-Route::resource('/cart', CartController::class);
+
 
 // END CART
 

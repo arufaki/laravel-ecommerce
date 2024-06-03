@@ -1,0 +1,30 @@
+.checkout-price {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.cover-bg {
+    max-width: 137px;
+}
+
+.checkout-master {
+    position: relative;
+}
+
+.subtotal-checkout {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+@media only screen and (min-width: 768px) {
+    .checkout-wrap {
+        flex: 1 120%;
+    }
+}
+
+@media only screen and (min-width: 1020px) {
+    .checkout-wrap {
+        flex: 1 78%;
+    }
+}

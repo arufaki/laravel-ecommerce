@@ -9,12 +9,25 @@ class CartController extends Controller
     public function index() {
         $recordsCart = \DB::table('cart')
         ->leftJoin('tbstok', 'cart.id_stok', '=', 'tbstok.id_stok')
-        ->select('cart.*', 'tbstok.nama_stok as nama_stok', 'tbstok.harga_jual as harga_jual', 'tbstok.image as image');
+        ->select('cart.*', 'tbstok.nama_stok as nama_stok', 'tbstok.harga_jual as harga_jual', 'tbstok.image as image')
+        ->orderBy('id_cart', 'desc');
 
         $recordCarts = $recordsCart->get();
 
-        return view('ecomPages.cart', compact('recordCarts'));
+        $calcSubTotal = $recordCarts->sum(function($datas) {
+            return $datas->harga_jual * $datas->qty;
+        });
+
+        $subtotal = $recordCarts ? $calcSubTotal : 0;
+
+        // $deliveryFee = $recordCarts ? 200000 : 0;
+
+        $total = $subtotal;
+
+
+        return view('ecomPages.cart', compact('recordCarts', 'subtotal', 'total'));
     }
+
 
     public function store(Request $r) {
 
@@ -22,6 +35,7 @@ class CartController extends Controller
             'ukuran' => $r->ukuran,
             'qty' => $r->qty,
             'id_stok' => $r->id_stok,
+            'id_user' => $r->id_user,
         );
 
         $product = \DB::table('tbstok')->where('id_stok', $r->id_stok)->first();
@@ -60,5 +74,12 @@ class CartController extends Controller
 
         return redirect()->route('cart.index');
 
+    }
+
+    public function destroy($id_cart)
+    {
+        \DB::Table('cart')->where('id_cart', $id_cart)->delete();
+
+        return redirect()->route('cart.index');
     }
 }

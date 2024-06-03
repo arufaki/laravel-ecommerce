@@ -34,7 +34,7 @@
                                     <input type="text" class="form-control" id="nama_stok" name="nama_stok">
                                 </div>
                                 <div class="form-group">
-                                    <label for="saldo_awal">Saldo Awal</label>
+                                    <label for="saldo_awal">Stok Barang</label>
                                     <input type="text" class="form-control" id="saldo_awal" name="saldo_awal">
                                 </div>
                                 <div class="form-group">

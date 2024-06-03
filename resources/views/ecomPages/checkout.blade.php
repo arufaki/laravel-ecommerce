@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FKH.CO</title>
     <link rel="stylesheet" href="{{ url('fkhco/css/cart.css') }}" />
+    <link rel="stylesheet" href="{{ url('fkhco/css/checkout.css') }}" />
 </head>
 
 <body>
@@ -28,58 +29,35 @@
     <main>
         <section id="product-cart">
             <div class="cart-wrapped container">
-                <div class="products-cart">
-                    <h1>YOUR CART</h1>
+                <div class="products-cart checkout-wrap">
+                    <h1>CHECKOUT</h1>
                     <div class="cart-master">
-                        
-                        @foreach($recordCarts as $cart)
                             <div class="cart-wrapping">
-                                <div class="product-wishlist">
+                                <div class="product-wishlist checkout-master">
                                     <div class="detail-cart">
-                                        <div class="image images">
-                                            @php
-                                                $imageExtract = json_decode($cart->image);
-                                            @endphp
-                                            <img src="{{ asset('storage/foto-produk/' . $imageExtract[0]) }}"
-                                                alt="product-image" />
-                                        </div>
-                                        <div class="product-details">
-                                            <h3 class="product-title price">{{$cart->nama_stok}}</h3>
-                                            <p class="size-chart">Size: <span>{{strtoupper($cart->ukuran)}}</span></p>
-                                            <p class="price cart-price">{{ 'Rp. ' . number_format($cart->harga_jual, 0, ',', '.') }}</p>
-                                        </div>
+                                        <div class="image images cover-bg">
+                                            <img
+                                              src="{{url('fkhco/assets/png/products/hoodie.png')}}"
+                                              alt="product-image"
+                                            />
+                                          </div>
+                                          <div class="product-details">
+                                            <h3 class="product-title price">PULLOVER SWEAT HOODIE</h3>
+                                            <p class="size-chart">Size: <span>L</span></p>
+                                            <p class="price cart-price checkout-price">$120 x 2</p>
+                                          </div>
                                     </div>
-                                    <div class="btn-feat">
-                                        <form action="{{ Route('cart.destroy', $cart->id_cart) }}"
-                                            method="POST" onsubmit="return confirm('Yakin Ingin Menghapus ?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="trash-btn">
-                                                <img src="{{ url('fkhco/assets/svg/trash.svg') }}" alt="trash-icon" />
-                                            </button>
-                                        </form>
-                                        
-                                        <form action="{{Route("cart.update", $cart->id_cart)}}" method="POST">
-                                            @csrf
-                                            @method("PUT")
-                                            <input type="hidden" name="id_cart" value="{{$cart->id_cart}}">
-                                            <div class="quantity qty">
-                                                <button id="decrease" name="action" value="decrease" class="counter" type="submit">-</button>
-                                                <input type="number" class="qty" name="qty" id="qty" value="{{$cart->qty}}" max="100" required />
-                                                <button id="increase" name="action" value="increase" class="counter" type="submit">+</button>
-                                            </div>
-                                        </form>
-                                    </div>
+                                    <p class="subtotal-checkout">$240</p>
                                 </div>
                             </div> 
-                        @endforeach
+                     
                     </div>
                 </div>
                 <div class="order-summary">
                     <h3>Order Summary</h3>
                     <div class="subtotal delivery">
                         <p>Subtotal</p>
-                        <p class="price-title">{{ 'Rp. ' . number_format($subtotal, 0, ',', '.') }}</p>
+                        <p class="price-title"></p>
                     </div>
                     {{-- <div class="delivery">
                         <p>Delivery Fee</p>
@@ -87,7 +65,7 @@
                     </div> --}}
                     <div class="total">
                         <p>Total</p>
-                        <p class="price order-total">{{ 'Rp. ' . number_format($total, 0, ',', '.') }}</p>
+                        <p class="price order-total"></p>
                     </div>
                     <button class="add-to-cart checkout-btn">
                         Go to Checkout <img src="{{ url('fkhco/assets/svg/arrow.svg') }}" alt="arrow-icon" />

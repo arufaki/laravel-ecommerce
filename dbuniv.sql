@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 27, 2024 at 08:11 AM
+-- Generation Time: Jun 03, 2024 at 07:57 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.7
 
@@ -55,18 +55,20 @@ CREATE TABLE `cart` (
   `id_cart` int NOT NULL,
   `ukuran` varchar(100) NOT NULL,
   `qty` int NOT NULL,
-  `id_stok` bigint UNSIGNED NOT NULL
+  `id_stok` bigint UNSIGNED NOT NULL,
+  `id_user` bigint UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `cart`
 --
 
-INSERT INTO `cart` (`id_cart`, `ukuran`, `qty`, `id_stok`) VALUES
-(2, 's', 5, 33),
-(3, 'm', 6, 33),
-(4, 'xl', 4, 36),
-(5, 'm', 5, 40);
+INSERT INTO `cart` (`id_cart`, `ukuran`, `qty`, `id_stok`, `id_user`) VALUES
+(14, 'm', 1, 41, 5),
+(15, 'l', 2, 41, 5),
+(16, 'l', 4, 43, 5),
+(17, 'l', 3, 44, 5),
+(18, 's', 1, 44, 5);
 
 -- --------------------------------------------------------
 
@@ -311,9 +313,9 @@ CREATE TABLE `tbstok` (
 --
 
 INSERT INTO `tbstok` (`id_stok`, `kode_stok`, `nama_stok`, `saldo_awal`, `harga_beli`, `harga_jual`, `harga_modal`, `image`, `deskripsi_barang`, `pajang`, `id_satuan`, `id_kategori`) VALUES
-(33, 4231, 'Hoodie', '450000', '400000', '499999', '450000', '[\"171491936894.jpg\",\"171491936830.png\",\"171491936823.jpg\"]', 'This product is made from the material composition options below. At this time, it is not permitted to choose the material composition for the product you purchase.', 'tidak', 6, 1),
-(36, 1242, 'Bomber Jacket', '450000', '420000', '520000', '420000', '[\"171493275397.jpg\",\"17149327535.jpg\",\"171493275346.png\"]', 'Jaket bomber adalah salah satu jenis jaket yang memiliki desain khas dengan potongan yang ramping di bagian pinggang dan lengan. Biasanya terbuat dari bahan yang tebal seperti nilon atau kulit sintetis, jaket ini awalnya dirancang untuk para pilot pesawat tempur pada Perang Dunia II. Namun, seiring berjalannya waktu, jaket bomber menjadi ikon mode yang populer di kalangan masyarakat umum. Desainnya yang sederhana namun stylish membuatnya menjadi pilihan yang cocok untuk berbagai kesempatan, mulai dari casual hingga semi-formal.', 'tidak', 6, 1),
-(40, 59234, 'White Hoodie', '500000', '350000', '450000', '500000', '[\"171631167272.png\",\"171631167289.png\",\"171631167224.png\"]', 'A white hoodie: Classic and versatile, this hoodie features a soft, comfortable fabric and a relaxed fit. Perfect for layering or wearing on its own, it offers a clean, minimalist look with a cozy hood and practical front pocket. Ideal for any casual occasion.', 'tidak', 6, 1);
+(41, 1234, 'White Hoodie', '150', '350000', '450000', '400000', '[\"171689881834.png\",\"171689881865.png\",\"171689881898.png\"]', 'This white hoodie epitomizes comfort and style. Crafted from soft, high-quality cotton, it offers a snug and cozy fit, perfect for casual outings or lounging at home. The minimalist design features a classic kangaroo pocket at the front, providing both functionality and a touch of urban flair. Its versatile color makes it an essential wardrobe staple, effortlessly pairing with any outfit choice. Whether you\'re layering up for a brisk morning walk or simply adding a layer of warmth on a chilly evening, this white hoodie promises both comfort and fashion-forward appeal. Upgrade your wardrobe with this timeless piece that seamlessly blends comfort and style.', 'tidak', 6, 1),
+(43, 4321, 'Leather Jacket', '100', '550000', '750000', '600000', '[\"171690126727.png\",\"17169012687.png\",\"171690126832.png\"]', 'Experience the perfect blend of edgy style and premium quality with this leather jacket. Made from genuine, high-grade leather, it offers durability and a sleek, sophisticated look. The jacket features a classic zip-up front, multiple pockets for practicality, and a fitted design that flatters any silhouette. The interior is lined with a soft, comfortable fabric, ensuring you stay warm while looking effortlessly cool. Ideal for both casual wear and more dressed-up occasions, this leather jacket is a versatile addition to any wardrobe. Elevate your style and make a bold statement with this timeless piece that exudes confidence and class.', 'tidak', 6, 1),
+(44, 2341, 'Black Boots', '100', '250000', '350000', '270000', '[\"171690170211.png\",\"17169017027.png\",\"171690170297.png\"]', 'Step into style and confidence with these sleek black boots. Expertly crafted from high-quality leather, these boots offer both durability and a polished finish. The timeless design features a sturdy sole for excellent traction, a comfortable insole for all-day wear, and a secure lace-up front or zipper closure, depending on your preference. Whether you\'re navigating the city streets or dressing up for a special occasion, these black boots provide the perfect balance of practicality and sophistication. Their versatile design makes them an essential addition to any wardrobe, effortlessly complementing a range of outfits from casual jeans to smart trousers. Elevate your footwear collection with these classic black boots that combine functionality with a touch of elegance.', 'tidak', 6, 5);
 
 -- --------------------------------------------------------
 
@@ -357,7 +359,8 @@ ALTER TABLE `beli`
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`id_cart`),
-  ADD KEY `id_stok` (`id_stok`);
+  ADD KEY `id_stok` (`id_stok`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -453,7 +456,7 @@ ALTER TABLE `beli`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id_cart` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_cart` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -513,7 +516,7 @@ ALTER TABLE `tbsatuan`
 -- AUTO_INCREMENT for table `tbstok`
 --
 ALTER TABLE `tbstok`
-  MODIFY `id_stok` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id_stok` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -535,7 +538,8 @@ ALTER TABLE `beli`
 -- Constraints for table `cart`
 --
 ALTER TABLE `cart`
-  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`id_stok`) REFERENCES `tbstok` (`id_stok`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`id_stok`) REFERENCES `tbstok` (`id_stok`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `jual`

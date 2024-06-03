@@ -18,7 +18,7 @@
                     <a href={{ url('/cart') }} class="cart-btn obj-href">
                         <img src="{{ url('fkhco/assets/svg/shopping-cart.svg') }}" alt="cart-icon" />
                     </a>
-                    <a href={{ Route('ecomPages.signin') }} class="user-btn obj-href">
+                    <a href={{ Route('login') }} class="user-btn obj-href">
                         <img src="{{ url('fkhco/assets/svg/user.svg') }}" alt="user-icon" />
                     </a>
                 </div>
@@ -56,16 +56,18 @@
                                 </div>
                                 <p class="rate">4.5/5</p>
                             </div>
+                            <p style="padding-bottom: 10px;">in stock {{$selectedProduct->saldo_awal}} {{$selectedProduct->nama_satuan}}</p>
                             <p class="price pricing-detail">
                                 {{ 'Rp. ' . number_format($selectedProduct->harga_jual, 0, ',', '.') }}</p>
                             <p class="product-body">
                                 {{ $selectedProduct->deskripsi_barang }}
                             </p>
                         </div>
-                        <form action="{{url('cart')}}" method="POST">
+                        <form action="{{ url('cart')  }}" method="POST" id="cart-form">
                             @csrf
                             <div class="product-size">
                                 <input type="hidden" name="id_stok" value="{{$selectedProduct->id_stok}}">
+                                <input type="hidden" class="form-control" id="id_user" name="id_user" value="{{ Auth::user() !== null ? Auth::user()->id : '' }}">
                                 <p class="choose-size">Choose Size</p>
                                 <div class="size-wrap">
                                     <div class="size">
@@ -94,7 +96,7 @@
                             <div class="cart">
                                 <div class="quantity">
                                     <span id="decrease" class="counter">-</span>
-                                    <input type="number" class="qty" name="qty" id="qty" value="1" max="100" required   />
+                                    <input type="number" class="qty" name="qty" id="qty" value="1" max="{{$selectedProduct->saldo_awal}}" required   />
                                     <span id="increase" class="counter">+</span>
                                 </div>
                                 <button class="add-to-cart" type="submit">Add To Cart</button>
@@ -135,6 +137,7 @@
         </div>
     </footer>
     <script src="{{ url('fkhco/js/app.js') }}"></script>
+
 </body>
 
 </html>
