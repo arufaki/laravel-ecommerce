@@ -50,25 +50,110 @@
                                     <p class="subtotal-checkout">$240</p>
                                 </div>
                             </div> 
-                     
+                            <div class="cart-wrapping">
+                                <div class="product-wishlist checkout-master">
+                                    <div class="detail-cart">
+                                        <div class="image images cover-bg">
+                                            <img
+                                              src="{{url('fkhco/assets/png/products/hoodie.png')}}"
+                                              alt="product-image"
+                                            />
+                                          </div>
+                                          <div class="product-details">
+                                            <h3 class="product-title price">PULLOVER SWEAT HOODIE</h3>
+                                            <p class="size-chart">Size: <span>L</span></p>
+                                            <p class="price cart-price checkout-price">$120 x 2</p>
+                                          </div>
+                                    </div>
+                                    <p class="subtotal-checkout">$240</p>
+                                </div>
+                            </div> 
+                            <div class="cart-wrapping">
+                                <div class="product-wishlist checkout-master">
+                                    <div class="detail-cart">
+                                        <div class="image images cover-bg">
+                                            <img
+                                              src="{{url('fkhco/assets/png/products/hoodie.png')}}"
+                                              alt="product-image"
+                                            />
+                                          </div>
+                                          <div class="product-details">
+                                            <h3 class="product-title price">PULLOVER SWEAT HOODIE</h3>
+                                            <p class="size-chart">Size: <span>L</span></p>
+                                            <p class="price cart-price checkout-price">$120 x 2</p>
+                                          </div>
+                                    </div>
+                                    <p class="subtotal-checkout">$240</p>
+                                </div>
+                            </div> 
                     </div>
                 </div>
-                <div class="order-summary">
-                    <h3>Order Summary</h3>
-                    <div class="subtotal delivery">
-                        <p>Subtotal</p>
-                        <p class="price-title"></p>
+                <div class="order-summary checkout-summary">
+                    <div class="header-wrap">
+                        <h3 class="header-summary">Delivery Address</h3>
+                        <span class="line-span"></span>
                     </div>
-                    {{-- <div class="delivery">
-                        <p>Delivery Fee</p>
-                        <p class="price-title">{{ 'Rp. ' . number_format($deliveryFee, 0, ',', '.') }}</p>
-                    </div> --}}
+                    <div class="cart-master">
+                        <div class="cart-wrapping">
+                            <div class="product-wishlist checkout-master">
+                                <div class="detail-cart">
+                                      <div class="product-details">
+                                        <h3 class="product-title price">John Doe | (+62 823 8792 4582)</h3>
+                                        <p class="size-chart">Jl. Yamagawa, Perum Mutiara Indah Blok G.24, Kec. Sarolangun, Kel. Kuvukiland, Kota Jamaica, Provinsi Osaka, 28829</p>
+                                      </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="header-wrap">
+                        <h3 class="header-summary">Shipping Option</h3>
+                        <span class="line-span"></span>
+                    </div>
+                    <div class="cart-master">
+                        <div class="cart-wrapping">
+                            <div class="product-wishlist checkout-master">
+                                <div class="detail-cart">
+                                    <div class="product-details">
+                                      <h3 class="product-title price">JNE Trucking</h3>
+                                      <p class="size-chart">Receive in 2-3 days</p>
+                                    </div>
+                              </div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="header-wrap">
+                        <h3 class="header-summary">Payment Method</h3>
+                        <span class="line-span"></span>
+                    </div>
+                    <div class="cart-master">
+                        <div class="cart-wrapping">
+                            <div class="product-wishlist checkout-master">
+                                <div class="detail-cart">
+                                    <div class="product-details">
+                                      <h3 class="product-title price">BANK Virtual Account</h3>
+                                    </div>
+                              </div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="subtotal checkout-subtotal">
+                        <p>Subtotal</p>
+                        <p class="price-title">$450</p>
+                    </div>
+                    <div class="subtotal checkout-subtotal">
+                        <p>Shipping Fee</p>
+                        <p class="price-title">$50</p>
+                    </div>
+                    <div class="subtotal delivery checkout-subtotal">
+                        <p>Admin Fee</p>
+                        <p class="price-title">$5</p>
+                    </div>
                     <div class="total">
                         <p>Total</p>
-                        <p class="price order-total"></p>
+                        <p class="price order-total">$505</p>
                     </div>
                     <button class="add-to-cart checkout-btn">
-                        Go to Checkout <img src="{{ url('fkhco/assets/svg/arrow.svg') }}" alt="arrow-icon" />
+                        Create Order <img src="{{ url('fkhco/assets/svg/arrow.svg') }}" alt="arrow-icon" />
                     </button>
                 </div>
             </div>

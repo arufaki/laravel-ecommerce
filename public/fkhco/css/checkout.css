@@ -17,6 +17,27 @@
     bottom: 0;
 }
 
+.checkout-summary {
+    height: 100%;
+}
+
+.header-summary {
+    font-size: 18px;
+}
+
+.line-span {
+    display: block;
+    width: 82px;
+    height: 2px;
+    background-color: rgb(85, 83, 83);
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.checkout-subtotal {
+    margin: 8px 0;
+}
+
 @media only screen and (min-width: 768px) {
     .checkout-wrap {
         flex: 1 120%;
@@ -25,6 +46,6 @@
 
 @media only screen and (min-width: 1020px) {
     .checkout-wrap {
-        flex: 1 78%;
+        flex: 1 160%;
     }
 }

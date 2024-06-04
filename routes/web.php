@@ -63,6 +63,7 @@ Route::middleware(['auth', 'verified', 'rolesChecker:admin'])->group(function ()
 
 
 Route::get('/checkout', [IndexController::class, 'checkout']);
+Route::get('/products', [IndexController::class, 'products']);
 
 // END ECOMMERCE ROUTE
 
