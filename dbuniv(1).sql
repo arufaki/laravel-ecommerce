@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 03, 2024 at 07:57 AM
+-- Generation Time: Jun 11, 2024 at 06:10 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.7
 
@@ -57,7 +57,7 @@ CREATE TABLE `cart` (
   `qty` int NOT NULL,
   `id_stok` bigint UNSIGNED NOT NULL,
   `id_user` bigint UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `cart`
@@ -65,10 +65,10 @@ CREATE TABLE `cart` (
 
 INSERT INTO `cart` (`id_cart`, `ukuran`, `qty`, `id_stok`, `id_user`) VALUES
 (14, 'm', 1, 41, 5),
-(15, 'l', 2, 41, 5),
-(16, 'l', 4, 43, 5),
-(17, 'l', 3, 44, 5),
-(18, 's', 1, 44, 5);
+(20, 'm', 3, 47, 5),
+(21, 'l', 2, 48, 5),
+(22, 'l', 3, 45, 6),
+(23, 'xxl', 4, 43, 6);
 
 -- --------------------------------------------------------
 
@@ -97,16 +97,8 @@ CREATE TABLE `jual` (
   `no_bukti` int NOT NULL,
   `tanggal` date NOT NULL,
   `keterangan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `id_pelanggan` bigint UNSIGNED NOT NULL
+  `id_user` bigint UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `jual`
---
-
-INSERT INTO `jual` (`id_penjualan`, `no_bukti`, `tanggal`, `keterangan`, `id_pelanggan`) VALUES
-(3, 132, '2024-04-05', 'ASWG-114', 3),
-(4, 442, '2024-04-04', 'ASWG-115', 2);
 
 -- --------------------------------------------------------
 
@@ -219,11 +211,10 @@ INSERT INTO `tbkategori` (`id_kategori`, `nama_kategori`, `created_at`, `updated
 
 CREATE TABLE `tbpelanggan` (
   `id_pelanggan` bigint UNSIGNED NOT NULL,
-  `kode_pelanggan` int NOT NULL,
-  `nama_pelanggan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `alamat_pelanggan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `nohp` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `top` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_user` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -232,9 +223,8 @@ CREATE TABLE `tbpelanggan` (
 -- Dumping data for table `tbpelanggan`
 --
 
-INSERT INTO `tbpelanggan` (`id_pelanggan`, `kode_pelanggan`, `nama_pelanggan`, `alamat_pelanggan`, `nohp`, `top`, `created_at`, `updated_at`) VALUES
-(2, 12333123, 'Aswangga Pasyaan', 'Jl. Nangka No. 04', '083384742', '12444213', NULL, NULL),
-(3, 4231, 'Rehan Subrantas', 'Jl. Tidore No. 3', '08238229230', 'Apa Coba', NULL, NULL);
+INSERT INTO `tbpelanggan` (`id_pelanggan`, `alamat_pelanggan`, `nohp`, `top`, `id_user`, `created_at`, `updated_at`) VALUES
+(1, 'Jl. Yamagawa, Perum Mutiara Indah Blok G.24, Kec. Sarolangun, Kel. Kuvukiland, Kota Jamaica, Provinsi Osaka, 28829', '+62 823 8792 4582', '1', 5, '2024-06-11 17:18:50', '2024-06-11 17:18:50');
 
 -- --------------------------------------------------------
 
@@ -315,7 +305,10 @@ CREATE TABLE `tbstok` (
 INSERT INTO `tbstok` (`id_stok`, `kode_stok`, `nama_stok`, `saldo_awal`, `harga_beli`, `harga_jual`, `harga_modal`, `image`, `deskripsi_barang`, `pajang`, `id_satuan`, `id_kategori`) VALUES
 (41, 1234, 'White Hoodie', '150', '350000', '450000', '400000', '[\"171689881834.png\",\"171689881865.png\",\"171689881898.png\"]', 'This white hoodie epitomizes comfort and style. Crafted from soft, high-quality cotton, it offers a snug and cozy fit, perfect for casual outings or lounging at home. The minimalist design features a classic kangaroo pocket at the front, providing both functionality and a touch of urban flair. Its versatile color makes it an essential wardrobe staple, effortlessly pairing with any outfit choice. Whether you\'re layering up for a brisk morning walk or simply adding a layer of warmth on a chilly evening, this white hoodie promises both comfort and fashion-forward appeal. Upgrade your wardrobe with this timeless piece that seamlessly blends comfort and style.', 'tidak', 6, 1),
 (43, 4321, 'Leather Jacket', '100', '550000', '750000', '600000', '[\"171690126727.png\",\"17169012687.png\",\"171690126832.png\"]', 'Experience the perfect blend of edgy style and premium quality with this leather jacket. Made from genuine, high-grade leather, it offers durability and a sleek, sophisticated look. The jacket features a classic zip-up front, multiple pockets for practicality, and a fitted design that flatters any silhouette. The interior is lined with a soft, comfortable fabric, ensuring you stay warm while looking effortlessly cool. Ideal for both casual wear and more dressed-up occasions, this leather jacket is a versatile addition to any wardrobe. Elevate your style and make a bold statement with this timeless piece that exudes confidence and class.', 'tidak', 6, 1),
-(44, 2341, 'Black Boots', '100', '250000', '350000', '270000', '[\"171690170211.png\",\"17169017027.png\",\"171690170297.png\"]', 'Step into style and confidence with these sleek black boots. Expertly crafted from high-quality leather, these boots offer both durability and a polished finish. The timeless design features a sturdy sole for excellent traction, a comfortable insole for all-day wear, and a secure lace-up front or zipper closure, depending on your preference. Whether you\'re navigating the city streets or dressing up for a special occasion, these black boots provide the perfect balance of practicality and sophistication. Their versatile design makes them an essential addition to any wardrobe, effortlessly complementing a range of outfits from casual jeans to smart trousers. Elevate your footwear collection with these classic black boots that combine functionality with a touch of elegance.', 'tidak', 6, 5);
+(45, 3412, 'Sombrero Hat', '250', '320000', '350000', '320000', '[\"171811461865.png\",\"171811461897.png\",\"171811461851.png\"]', 'The Sombrero Hat is a traditional Mexican hat known for its wide brim and high, pointed crown, designed to provide excellent sun protection. Crafted from materials such as straw or felt, this iconic accessory often features intricate embroidery and colorful decorations, reflecting Mexican cultural heritage. Ideal for both functional wear and festive occasions, the Sombrero Hat combines practicality with vibrant style, making it a standout piece in any wardrobe.', 'tidak', 6, 4),
+(46, 4123, 'Cream Pants', '100', '500000', '650000', '500000', '[\"171811469917.png\",\"171811469919.jpg\",\"171811469970.png\"]', 'Cream Pants are a versatile wardrobe staple, perfect for both casual and formal occasions. Crafted from high-quality, breathable fabric, these pants offer a comfortable and stylish fit. Their neutral cream color makes them easy to pair with a variety of tops and accessories, creating effortlessly chic ensembles. Whether for work, a day out, or an evening event, Cream Pants provide a timeless and elegant look that complements any personal style.', 'tidak', 6, 3),
+(47, 4567, 'Vercase Barocco Shirt', '100', '550000', '250000', '600000', '[\"171811509657.png\",\"171811509636.png\",\"171811509626.png\"]', 'The Versace Barocco collection epitomizes luxury and opulence with its signature Baroque-inspired designs. Renowned for its intricate patterns, bold prints, and lavish detailing, this collection reflects the iconic aesthetic of the Versace brand. Each piece, whether clothing, accessories, or home decor, showcases a fusion of classic elegance and contemporary style. Perfect for those who appreciate high fashion and sophisticated artistry, the Versace Barocco collection adds a touch of extravagance to any wardrobe or living space.', 'tidak', 6, 2),
+(48, 5674, 'Jumbo GG jogging pant', '124', '460000', '122000', '560000', '[\"17181153932.png\",\"171811539337.png\",\"171811539352.png\"]', 'The Jumbo GG Jogging Pant by Gucci is the epitome of luxury leisurewear. Crafted with meticulous attention to detail, these pants feature the iconic GG logo pattern in a bold, oversized design, showcasing the brand\'s unmistakable style. Made from high-quality materials, they offer both comfort and sophistication, ideal for casual outings or relaxing at home. With their relaxed fit and elasticized waistband, the Jumbo GG Jogging Pant provides effortless versatility and timeless elegance for the modern wardrobe.', 'tidak', 6, 3);
 
 -- --------------------------------------------------------
 
@@ -341,7 +334,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `role`) VALUES
 (3, 'rehan', 'rehan@gmail.com', NULL, '$2y$12$9BU2cdQVlLDzULIZ80XV9.U/4wcVrl2K8yghR14fbFpQ2BScWuDka', 'li7PmbgzJhKCWZ3n5SUzdq9nrmIwy7M4HH2e5E42uLkwWfJLhfdkKJnm9Two', '2024-01-15 10:45:56', '2024-01-15 10:45:56', 'admin'),
-(5, 'john doe', 'johndoe@gmail.com', NULL, '$2y$12$1coxVShK058Br114CCVcD.Om61YwgZsZHDm3.g6EPLpE4.mB8kkvC', NULL, '2024-01-27 06:03:00', '2024-01-27 06:03:00', 'admin');
+(5, 'john doe', 'johndoe@gmail.com', NULL, '$2y$12$1coxVShK058Br114CCVcD.Om61YwgZsZHDm3.g6EPLpE4.mB8kkvC', NULL, '2024-01-27 06:03:00', '2024-01-27 06:03:00', 'admin'),
+(6, 'Dont Hurt Me', 'erik@gmail.com', NULL, '$2y$12$2jwbRv2Tn2MPIHwAxtDseODU9sXDgJqEvdt/koAdOOZjn2e0r847q', NULL, '2024-06-11 10:29:49', '2024-06-11 10:29:49', 'user');
 
 --
 -- Indexes for dumped tables
@@ -374,7 +368,7 @@ ALTER TABLE `failed_jobs`
 --
 ALTER TABLE `jual`
   ADD PRIMARY KEY (`id_penjualan`),
-  ADD KEY `jual_id_pelanggan_index` (`id_pelanggan`);
+  ADD KEY `jual_id_pelanggan_index` (`id_user`);
 
 --
 -- Indexes for table `migrations`
@@ -413,7 +407,8 @@ ALTER TABLE `tbkategori`
 -- Indexes for table `tbpelanggan`
 --
 ALTER TABLE `tbpelanggan`
-  ADD PRIMARY KEY (`id_pelanggan`);
+  ADD PRIMARY KEY (`id_pelanggan`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indexes for table `tbpemasok`
@@ -456,7 +451,7 @@ ALTER TABLE `beli`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id_cart` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_cart` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -516,13 +511,13 @@ ALTER TABLE `tbsatuan`
 -- AUTO_INCREMENT for table `tbstok`
 --
 ALTER TABLE `tbstok`
-  MODIFY `id_stok` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id_stok` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
@@ -545,13 +540,19 @@ ALTER TABLE `cart`
 -- Constraints for table `jual`
 --
 ALTER TABLE `jual`
-  ADD CONSTRAINT `jual_id_pelanggan_foreign` FOREIGN KEY (`id_pelanggan`) REFERENCES `tbpelanggan` (`id_pelanggan`) ON DELETE CASCADE;
+  ADD CONSTRAINT `jual_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `mutasi`
 --
 ALTER TABLE `mutasi`
   ADD CONSTRAINT `mutasi_id_stok_foreign` FOREIGN KEY (`id_stok`) REFERENCES `tbstok` (`id_stok`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `tbpelanggan`
+--
+ALTER TABLE `tbpelanggan`
+  ADD CONSTRAINT `tbpelanggan_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `tbstok`

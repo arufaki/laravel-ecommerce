@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Http\Controllers\Auth;
 
 class CartController extends Controller
 {
     public function index() {
+        $user = Auth()->user()->id;
+        
         $recordsCart = \DB::table('cart')
+        ->where('id_user', $user)
         ->leftJoin('tbstok', 'cart.id_stok', '=', 'tbstok.id_stok')
         ->select('cart.*', 'tbstok.nama_stok as nama_stok', 'tbstok.harga_jual as harga_jual', 'tbstok.image as image')
         ->orderBy('id_cart', 'desc');
@@ -23,6 +28,8 @@ class CartController extends Controller
         // $deliveryFee = $recordCarts ? 200000 : 0;
 
         $total = $subtotal;
+
+        
 
 
         return view('ecomPages.cart', compact('recordCarts', 'subtotal', 'total'));

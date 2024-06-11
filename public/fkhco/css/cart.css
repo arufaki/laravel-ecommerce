@@ -97,6 +97,9 @@
     align-items: center;
     justify-content: center;
     gap: 12px;
+    padding: 16px 0;
+    border-radius: 80px;
+    cursor: pointer;
 }
 
 .price-title {

@@ -32,12 +32,13 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MutasiController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 
 
 
- Route::get('/', function () { 
-    return view('auth.login');
-}); 
+//  Route::get('/', function () { 
+//     return view('auth.login');
+// }); 
 
 // ECOMMERCE ROUTE
 
@@ -61,13 +62,33 @@ Route::middleware(['auth', 'verified', 'rolesChecker:admin'])->group(function ()
     Route::resource('/cart', CartController::class);
 });
 
+Route::middleware(['auth', 'verified', 'rolesChecker:user'])->group(function () {
 
-Route::get('/checkout', [IndexController::class, 'checkout']);
+    Route::resource('/cart', CartController::class);
+});
+
+
+Route::get('/checkout', [CheckoutController::class, 'index']);
 Route::get('/products', [IndexController::class, 'products']);
+
+
 
 // END ECOMMERCE ROUTE
 
+Route::resources([
+    'stok' => StokController::class,
+    'pemasok' => PemasokController::class,
+    'pelanggan' => PelangganController::class,
+    'jual' => JualController::class,
+    'beli' => BeliController::class,
+    'satuan' => SatuanController::class,
+    'kategori' => KategoriController::class,
+    'mutasi' => MutasiController::class,
+]);
 
+Route::middleware('auth')->group(function () {
+    Route::resource('profile', ProfileController::class);
+});
 
 
 
@@ -86,22 +107,13 @@ Route::get('/products', [IndexController::class, 'products']);
 
 // END CART
 
-Route::resources([
-    'stok' => StokController::class,
-    'pemasok' => PemasokController::class,
-    'pelanggan' => PelangganController::class,
-    'jual' => JualController::class,
-    'beli' => BeliController::class,
-    'satuan' => SatuanController::class,
-    'kategori' => KategoriController::class,
-    'mutasi' => MutasiController::class,
-]);
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
 
 

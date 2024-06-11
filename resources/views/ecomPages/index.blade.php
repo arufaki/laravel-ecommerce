@@ -11,20 +11,7 @@
 
 <body>
     <header>
-        <nav class="container">
-            <div class="nav-wrap">
-                <h1 class="logos logo">FKH.CO</h1>
-                <input type="text" placeholder="Search product..." class="search-wrap" />
-                <div class="icons-wrap">
-                    <a href={{ url('/cart') }} class="cart-btn obj-href">
-                        <img src="{{ url('fkhco/assets/svg/shopping-cart.svg') }}" alt="cart-icon" />
-                    </a>
-                    <a href={{ Route('login') }} class="user-btn obj-href">
-                        <img src="{{ url('fkhco/assets/svg/user.svg') }}" alt="user-icon" />
-                    </a>
-                </div>
-            </div>
-        </nav>
+        @include('ecomPages.component.header')
     </header>
     <main>
         <section id="banner">
@@ -36,8 +23,7 @@
                         designed to bring out your individuality and cater to your sense
                         of style.
                     </p>
-                    <a href={{url("/products")}} class="shop-btn shop-now">Shop
-Now</a>
+                    <a href={{url("/products")}} class="shop-btn shop-now">Shop Now</a>
                 </div>
                 <div class="banners">
                     <svg width="44" height="44" viewBox="0 0 76 76" fill="none"
@@ -176,34 +162,7 @@ Now</a>
         </section>
     </main>
     <footer>
-        <div id="subscribe">
-            <div class="subscribe-wrap container">
-                <div class="subscribe-content container">
-                    <h1>STAY UPTO DATE ABOUT OUR LATEST OFFERS</h1>
-                    <div class="subscribe-form">
-                        <div class="subscribe-input-wrap">
-                            <img src="{{ url('fkhco/assets/svg/mail.svg') }}" alt="mail-icon" />
-                            <input type="text" placeholder="Enter your email address..."
-                                class="subscribe-input" />
-                        </div>
-                        <button class="subscribe-btn">Subscribe to Newsletter</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer container">
-            <div class="footer-content">
-                <h1 class="footer-logo">FKH.CO</h1>
-                <p class="footer-body">
-                    We have clothes that suits your style and which you’re proud to
-                    wear. From women to men.
-                </p>
-            </div>
-            <h5>
-                Created with ❤ by
-                <a href="https://github.com/Arufaki" target="_blank" class="creator-name">Alfakih Anggi Subekti</a>
-            </h5>
-        </div>
+        @include('ecomPages.component.footer')
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="{{ url('fkhco/js/swiper.js') }}"></script>

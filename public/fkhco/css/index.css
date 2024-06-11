@@ -43,7 +43,7 @@ p {
 }
 
 a {
-    color:inherit;
+    color: inherit;
 }
 
 h1 {
@@ -154,7 +154,7 @@ img {
     padding: 16px 0;
     border-radius: 80px;
     cursor: pointer;
-    text-align:center;
+    text-align: center;
 }
 
 .shop-btn:hover {
@@ -189,7 +189,7 @@ img {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
-.card {
+.cardd {
     cursor: pointer;
 }
 
@@ -386,6 +386,35 @@ footer {
 .login-form {
     max-width: 1280px;
     margin: 0 auto;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    flex-direction: column;
+    width: 90px;
+    position: absolute;
+    background: var(--seashell);
+    border: 1px solid var(--black-opacity);
+    top: 47px;
+    border-radius: 5px;
+}
+
+.dropdown-active {
+    display: flex;
+}
+
+.dropdown-item {
+    color: var(--black-opacity1);
+    padding: 5px 5px;
+    font-weight: 400;
+}
+
+.dropdown-item:hover {
+    background: var(--black-opacity) 50%;
 }
 
 @media only screen and (max-width: 400px) {

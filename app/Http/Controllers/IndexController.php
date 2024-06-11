@@ -29,12 +29,11 @@ class IndexController extends Controller
         return view('ecomPages.product-detail', compact('selectedProduct', 'extractImage'));
     }
 
-    public function checkout() {
-        return view('ecomPages.checkout');
-    }
 
     public function products() {
-        return view('ecomPages.products');
+        $newProduct = \DB::table('tbstok')->get();
+
+        return view('ecomPages.products', compact('newProduct'));
     }
 
 

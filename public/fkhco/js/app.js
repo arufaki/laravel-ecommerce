@@ -16,7 +16,9 @@ const selectCard = document.querySelectorAll(".card"),
     inputUkuran = document.querySelectorAll("#ukuran"),
     inputQty = document.getElementById("qty"),
     increaseButton = document.getElementById("increase"),
-    decreaseButton = document.getElementById("decrease");
+    decreaseButton = document.getElementById("decrease"),
+    btnDropdown = document.getElementById("dropdownMenuButton"),
+    dropdownMenu = document.querySelector(".dropdown-menu");
 
 // Links to Multiple Page
 // if (shopBtn) {
@@ -86,6 +88,10 @@ inputUkuran.forEach((uk, index) => {
         });
         sizeProduct[index].classList.add("product-border");
     });
+});
+
+btnDropdown.addEventListener("click", () => {
+    dropdownMenu.classList.toggle("dropdown-active");
 });
 
 increaseButton.addEventListener("click", () => {

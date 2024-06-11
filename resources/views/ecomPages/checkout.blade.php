@@ -11,20 +11,7 @@
 
 <body>
     <header>
-        <nav class="container nav-border">
-            <div class="nav-wrap">
-                <h1 class="logos logo">FKH.CO</h1>
-                <input type="text" placeholder="Search product..." class="search-wrap" />
-                <div class="icons-wrap">
-                    <a href={{ url('/cart') }} class="cart-btn obj-href">
-                        <img src="{{ url('fkhco/assets/svg/shopping-cart.svg') }}" alt="cart-icon" />
-                    </a>
-                    <a href={{ Route('login') }} class="user-btn obj-href">
-                        <img src="{{ url('fkhco/assets/svg/user.svg') }}" alt="user-icon" />
-                    </a>
-                </div>
-            </div>
-        </nav>
+        @include('ecomPages.component.header')
     </header>
     <main>
         <section id="product-cart">
@@ -32,68 +19,35 @@
                 <div class="products-cart checkout-wrap">
                     <h1>CHECKOUT</h1>
                     <div class="cart-master">
+                        @foreach ($recordCarts as $cart)
                             <div class="cart-wrapping">
                                 <div class="product-wishlist checkout-master">
                                     <div class="detail-cart">
                                         <div class="image images cover-bg">
-                                            <img
-                                              src="{{url('fkhco/assets/png/products/hoodie.png')}}"
-                                              alt="product-image"
-                                            />
-                                          </div>
-                                          <div class="product-details">
-                                            <h3 class="product-title price">PULLOVER SWEAT HOODIE</h3>
-                                            <p class="size-chart">Size: <span>L</span></p>
-                                            <p class="price cart-price checkout-price">$120 x 2</p>
-                                          </div>
+                                            @php
+                                                $imageExtract = json_decode($cart->image);
+                                            @endphp
+                                             <img src="{{ asset('storage/foto-produk/' . $imageExtract[0]) }}"
+                                             alt="product-image" />
+                                        </div>
+                                        <div class="product-details">
+                                            <h3 class="product-title price">{{$cart->nama_stok}}</h3>
+                                            <p class="size-chart">Size: <span>{{strtoupper($cart->ukuran)}}</span></p>
+                                            <p class="price cart-price checkout-price">{{ 'Rp. ' . number_format($cart->harga_jual, 0, ',', '.') }} x {{$cart->qty}}</p>
+                                        </div>
                                     </div>
-                                    <p class="subtotal-checkout">$240</p>
+                                    <p class="subtotal-checkout">{{ 'Rp. ' . number_format($cart->harga_jual * $cart->qty, 0, ',', '.') }}</p>
                                 </div>
                             </div> 
-                            <div class="cart-wrapping">
-                                <div class="product-wishlist checkout-master">
-                                    <div class="detail-cart">
-                                        <div class="image images cover-bg">
-                                            <img
-                                              src="{{url('fkhco/assets/png/products/hoodie.png')}}"
-                                              alt="product-image"
-                                            />
-                                          </div>
-                                          <div class="product-details">
-                                            <h3 class="product-title price">PULLOVER SWEAT HOODIE</h3>
-                                            <p class="size-chart">Size: <span>L</span></p>
-                                            <p class="price cart-price checkout-price">$120 x 2</p>
-                                          </div>
-                                    </div>
-                                    <p class="subtotal-checkout">$240</p>
-                                </div>
-                            </div> 
-                            <div class="cart-wrapping">
-                                <div class="product-wishlist checkout-master">
-                                    <div class="detail-cart">
-                                        <div class="image images cover-bg">
-                                            <img
-                                              src="{{url('fkhco/assets/png/products/hoodie.png')}}"
-                                              alt="product-image"
-                                            />
-                                          </div>
-                                          <div class="product-details">
-                                            <h3 class="product-title price">PULLOVER SWEAT HOODIE</h3>
-                                            <p class="size-chart">Size: <span>L</span></p>
-                                            <p class="price cart-price checkout-price">$120 x 2</p>
-                                          </div>
-                                    </div>
-                                    <p class="subtotal-checkout">$240</p>
-                                </div>
-                            </div> 
+                        @endforeach
                     </div>
                 </div>
                 <div class="order-summary checkout-summary">
-                    <div class="header-wrap">
+                    <div class="header-wrap delivery-head">
                         <h3 class="header-summary">Delivery Address</h3>
                         <span class="line-span"></span>
                     </div>
-                    <div class="cart-master">
+                    <div class="cart-master delivery-address">
                         <div class="cart-wrapping">
                             <div class="product-wishlist checkout-master">
                                 <div class="detail-cart">
@@ -106,11 +60,11 @@
                         </div> 
                     </div>
                     <div class="header-wrap">
-                        <h3 class="header-summary">Shipping Option</h3>
+                        <h3 class="header-summary shipping-head">Shipping Option</h3>
                         <span class="line-span"></span>
                     </div>
                     <div class="cart-master">
-                        <div class="cart-wrapping">
+                        <div class="cart-wrapping shipping-option">
                             <div class="product-wishlist checkout-master">
                                 <div class="detail-cart">
                                     <div class="product-details">
@@ -122,11 +76,11 @@
                         </div> 
                     </div>
                     <div class="header-wrap">
-                        <h3 class="header-summary">Payment Method</h3>
+                        <h3 class="header-summary payment-head">Payment Method</h3>
                         <span class="line-span"></span>
                     </div>
                     <div class="cart-master">
-                        <div class="cart-wrapping">
+                        <div class="cart-wrapping payment-method">
                             <div class="product-wishlist checkout-master">
                                 <div class="detail-cart">
                                     <div class="product-details">
@@ -160,33 +114,7 @@
         </section>
     </main>
     <footer>
-        <div id="subscribe">
-            <div class="subscribe-wrap container">
-                <div class="subscribe-content container">
-                    <h1>STAY UPTO DATE ABOUT OUR LATEST OFFERS</h1>
-                    <div class="subscribe-form">
-                        <div class="subscribe-input-wrap">
-                            <img src="{{ url('fkhco/assets/svg/mail.svg') }}" alt="mail-icon" />
-                            <input type="text" placeholder="Enter your email address..." class="subscribe-input" />
-                        </div>
-                        <button class="subscribe-btn">Subscribe to Newsletter</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer container">
-            <div class="footer-content">
-                <h1 class="footer-logo">FKH.CO</h1>
-                <p class="footer-body">
-                    We have clothes that suits your style and which you’re proud to
-                    wear. From women to men.
-                </p>
-            </div>
-            <h5>
-                Created with ❤ by
-                <a href="https://github.com/Arufaki" target="_blank" class="creator-name">Alfakih Anggi Subekti</a>
-            </h5>
-        </div>
+        @include('ecomPages.component.footer')
     </footer>
     <script src="{{ url('fkhco/js/app.js') }}"></script>
 </body>
