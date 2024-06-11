@@ -19,11 +19,11 @@ const selectCard = document.querySelectorAll(".card"),
     decreaseButton = document.getElementById("decrease");
 
 // Links to Multiple Page
-if (shopBtn) {
-    shopBtn.addEventListener("click", () => {
-        window.location.href = "products.html";
-    });
-}
+// if (shopBtn) {
+//     shopBtn.addEventListener("click", () => {
+//         window.location.href = "products.html";
+//     });
+// }
 
 // selectCard.forEach((card) =>
 //     card.addEventListener("click", () => {

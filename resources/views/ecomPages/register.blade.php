@@ -17,29 +17,25 @@
     <main>
       <section id="login">
         <div class="container login-form">
-          <form class="form-login">
+          <form method="POST" action="{{ route('register') }}">
+          @csrf
             <h1>Sign Up</h1>
-            <label for="username"
-              >Name<input
-                type="text"
-                placeholder="Name"
-                name="name"
-                class="name"
-            /></label>
-            <label for="username"
-              >Username<input
-                type="text"
-                placeholder="Username"
-                name="username"
-                class="username"
-            /></label>
-            <label for="password"
-              >Password<input
-                type="password"
-                placeholder="Password"
-                name="password"
-                class="password"
-            /></label>
+            <label for="username">Name
+                <input type="text" name="name" required autofocus autocomplete="name" id="name" class="form-control" placeholder="Name">
+                <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            </label>
+            <label for="username">Username
+                <input type="email" name="email" id="email" required autofocus autocomplete="username" id="email" class="form-control" placeholder="Email">
+                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            </label>
+            <label for="password">Password
+                <input id="password" type="password" name="password" required autocomplete="new-password" class="form-control" placeholder="Password">
+                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            </label>
+            <label for="password_confirmation">Password Confirmation
+            <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password" class="form-control" placeholder=" Confirm Password">
+            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+            </label>
             <p class="sign-up-acc">
               Have an Account ? <span class="sign-up sign-in">Sign In</span>
             </p>

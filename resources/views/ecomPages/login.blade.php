@@ -39,7 +39,7 @@
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
           </label>
             <p class="sign-up-acc">
-              Don't have an account ? <span class="sign-up">Sign Up</span>
+              Don't have an account ? <a href="{{url('/register')}}" class="sign-up">Sign Up</span>
             </p>
             <button class="login-btn" type="submit">Sign In</button>
           </form>

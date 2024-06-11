@@ -57,7 +57,7 @@ CREATE TABLE `cart` (
   `qty` int NOT NULL,
   `id_stok` bigint UNSIGNED NOT NULL,
   `id_user` bigint UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `cart`
