@@ -34,6 +34,22 @@
                                     <input type="text" class="form-control" id="nama_stok" name="nama_stok">
                                 </div>
                                 <div class="form-group">
+                                    <label for="harga_modal">Brand</label>
+                                    <select class="form-control select2" id="id_brand" name="id_brand" style="width:100%"
+                                        required>
+                                        <option selected>Pilih Brand</option>
+                                        @foreach ($recordBrand as $record)
+                                            @if ($id_brand == $record->id_brand)
+                                                <option selected="selected" value="{{ $record->id_brand }}">
+                                                    {{ $record->nama_brand }}</option>
+                                            @else
+                                                <option value="{{ $record->id_brand }}">{{ $record->nama_brand }}
+                                                </option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label for="saldo_awal">Stok Barang</label>
                                     <input type="text" class="form-control" id="saldo_awal" name="saldo_awal">
                                 </div>

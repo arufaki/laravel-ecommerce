@@ -10,33 +10,26 @@
                 <button class="btn-dropdown" id="dropdownMenuButton">
                     <img src="{{ url('fkhco/assets/svg/user.svg') }}" alt="user-icon" />
                 </button>
+                @php
+                    $userCondition = Auth::user();
+                @endphp
+                <span class="user-status">{{$userCondition ? "True" : "False"}}</span>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Profile</a>
-                    <a class="dropdown-item" href="#">Orders</a>
-                    <a class="dropdown-item" href="#">Log out</a>
-                    <a class="dropdown-item" href="{{url("/dashboard")}}" style="{{Auth()->user() ? (Auth()->user()->role == "user" ? "display:none;" : "display:block") : "display:none;" }}">Admin</a>
+                    @if($userCondition)
+                        <a class="dropdown-item" href="{{url("/profile")}}">Profile</a>
+                        <a class="dropdown-item" href="{{url("/orders")}}">Orders</a>
+                        @if(Auth::check() && $userCondition->role == "admin")
+                            <a class="dropdown-item" href="{{url("/dashboard")}}">Admin</a>
+                        @endif
+                        <form class="dropdown-item" method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <a href="{{route('logout')}}" onclick="event.preventDefault(); this.closest('form').submit();" role="button">Log out</a>
+                        </form>
+                    @else
+                        <a class="dropdown-item" href="{{url('/login')}}">Login</a>
+                    @endif
                 </div>
-                {{-- <a href={{ Route('login') }} class="user-btn obj-href">
-                    <img src="{{ url('fkhco/assets/svg/user.svg') }}" alt="user-icon" />
-                </a> --}}
             </div>
-
-            {{-- @php
-                dd(Auth()->user());
-            @endphp --}}
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                  <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <a class="nav-link" data-widget="navbar-search" href="{{route('logout')}}" onclick="event.preventDefault(); this.closest('form').submit();" role="button">
-                    <p>Logut</p>
-                  </form>
-                  </a>
-                </li>
-            </ul>
-            <a href="{{url('/login')}}">login</a>
-
-            <p>status login saat ini : <strong style="font-weight: 700">{{Auth()->user() ? Auth()->user()->role : "None"}}</strong></p>
         </div>
     </div>
 </nav>

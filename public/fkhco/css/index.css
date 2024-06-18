@@ -214,9 +214,9 @@ img {
 }
 
 .image-wrap {
-    background: var(--soft-peach);
+    /* background: var(--soft-peach); */
     margin: 32px 0 10px;
-    border-radius: 12px;
+    /* border-radius: 12px; */
 }
 
 .image-wrap > img {
@@ -415,6 +415,11 @@ footer {
 
 .dropdown-item:hover {
     background: var(--black-opacity) 50%;
+}
+
+.user-status {
+    display: none;
+    position: absolute;
 }
 
 @media only screen and (max-width: 400px) {

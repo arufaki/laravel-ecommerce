@@ -67,7 +67,7 @@
                 <h1>NEW ARRIVALS</h1>
                 <div class="swiper">
                     <div class="swiper-wrapper cards">
-                        @foreach ($newProduct as $product)
+                        @foreach ($newArrival as $product)
                             @php
                                 $imageCover = json_decode($product->image);
                             @endphp
@@ -107,7 +107,7 @@
                 <h1>TOP SELLING</h1>
                 <div class="swiper">
                     <div class="swiper-wrapper cards">
-                        @foreach ($newProduct as $product)
+                        @foreach ($topSelling as $product)
                             @php
                                 $imageCover = json_decode($product->image);
                             @endphp

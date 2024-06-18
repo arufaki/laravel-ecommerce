@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FKH.CO</title>
     <link rel="stylesheet" href="{{ url('fkhco/css/cart.css') }}" />
-
 </head>
 
 <body>
@@ -87,8 +86,9 @@
     <footer>
         @include('ecomPages.component.footer')
     </footer>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="{{ url('fkhco/js/cart.js') }}"></script>
     <script src="{{ url('fkhco/js/app.js') }}"></script>
+
 </body>
 
 </html>

@@ -33,8 +33,64 @@ use App\Http\Controllers\MutasiController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\BrandController;
 
 
+// Index WebPages
+Route::get('/', [IndexController::class, 'index'])->name('ecomPages.index');
+
+
+// SignIn WebPages
+Route::get('/signin', [IndexController::class, 'signin'])->name('ecomPages.signin');
+
+
+// All Products Page
+Route::get('/products', [IndexController::class, 'products']);
+
+
+// Detail Product to Cart
+Route::get('/product/{id_stok}', [IndexController::class, 'productDetail'])->name('ecomPages.product-detail');
+
+
+// Admin only Accesed This Pages
+Route::middleware(['auth', 'verified', 'rolesChecker:admin'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('include.welcome');
+    })->name('dashboard');  
+
+    Route::resources([
+        'stok' => StokController::class,
+        'pemasok' => PemasokController::class,
+        'pelanggan' => PelangganController::class,
+        'jual' => JualController::class,
+        'beli' => BeliController::class,
+        'satuan' => SatuanController::class,
+        'brand' => BrandController::class,
+        'kategori' => KategoriController::class,
+        'mutasi' => MutasiController::class,
+    ]);
+});
+
+
+// Can Accessed This Page if User Log In into FKH.CO
+Route::middleware('auth')->group(function () {
+    Route::resource('profile', ProfileController::class);
+    Route::resource('/cart', CartController::class);
+    Route::resource('/checkout', CheckoutController::class);
+});
+
+
+// END ECOMMERCE ROUTE
+
+
+
+
+
+
+// Route::middleware(['auth', 'verified', 'rolesChecker:user'])->group(function () {
+
+//     Route::resource('/cart', CartController::class);
+// });
 
 //  Route::get('/', function () { 
 //     return view('auth.login');
@@ -49,47 +105,6 @@ use App\Http\Controllers\CheckoutController;
 // Route::get('/', function () {
 //     return view('ecomPages.index');
 // });
-Route::get('/', [IndexController::class, 'index']);
-
-Route::get('/signin', [IndexController::class, 'signin'])->name('ecomPages.signin');
-Route::get('/product/{id_stok}', [IndexController::class, 'productDetail'])->name('ecomPages.product-detail');
-
-Route::middleware(['auth', 'verified', 'rolesChecker:admin'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('include.welcome');
-    })->name('dashboard');  
-
-    Route::resource('/cart', CartController::class);
-});
-
-Route::middleware(['auth', 'verified', 'rolesChecker:user'])->group(function () {
-
-    Route::resource('/cart', CartController::class);
-});
-
-
-Route::get('/checkout', [CheckoutController::class, 'index']);
-Route::get('/products', [IndexController::class, 'products']);
-
-
-
-// END ECOMMERCE ROUTE
-
-Route::resources([
-    'stok' => StokController::class,
-    'pemasok' => PemasokController::class,
-    'pelanggan' => PelangganController::class,
-    'jual' => JualController::class,
-    'beli' => BeliController::class,
-    'satuan' => SatuanController::class,
-    'kategori' => KategoriController::class,
-    'mutasi' => MutasiController::class,
-]);
-
-Route::middleware('auth')->group(function () {
-    Route::resource('profile', ProfileController::class);
-});
-
 
 
 // Route::middleware(['auth', 'verified', 'rolesChecker:user'])->group(function () {

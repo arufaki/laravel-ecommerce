@@ -28,10 +28,6 @@ class CartController extends Controller
         // $deliveryFee = $recordCarts ? 200000 : 0;
 
         $total = $subtotal;
-
-        
-
-
         return view('ecomPages.cart', compact('recordCarts', 'subtotal', 'total'));
     }
 
@@ -75,7 +71,6 @@ class CartController extends Controller
                 \DB::table('cart')->where('id_cart', $r->id_cart)->increment('qty');
            } else if($r->action == 'decrease') {
                 \DB::table('cart')->where('id_cart', $r->id_cart)->decrement('qty');
-
            }
         }
 

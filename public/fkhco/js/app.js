@@ -14,9 +14,6 @@ const selectCard = document.querySelectorAll(".card"),
     imageDetail = document.querySelectorAll(".image"),
     sizeProduct = document.querySelectorAll(".size"),
     inputUkuran = document.querySelectorAll("#ukuran"),
-    inputQty = document.getElementById("qty"),
-    increaseButton = document.getElementById("increase"),
-    decreaseButton = document.getElementById("decrease"),
     btnDropdown = document.getElementById("dropdownMenuButton"),
     dropdownMenu = document.querySelector(".dropdown-menu");
 
@@ -72,14 +69,14 @@ if (containerGallery) {
     });
 }
 
-imageDetail.forEach((img) => {
-    img.addEventListener("click", () => {
-        imageDetail.forEach((image) => {
-            image.classList.remove("product-border");
-        });
-        img.classList.add("product-border");
-    });
-});
+// imageDetail.forEach((img) => {
+//     img.addEventListener("click", () => {
+//         imageDetail.forEach((image) => {
+//             image.classList.remove("product-border");
+//         });
+//         img.classList.add("product-border");
+//     });
+// });
 
 inputUkuran.forEach((uk, index) => {
     uk.addEventListener("click", () => {
@@ -92,15 +89,6 @@ inputUkuran.forEach((uk, index) => {
 
 btnDropdown.addEventListener("click", () => {
     dropdownMenu.classList.toggle("dropdown-active");
-});
-
-increaseButton.addEventListener("click", () => {
-    inputQty.value = parseInt(inputQty.value, 10) + 1;
-});
-
-decreaseButton.addEventListener("click", () => {
-    inputQty.value =
-        parseInt(inputQty.value) <= 1 ? 1 : parseInt(inputQty.value) - 1;
 });
 
 // FILTER Category Product

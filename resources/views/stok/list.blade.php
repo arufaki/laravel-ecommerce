@@ -68,11 +68,15 @@
                                                 <td>{{ $record->nama_kategori ?? '-' }}</td>
                                                 <td>{{ $record->deskripsi_barang ?? '-' }}</td>
                                                 <td>{{ $record->pajang ?? '-' }}</td>
-                                                <td><a href="#" data-target="#exampleModalCenter" data-toggle="modal"
+                                                @php
+                                                    $images = json_decode($record->image);
+                                                @endphp
+                                                <td><img src="{{ asset('storage/foto-produk/' . $images[0]) }}" width="100"></td>
+                                                {{-- <td><a href="#" data-target="#exampleModalCenter" data-toggle="modal"
                                                         class="btn btn-success text-white btn-view"
                                                         data-order-id="{{ $record->id_stok }}"
                                                         data-image="{{ $record->image }}"><i class="fas fa-eye"
-                                                            data-></i></a></td>
+                                                            data-></i></a></td> --}}
                                                 <td><a href="{{ Route('stok.edit', $record->id_stok) }}"
                                                         class="btn btn-primary">Edit</a>
                                                 </td>

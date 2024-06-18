@@ -18,9 +18,9 @@
 .main-image {
     display: flex;
     flex-direction: column;
-    background: var(--soft-peach);
+    background: #f1f1f1;
     padding: 50px;
-    border-radius: 20px;
+    /* border-radius: 20px; */
 }
 
 .child-image {
@@ -31,9 +31,9 @@
 }
 
 .image {
-    background: var(--soft-peach);
+    /* background: var(--soft-peach);
     border-radius: 20px;
-    border: 1px solid var(--soft-peach);
+    border: 1px solid var(--soft-peach); */
     transition: border 0.2s ease-in-out;
     text-align: center;
     cursor: pointer;

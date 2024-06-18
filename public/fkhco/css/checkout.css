@@ -38,6 +38,65 @@
     margin: 8px 0;
 }
 
+.ship-master {
+    position: relative;
+}
+
+.shipping-select {
+    position: absolute;
+    background: var(--white);
+    z-index: 1;
+    top: 82px;
+    width: 100%;
+    padding: 0;
+    display: none;
+}
+
+.shipping-option {
+    cursor: pointer;
+}
+
+.courier:hover {
+    background: var(--porcelain);
+}
+
+.courier {
+    cursor: pointer;
+    padding: 8px 14px;
+    border-radius: 20px;
+}
+
+.arrow-down {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.arrow {
+    display: block;
+    width: 15px;
+    height: 4px;
+    background: var(--black);
+    border-radius: 15px;
+    transition: 0.3s;
+}
+
+.arrow-left {
+    transform: rotate(40deg);
+    position: absolute;
+    right: 10px;
+}
+
+.checkout-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.arrow-right {
+    transform: rotate(-40deg);
+}
+
 @media only screen and (min-width: 768px) {
     .checkout-wrap {
         flex: 1 120%;

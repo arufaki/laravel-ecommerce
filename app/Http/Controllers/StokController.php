@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Carbon\Carbon;
 
 class StokController extends Controller
 {
@@ -14,7 +15,8 @@ class StokController extends Controller
         $recordsStok = \DB::Table('tbstok')
         ->leftJoin('tbsatuan', 'tbstok.id_satuan', '=', 'tbsatuan.id_satuan')
         ->leftJoin('tbkategori', 'tbstok.id_kategori', '=', 'tbkategori.id_kategori')
-        ->select('tbstok.*', 'tbsatuan.nama_satuan as nama_satuan', 'tbkategori.nama_kategori as nama_kategori');
+        ->leftJoin('brand', 'tbstok.id_brand', '=', 'brand.id_brand')
+        ->select('tbstok.*', 'tbsatuan.nama_satuan as nama_satuan', 'tbkategori.nama_kategori as nama_kategori', 'brand.nama_brand as nama_brand');
 
         $recordStok = $recordsStok->get();
         $no = 1;
@@ -29,15 +31,18 @@ class StokController extends Controller
         $id_kategori = 0;
         $recordSatuan = \DB::table('tbsatuan')->get();
         $id_satuan = 0;
-        return view('stok.form', compact('recordKategori', 'id_kategori', 'recordSatuan', 'id_satuan'))
+        $recordBrand = \DB::table('brand')->get();
+        $id_brand = 0;
+        return view('stok.form', compact('recordKategori', 'id_kategori', 'recordSatuan', 'id_satuan', 'recordBrand', 'id_brand'))
             ->with('judul', 'Form Stok');
     }
 
     public function store(Request $r)
     {
+        $date = Carbon::now();
         $r->validate([
             'image' => 'required',
-            'image.*' => 'image|mimes:png,jpg,jpeg|max:10240'
+            'image.*' => 'image|mimes:png,jpg,jpeg,webp|max:10240'
         ]);
 
         $image=[];
@@ -64,6 +69,10 @@ class StokController extends Controller
             'pajang' => $r->pajang,
             'id_kategori' => $r->id_kategori,
             'id_satuan' => $r->id_satuan,
+            'id_brand' => $r->id_brand,
+            'created_at' => $date,
+            'updated_at' => $date,
+
         );
 
         $rec = \DB::table('tbstok')
