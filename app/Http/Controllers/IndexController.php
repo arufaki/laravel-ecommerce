@@ -24,7 +24,7 @@ class IndexController extends Controller
             ->get();
 
         return view('ecomPages.index', compact('newProduct', 'newArrival', 'topSelling'));
-    }
+    } 
 
     public function productDetail($id_stok) {
 
