@@ -17,19 +17,6 @@ const selectCard = document.querySelectorAll(".card"),
     btnDropdown = document.getElementById("dropdownMenuButton"),
     dropdownMenu = document.querySelector(".dropdown-menu");
 
-// Links to Multiple Page
-// if (shopBtn) {
-//     shopBtn.addEventListener("click", () => {
-//         window.location.href = "products.html";
-//     });
-// }
-
-// selectCard.forEach((card) =>
-//     card.addEventListener("click", () => {
-//         window.location.href = "product-detail.html";
-//     })
-// );
-
 if (logo) {
     logo.addEventListener("click", () => {
         window.location.href = "/";
@@ -69,15 +56,6 @@ if (containerGallery) {
     });
 }
 
-// imageDetail.forEach((img) => {
-//     img.addEventListener("click", () => {
-//         imageDetail.forEach((image) => {
-//             image.classList.remove("product-border");
-//         });
-//         img.classList.add("product-border");
-//     });
-// });
-
 inputUkuran.forEach((uk, index) => {
     uk.addEventListener("click", () => {
         sizeProduct.forEach((sz) => {
@@ -87,9 +65,11 @@ inputUkuran.forEach((uk, index) => {
     });
 });
 
-btnDropdown.addEventListener("click", () => {
-    dropdownMenu.classList.toggle("dropdown-active");
-});
+if (btnDropdown) {
+    btnDropdown.addEventListener("click", () => {
+        dropdownMenu.classList.toggle("dropdown-active");
+    });
+}
 
 // FILTER Category Product
 if (selectContainer) {

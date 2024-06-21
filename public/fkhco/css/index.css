@@ -506,4 +506,19 @@ footer {
 
 .obj-href {
     padding: 16px 0;
+    position: relative;
+}
+
+.cart-count {
+    position: absolute;
+    top: 8px;
+    left: 17px;
+    background: var(--grey);
+    font-size: 14px;
+    width: 17px;
+    text-align: center;
+    height: 17px;
+    border-radius: 48%;
+    color: var(--white);
+    border: 2px solid var(--white);
 }

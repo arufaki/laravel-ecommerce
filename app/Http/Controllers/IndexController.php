@@ -5,26 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Auth;
 
 class IndexController extends Controller
 {
     public function index(){
-        $newProduct = \DB::table('tbstok')->get();
-
         $newArrival = DB::table('tbstok')
-            ->where('created_at', '>=', now()->subDays(1))
-            ->orderBy('created_at', 'desc')
+            ->orderBy('id_stok', 'desc')
+            ->limit(5)
             ->get();
 
         $topSelling = \DB::table('mutasi')
             ->leftJoin('tbstok', 'mutasi.id_stok', '=', 'tbstok.id_stok')
-            ->select('tbstok.nama_stok', 'tbstok.harga_jual', 'tbstok.image',
-'mutasi.id_stok', DB::raw('SUM(mutasi.keluar) as total_keluar'))
-            ->groupBy('mutasi.id_stok', 'tbstok.nama_stok',
-'tbstok.harga_jual', 'tbstok.image')
+            ->select('tbstok.nama_stok', 'tbstok.harga_jual', 'tbstok.image', 'mutasi.id_stok', DB::raw('SUM(mutasi.keluar) as total_keluar'))
+            ->groupBy('mutasi.id_stok', 'tbstok.nama_stok', 'tbstok.harga_jual', 'tbstok.image')
             ->orderBy('total_keluar', 'DESC')
             ->get();
-        
+
         // $topSelling = \DB::table('mutasi')
         //     ->leftJoin('tbstok', 'mutasi.id_stok', '=', 'tbstok.id_stok')
         //     ->select('mutasi.id_stok', DB::raw('SUM(mutasi.keluar) as total_keluar'), 'tbstok.image', 'tbstok.nama_stok', 'tbstok.harga_jual')
@@ -32,8 +29,7 @@ class IndexController extends Controller
         //     ->orderBy('total_keluar', 'DESC')
         //     ->get();
 
-        return view('ecomPages.index', compact('newProduct', 'newArrival',
-'topSelling'));
+        return view('ecomPages.index', compact('newArrival', 'topSelling'));
     } 
 
     public function productDetail($id_stok) {
@@ -59,12 +55,4 @@ class IndexController extends Controller
         return view('ecomPages.products', compact('newProduct'));
     }
 
-
-    // public function signin() {
-    //     return view('ecomPages.login');
-    // }
-
-    // public function cart() {
-    //     return view('ecomPages.cart');
-    // }
 }

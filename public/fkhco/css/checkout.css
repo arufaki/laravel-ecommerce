@@ -11,6 +11,24 @@
     position: relative;
 }
 
+.payment-gateway {
+    display: block;
+}
+
+.detail-payment {
+    display: block;
+}
+
+.payment-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttonBank {
+    width: 125px;
+}
+
 .subtotal-checkout {
     position: absolute;
     right: 0;
@@ -95,6 +113,44 @@
 
 .arrow-right {
     transform: rotate(-40deg);
+}
+
+span.estimate {
+    color: var(--black);
+}
+
+.product-title {
+    margin: 0;
+}
+
+.bank-available {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bank {
+    border: 1px solid var(--white);
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.bankSelected {
+    border: 1px solid var(--black);
+}
+
+.accountHeader {
+    font-weight: 800;
+    font-size: 20px;
+    margin-top: 5px;
+}
+
+.accountNumber {
+    font-size: 18px;
+}
+
+.cart-count {
+    box-sizing: unset;
 }
 
 @media only screen and (min-width: 768px) {

@@ -58,7 +58,7 @@ class CheckoutController extends Controller
             'no_bukti' => $noBukti,
             'tanggal' => $date,
             'keterangan' => "Penjualan",
-            'ekspedisi' => "JNE",
+            'ekspedisi' => $r->expedition_input,
             'bukti_pembayaran' => $saveImage,
             'id_user' => $user,
         );

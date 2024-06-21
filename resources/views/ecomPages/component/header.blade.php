@@ -1,9 +1,21 @@
+@php
+        $user = Auth()->user();
+        if($user) {
+            $cartCount = \DB::table('cart')
+            ->where('id_user',  $user->id)
+            ->count();
+        }
+@endphp
+
 <nav class="container">
     <div class="nav-wrap">
         <h1 class="logos logo products-logo">FKH.CO<a href="{{url('/')}}" class="hidden-link"></a></h1>
         <input type="text" placeholder="Search product..." class="search-wrap" />
         <div class="icons-wrap">
             <a href={{ url('/cart') }} class="cart-btn obj-href">
+                @auth
+                    <span class="cart-count">{{$cartCount}}</span>
+                @endauth
                 <img src="{{ url('fkhco/assets/svg/shopping-cart.svg') }}" alt="cart-icon" />
             </a>
             <div class="dropdown">
@@ -13,9 +25,7 @@
                 @php
                     $userCondition = Auth::user();
                 @endphp
-                <span class="user-status">{{$userCondition ? "True" : "False"}}</span>
                 <div class="dropdown-menu">
-<!--                     @if($userCondition) -->
                     @auth
                         <a class="dropdown-item" href="{{url("/profile")}}">Profile</a>
                         <a class="dropdown-item" href="{{url("/orders")}}">Orders</a>
@@ -26,10 +36,10 @@
                             @csrf
                             <a href="{{route('logout')}}" onclick="event.preventDefault(); this.closest('form').submit();" role="button">Log out</a>
                         </form>
-<!--                     @else -->
                     @endauth
-                        <a class="dropdown-item" href="{{url('/login')}}">Login</a>
-<!--                     @endif -->
+                    @guest
+                        <a class="dropdown-item" href="{{url('/login')}}">Login</a>   
+                    @endguest
                 </div>
             </div>
         </div>
