@@ -15,7 +15,8 @@
                 @endphp
                 <span class="user-status">{{$userCondition ? "True" : "False"}}</span>
                 <div class="dropdown-menu">
-                    @if($userCondition)
+<!--                     @if($userCondition) -->
+                    @auth
                         <a class="dropdown-item" href="{{url("/profile")}}">Profile</a>
                         <a class="dropdown-item" href="{{url("/orders")}}">Orders</a>
                         @if(Auth::check() && $userCondition->role == "admin")
@@ -25,9 +26,10 @@
                             @csrf
                             <a href="{{route('logout')}}" onclick="event.preventDefault(); this.closest('form').submit();" role="button">Log out</a>
                         </form>
-                    @else
+<!--                     @else -->
+                    @endauth
                         <a class="dropdown-item" href="{{url('/login')}}">Login</a>
-                    @endif
+<!--                     @endif -->
                 </div>
             </div>
         </div>
