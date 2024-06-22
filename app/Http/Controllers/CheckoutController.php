@@ -71,37 +71,6 @@ class CheckoutController extends Controller
             \DB::table('jual')
                 ->InsertGetId($x);
 
-            // Ambil semua produk dari cart user lalu masukkan ke tbmutasi 
-            $cartUser = \DB::table('cart')
-                        ->where('id_user', $user)
-                        ->leftJoin('tbstok', 'cart.id_stok', "=", 'tbstok.id_stok')
-                        ->leftJoin('mutasi', 'cart.id_stok', "=", 'mutasi.id_stok')
-                        ->select('cart.*', 'tbstok.harga_jual as harga_jual', 'tbstok.saldo_awal as saldo_awal', 'mutasi.masuk as stok_masuk', 'mutasi.keluar as stok_keluar')
-                        ->get();
-
-            foreach($cartUser as $cart) {
-
-                $dataMutasi = array(
-                    'no_bukti' => $noBukti,
-                    'keluar' => $cart->qty,
-                    'harga' => $cart->harga_jual * $cart->qty,
-                    'keterangan' => "Keluar",
-                    'id_stok' => $cart->id_stok,
-                    'created_at' => $date,
-                    'updated_at' => $date,
-                );
-
-                \DB::table('mutasi')
-                    ->InsertGetId($dataMutasi);
-
-                // Update Qty di TBSTOK - Qty di Cart User
-                $updateStok = $cart->saldo_awal + $cart->stok_masuk - $cart->qty;
-
-                \DB::table('tbstok')
-                    ->where("id_stok", $cart->id_stok)
-                    ->update(["saldo_awal" => $updateStok]);
-            }
-
             return redirect()->route('ecomPages.index')->with('sukses', 'Berhasil Checkout');
         } else {
             return redirect()->back()->with('gagal', 'Checkout Gagal');

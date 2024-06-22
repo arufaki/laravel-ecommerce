@@ -14,6 +14,9 @@
         @include('ecomPages.component.header')
     </header>
     <main>
+        @php
+            // dd($topSellingis);
+        @endphp
         <section id="banner">
             <div class="banner-wrapper">
                 <div class="body-banner container">

@@ -15,19 +15,18 @@ class IndexController extends Controller
             ->limit(5)
             ->get();
 
-        $topSelling = \DB::table('mutasi')
-            ->leftJoin('tbstok', 'mutasi.id_stok', '=', 'tbstok.id_stok')
-            ->select('tbstok.nama_stok', 'tbstok.harga_jual', 'tbstok.image', 'mutasi.id_stok', DB::raw('SUM(mutasi.keluar) as total_keluar'))
-            ->groupBy('mutasi.id_stok', 'tbstok.nama_stok', 'tbstok.harga_jual', 'tbstok.image')
-            ->orderBy('total_keluar', 'DESC')
-            ->get();
-
         // $topSelling = \DB::table('mutasi')
         //     ->leftJoin('tbstok', 'mutasi.id_stok', '=', 'tbstok.id_stok')
-        //     ->select('mutasi.id_stok', DB::raw('SUM(mutasi.keluar) as total_keluar'), 'tbstok.image', 'tbstok.nama_stok', 'tbstok.harga_jual')
-        //     ->groupBy('mutasi.id_stok', 'tbstok.image')
+        //     ->select('tbstok.nama_stok', 'tbstok.harga_jual', 'tbstok.image', 'mutasi.id_stok', DB::raw('SUM(mutasi.qty) as total_keluar'))
+        //     ->groupBy('mutasi.id_stok', 'tbstok.nama_stok', 'tbstok.harga_jual', 'tbstok.image')
         //     ->orderBy('total_keluar', 'DESC')
         //     ->get();
+
+        $topSelling = \DB::table('mutasi')
+            ->where('keterangan', '=', 'Keluar')
+            ->leftJoin('tbstok', 'mutasi.id_stok', '=', 'tbstok.id_stok')
+            ->select('mutasi.*', "tbstok.nama_stok as nama_stok", "tbstok.harga_jual as harga_jual", "tbstok.image as image")
+            ->sum('qty');
 
         return view('ecomPages.index', compact('newArrival', 'topSelling'));
     } 

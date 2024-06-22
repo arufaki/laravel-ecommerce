@@ -42,11 +42,10 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nomor Bukti Mutasi</th>
-                                        <th>Masuk Keluar</th>
+                                        <th>Nama Barang</th>
                                         <th>Quantity</th>
                                         <th>Harga</th>
                                         <th>Keterangan Mutasi</th>
-                                        <th>Stok</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -54,11 +53,10 @@
                                         <tr>
                                             <td>{{ $no++ }}</td>
                                             <td>{{ $record->no_bukti ?? '-' }}</td>
-                                            <td>{{ $record->masuk_keluar ?? '-' }}</td>
-                                            <td>{{ $record->qty ?? '-' }}</td>
-                                            <td>{{ $record->harga ?? '-' }}</td>
-                                            <td>{{ $record->keterangan ?? '-' }}</td>
                                             <td>{{ $record->nama_stok ?? '-' }}</td>
+                                            <td>{{ $record->qty ?? '-' }}</td>
+                                            <td>{{ 'Rp. ' . number_format($record->harga ?? '-', 0, ',', ',') }}</td>
+                                            <td>{{ $record->keterangan ?? '-' }}</td>
                                             <td><a href="{{ Route('mutasi.edit', $record->id_mutasi) }}"
                                                     class="btn btn-primary">Edit</a>
                                             </td>

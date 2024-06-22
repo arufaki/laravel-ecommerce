@@ -399,8 +399,10 @@ footer {
     position: absolute;
     background: var(--seashell);
     border: 1px solid var(--black-opacity);
-    top: 47px;
+    top: 64px;
     border-radius: 5px;
+    right: 0;
+    z-index: 1;
 }
 
 .dropdown-active {

@@ -42,9 +42,13 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nomor Bukti Penjualan</th>
+                                            <th>Nama Pembeli</th>
                                             <th>Tanggal Penjualan</th>
                                             <th>Keterangan Penjualan</th>
-                                            <th>Pelanggan</th>
+                                            <th>Ekspedisi</th>
+                                            <th>Bukti Pembayaran</th>
+                                            <th>Status</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -52,27 +56,28 @@
                                             <tr>
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $record->no_bukti ?? '-' }}</td>
+                                                <td>{{ $record->nama_pelanggan ?? '-' }}</td>
                                                 <td>{{ $record->tanggal ?? '-' }}</td>
                                                 <td>{{ $record->keterangan ?? '-' }}</td>
-                                                <td>{{ $record->nama_pelanggan ?? '-' }}</td>
-                                                <td><a href="{{ Route('jual.edit', $record->id_penjualan) }}"
-                                                        class="btn btn-primary">Edit</a>
-                                                </td>
-                                                <td>
-                                                    <form action="{{ Route('jual.destroy', $record->id_penjualan) }}"
-                                                        method="POST" onsubmit="return confirm('Yakin Ingin Menghapus ?')">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                                    </form>
-                                                </td>
+                                                <td>{{ $record->ekspedisi ?? '-' }}</td>
+                                                <td>{{ $record->bukti_pembayaran ?? '-' }}</td>
+                                                <td>{{ $record->status ?? '-' }}</td>
+                                                @if ($record->status != "success" || $record->status != "rejected")
+                                                    <td style="display: flex; flex-direction: column; gap: 5px;">
+                                                        <a href="{{ Route('jual.edit', $record->id_penjualan) }}" class="btn btn-success">Accept</a>
+                                                        <form action="{{ Route('jual.show', $record->id_penjualan) }}"   onsubmit="return confirm('Yakin ingin Reject Pesanan Ini ?')">
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-danger" style="width:100%;">Reject</button>
+                                                        </form>
+                                                    
+                                                    </td>
+                                                @endif
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                                 <div class="d-flex justify-content-between mt-3">
                                     <a href="{{ url('/') }}" class="btn btn-danger">Kembali</a>
-                                    <a href="{{ url('jual/create') }}" class="btn btn-primary">Tambah Data</a>
                                 </div>
                             </div>
                             <!-- /.card-body -->

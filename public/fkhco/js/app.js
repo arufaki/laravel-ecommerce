@@ -15,7 +15,8 @@ const selectCard = document.querySelectorAll(".card"),
     sizeProduct = document.querySelectorAll(".size"),
     inputUkuran = document.querySelectorAll("#ukuran"),
     btnDropdown = document.getElementById("dropdownMenuButton"),
-    dropdownMenu = document.querySelector(".dropdown-menu");
+    dropdownMenu = document.querySelector(".dropdown-menu"),
+    cartCount = document.querySelector(".cart-count");
 
 if (logo) {
     logo.addEventListener("click", () => {
@@ -87,4 +88,10 @@ if (selectContainer) {
             })
         );
     });
+}
+
+if (cartCount) {
+    if (cartCount.textContent == "0") {
+        cartCount.style.display = "none";
+    }
 }
