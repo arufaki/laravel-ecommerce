@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 21, 2024 at 05:04 PM
+-- Generation Time: Jun 22, 2024 at 06:39 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.7
 
@@ -47,7 +47,7 @@ CREATE TABLE `beli` (
 CREATE TABLE `brand` (
   `id_brand` bigint UNSIGNED NOT NULL,
   `nama_brand` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `brand`
@@ -74,7 +74,7 @@ CREATE TABLE `cart` (
   `qty` int NOT NULL,
   `id_stok` bigint UNSIGNED NOT NULL,
   `id_user` bigint UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `cart`
@@ -82,8 +82,7 @@ CREATE TABLE `cart` (
 
 INSERT INTO `cart` (`id_cart`, `ukuran`, `qty`, `id_stok`, `id_user`) VALUES
 (36, 's', 1, 54, 5),
-(37, 'm', 2, 56, 5),
-(38, 's', 1, 60, 6);
+(37, 'm', 4, 56, 5);
 
 -- --------------------------------------------------------
 
@@ -114,8 +113,17 @@ CREATE TABLE `jual` (
   `keterangan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `ekspedisi` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `bukti_pembayaran` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` enum('pending','success','rejected') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
   `id_user` bigint UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `jual`
+--
+
+INSERT INTO `jual` (`id_penjualan`, `no_bukti`, `tanggal`, `keterangan`, `ekspedisi`, `bukti_pembayaran`, `status`, `id_user`) VALUES
+(31, 'OR620240622180206', '2024-06-22', 'Penjualan', 'JNE', 'bukti-pembayaran/17190793268.png', 'success', 6),
+(32, 'OR620240622182823', '2024-06-22', 'Penjualan', 'SiCepat', 'bukti-pembayaran/171908090377.png', 'success', 6);
 
 -- --------------------------------------------------------
 
@@ -156,8 +164,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 CREATE TABLE `mutasi` (
   `id_mutasi` bigint UNSIGNED NOT NULL,
   `no_bukti` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `masuk` int NOT NULL DEFAULT '0',
-  `keluar` int NOT NULL DEFAULT '0',
+  `qty` int NOT NULL,
   `harga` int NOT NULL,
   `keterangan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_stok` bigint UNSIGNED DEFAULT NULL,
@@ -169,16 +176,9 @@ CREATE TABLE `mutasi` (
 -- Dumping data for table `mutasi`
 --
 
-INSERT INTO `mutasi` (`id_mutasi`, `no_bukti`, `masuk`, `keluar`, `harga`, `keterangan`, `id_stok`, `created_at`, `updated_at`) VALUES
-(14, 'OR520240618183510', 0, 1, 39960000, 'Keluar', 54, '2024-06-18 11:35:10', '2024-06-18 11:35:10'),
-(16, 'OR520240618183625', 0, 2, 26500000, 'Keluar', 56, '2024-06-18 11:36:25', '2024-06-18 11:36:25'),
-(17, 'OR520240618183647', 0, 1, 39960000, 'Keluar', 54, '2024-06-18 11:36:47', '2024-06-18 11:36:47'),
-(18, 'OR520240618183647', 0, 1, 39960000, 'Keluar', 54, '2024-06-18 11:36:47', '2024-06-18 11:36:47'),
-(19, 'OR520240618183647', 0, 2, 26500000, 'Keluar', 56, '2024-06-18 11:36:47', '2024-06-18 11:36:47'),
-(21, 'OR620240621092123', 0, 1, 58150000, 'Keluar', 60, '2024-06-21 02:21:23', '2024-06-21 02:21:23'),
-(22, 'OR620240621092222', 0, 1, 58150000, 'Keluar', 60, '2024-06-21 02:22:22', '2024-06-21 02:22:22'),
-(23, 'OR620240621092514', 0, 1, 58150000, 'Keluar', 60, '2024-06-21 02:25:14', '2024-06-21 02:25:14'),
-(24, 'OR620240621092514', 0, 1, 58150000, 'Keluar', 60, '2024-06-21 02:25:14', '2024-06-21 02:25:14');
+INSERT INTO `mutasi` (`id_mutasi`, `no_bukti`, `qty`, `harga`, `keterangan`, `id_stok`, `created_at`, `updated_at`) VALUES
+(33, 'OR620240622180206', 1, 10110000, 'Keluar', 59, '2024-06-22 11:23:15', '2024-06-22 11:23:15'),
+(34, 'OR620240622182823', 3, 84210000, 'Keluar', 58, '2024-06-22 11:28:38', '2024-06-22 11:28:38');
 
 -- --------------------------------------------------------
 
@@ -306,11 +306,11 @@ CREATE TABLE `tbsatuan` (
 --
 
 INSERT INTO `tbsatuan` (`id_satuan`, `nama_satuan`, `created_at`, `updated_at`) VALUES
-(2, 'kg', NULL, NULL),
+(2, 'pcs', NULL, NULL),
 (3, 'g', NULL, NULL),
 (4, 'oz', NULL, NULL),
 (5, 'ton', NULL, NULL),
-(6, 'pcs', NULL, NULL);
+(6, 'kg', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -341,13 +341,13 @@ CREATE TABLE `tbstok` (
 --
 
 INSERT INTO `tbstok` (`id_stok`, `kode_stok`, `nama_stok`, `saldo_awal`, `harga_beli`, `harga_jual`, `harga_modal`, `image`, `deskripsi_barang`, `pajang`, `id_satuan`, `id_kategori`, `id_brand`, `created_at`, `updated_at`) VALUES
-(54, 11243, 'BAROCCO SEA REVERSIBLE JACKET', '15', '37500000', '39960000', '38000000', '[\"171873386325.webp\",\"171873386345.webp\",\"171873386355.webp\"]', 'Jaket reversibel Barocco Sea dari Versace adalah pilihan stylish yang menampilkan motif Barocco khas Versace dengan sentuhan nuansa laut. Jaket ini memiliki desain dua sisi yang memungkinkan Anda memilih antara tampilan motif laut yang dinamis atau motif Barocco klasik yang elegan. Terbuat dari bahan berkualitas tinggi, jaket ini tidak hanya memberikan kenyamanan tetapi juga kesan mewah dan modis, cocok untuk berbagai kesempatan. Desainnya yang unik dan serbaguna menjadikan jaket ini tambahan yang sempurna untuk koleksi busana Anda.', 'tidak', 6, 1, 1, '2024-06-21 03:48:27', '2024-06-21 03:48:27'),
+(54, 11243, 'BAROCCO SEA REVERSIBLE JACKET', '13', '37500000', '39960000', '38000000', '[\"171873386325.webp\",\"171873386345.webp\",\"171873386355.webp\"]', 'Jaket reversibel Barocco Sea dari Versace adalah pilihan stylish yang menampilkan motif Barocco khas Versace dengan sentuhan nuansa laut. Jaket ini memiliki desain dua sisi yang memungkinkan Anda memilih antara tampilan motif laut yang dinamis atau motif Barocco klasik yang elegan. Terbuat dari bahan berkualitas tinggi, jaket ini tidak hanya memberikan kenyamanan tetapi juga kesan mewah dan modis, cocok untuk berbagai kesempatan. Desainnya yang unik dan serbaguna menjadikan jaket ini tambahan yang sempurna untuk koleksi busana Anda.', 'tidak', 6, 1, 1, '2024-06-21 03:48:27', '2024-06-21 03:48:27'),
 (55, 1014855, 'BAROCCO SEA WINDBREAKER JACKET', '16', '30000000', '32110000', '31000000', '[\"171873399246.webp\",\"171873399237.webp\",\"171873399222.webp\"]', 'Jaket Windbreaker Barocco Sea dari Versace adalah pilihan stylish yang memadukan motif Barocco khas Versace dengan elemen desain laut. Jaket ini menawarkan perlindungan dari angin dan cuaca ringan dengan bahan yang tahan lama dan nyaman. Desainnya yang reversible memungkinkan Anda memilih antara tampilan motif laut yang dinamis atau motif Barocco klasik yang mewah. Dengan detail yang elegan dan fungsi yang praktis, jaket ini adalah tambahan sempurna untuk gaya sehari-hari Anda.', 'tidak', 6, 1, 1, '2024-06-21 03:48:27', '2024-06-21 03:48:27'),
-(56, 1011693, 'SLIM-FIT JEANS', '14', '12550000', '13250000', '12250000', '[\"171873444586.webp\",\"171873444547.webp\",\"171873444587.webp\"]', 'Slim-Fit Jeans pria dari Zara adalah celana jeans yang dirancang untuk memberikan tampilan yang modern dan ramping. Terbuat dari bahan denim berkualitas tinggi, jeans ini menawarkan kenyamanan dan daya tahan yang luar biasa. Potongannya yang slim-fit memeluk tubuh dengan sempurna, menciptakan siluet yang stylish dan kontemporer. Cocok untuk berbagai kesempatan, dari gaya kasual sehari-hari hingga acara semi-formal, jeans ini adalah pilihan ideal untuk pria yang menginginkan tampilan yang bersih dan trendi.', 'tidak', 6, 3, 2, '2024-06-21 03:48:27', '2024-06-21 03:48:27'),
+(56, 1011693, 'SLIM-FIT JEANS', '10', '12550000', '13250000', '12250000', '[\"171873444586.webp\",\"171873444547.webp\",\"171873444587.webp\"]', 'Slim-Fit Jeans pria dari Zara adalah celana jeans yang dirancang untuk memberikan tampilan yang modern dan ramping. Terbuat dari bahan denim berkualitas tinggi, jeans ini menawarkan kenyamanan dan daya tahan yang luar biasa. Potongannya yang slim-fit memeluk tubuh dengan sempurna, menciptakan siluet yang stylish dan kontemporer. Cocok untuk berbagai kesempatan, dari gaya kasual sehari-hari hingga acara semi-formal, jeans ini adalah pilihan ideal untuk pria yang menginginkan tampilan yang bersih dan trendi.', 'tidak', 6, 3, 2, '2024-06-21 03:48:27', '2024-06-21 03:48:27'),
 (57, 1005602, 'BAROCCO ROBE', '12', '75202000', '77230000', '73232000', '[\"171873494770.webp\",\"171873494730.webp\",\"171873494758.webp\"]', 'Barocco Robe dari Calvin Klein adalah jubah mewah dengan motif Barocco yang khas dan sentuhan desain modern. Terbuat dari bahan yang lembut dan nyaman di kulit, jubah ini memberikan kenyamanan maksimal saat digunakan. Desainnya yang elegan dengan detail motif yang mencolok menjadikan jubah ini tidak hanya fungsional sebagai pakaian tidur atau homewear, tetapi juga sebagai pilihan gaya yang mewah di dalam rumah. Cocok untuk pria yang menghargai gaya dan kenyamanan dalam satu paket yang eksklusif.', 'tidak', 6, 7, 5, '2024-06-21 03:48:27', '2024-06-21 03:48:27'),
 (58, 1015180, 'SEA OVERSIZED DENIM JACKET', '13', '24070000', '28070000', '25070000', '[\"171873528555.webp\",\"171873528535.webp\",\"171873528521.webp\"]', 'Sea Oversized Denim Jacket dari Prada adalah jaket denim yang menampilkan gaya oversized yang trendi. Terbuat dari denim berkualitas tinggi, jaket ini memberikan tampilan yang santai namun tetap modis. Desainnya yang oversized memberikan ruang gerak lebih dan memberikan kesan kasual yang stylish. Dengan detail motif laut yang unik, jaket ini menambahkan sentuhan eksklusif dan menarik pada setiap gaya pakaian. Cocok digunakan untuk gaya kasual sehari-hari yang ingin tetap terlihat fashionable dan berbeda.', 'tidak', 6, 6, 4, '2024-06-21 03:48:27', '2024-06-21 03:48:27'),
-(59, 1012594, 'LOGO RAFFIA BUCKET HAT', '17', '8110000', '10110000', '9110000', '[\"171894352663.webp\",\"171894352795.webp\",\"171894352793.webp\"]', 'Logo Raffia Bucket Hat dari Gucci adalah aksesori yang sempurna untuk melengkapi tampilan musim panas Anda. Topi ini dibuat dengan bahan raffia alami yang memberikan tekstur unik dan kesan santai namun tetap elegan. Desain bucket hat yang klasik memastikan perlindungan optimal dari sinar matahari, menjadikannya pilihan ideal untuk hari-hari yang cerah di pantai atau berjalan-jalan di kota.', 'tidak', 6, 4, 3, '2024-06-20 21:18:46', '2024-06-20 21:18:46'),
-(60, 1015805, 'EMBELLISHED MOHAIR-BLEND BLAZER', '16', '50150000', '58150000', '52020000', '[\"171894393537.webp\",\"171894393594.webp\",\"171894393520.webp\"]', 'Embossed Mohair-Blend Blazer dari Uniqlo adalah sebuah perwujudan dari kemewahan dan keanggunan dalam dunia fashion modern. Terbuat dari campuran mohair berkualitas tinggi, blazer ini menawarkan kehangatan dan kenyamanan tanpa mengorbankan gaya. Didesain dengan detail yang memukau, blazer ini menjadi pilihan sempurna untuk berbagai acara formal maupun semi-formal.', 'tidak', 6, 2, 6, '2024-06-21 09:25:36', '2024-06-21 09:25:36');
+(59, 1012594, 'LOGO RAFFIA BUCKET HAT', '14', '8110000', '10110000', '9110000', '[\"171894352663.webp\",\"171894352795.webp\",\"171894352793.webp\"]', 'Logo Raffia Bucket Hat dari Gucci adalah aksesori yang sempurna untuk melengkapi tampilan musim panas Anda. Topi ini dibuat dengan bahan raffia alami yang memberikan tekstur unik dan kesan santai namun tetap elegan. Desain bucket hat yang klasik memastikan perlindungan optimal dari sinar matahari, menjadikannya pilihan ideal untuk hari-hari yang cerah di pantai atau berjalan-jalan di kota.', 'tidak', 6, 4, 3, '2024-06-20 21:18:46', '2024-06-20 21:18:46'),
+(60, 1015805, 'EMBELLISHED MOHAIR-BLEND BLAZER', '15', '50150000', '58150000', '52020000', '[\"171894393537.webp\",\"171894393594.webp\",\"171894393520.webp\"]', 'Embossed Mohair-Blend Blazer dari Uniqlo adalah sebuah perwujudan dari kemewahan dan keanggunan dalam dunia fashion modern. Terbuat dari campuran mohair berkualitas tinggi, blazer ini menawarkan kehangatan dan kenyamanan tanpa mengorbankan gaya. Didesain dengan detail yang memukau, blazer ini menjadi pilihan sempurna untuk berbagai acara formal maupun semi-formal.', 'tidak', 6, 2, 6, '2024-06-21 09:25:36', '2024-06-21 09:25:36');
 
 -- --------------------------------------------------------
 
@@ -504,7 +504,7 @@ ALTER TABLE `brand`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id_cart` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_cart` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -516,7 +516,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `jual`
 --
 ALTER TABLE `jual`
-  MODIFY `id_penjualan` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_penjualan` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -528,7 +528,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `mutasi`
 --
 ALTER TABLE `mutasi`
-  MODIFY `id_mutasi` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_mutasi` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
