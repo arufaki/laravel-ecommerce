@@ -17,8 +17,6 @@ class CheckoutController extends Controller
         ->select('cart.*', 'tbstok.nama_stok as nama_stok', 'tbstok.harga_jual as harga_jual', 'tbstok.image as image')
         ->orderBy('id_cart', 'desc');
 
-        
-
         $recordCarts = $recordsCart->get();
 
         $calcSubTotal = $recordCarts->sum(function($datas) {
@@ -70,6 +68,37 @@ class CheckoutController extends Controller
         if ($rec == null) {
             \DB::table('jual')
                 ->InsertGetId($x);
+
+            // Call table cart
+            $cartUser = \DB::table('cart')
+                            ->where('id_user', $user);
+            
+            // Get data Cart then join mutasi and stok tabel for showing data
+            $getDataCart = $cartUser->leftJoin('tbstok', 'cart.id_stok', "=", 'tbstok.id_stok')
+                                    ->leftJoin('mutasi', 'cart.id_stok', "=", 'mutasi.id_stok')
+                                    ->select('cart.*', 'tbstok.harga_jual as harga_jual', 'tbstok.saldo_awal as saldo_awal', 'mutasi.qty as qty_mutasi')
+                                    ->get();
+
+            // Looping data cart user yang belanja
+            foreach($getDataCart as $cart) {
+                
+                $dataMutasi = array(
+                    'no_bukti' => $noBukti,
+                    'qty' =>  $cart->qty,
+                    'harga' => $cart->harga_jual * $cart->qty,
+                    'keterangan' => "Keluar",
+                    'id_stok' => $cart->id_stok,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                );
+
+                // inputkan data yang sudah dilooping ke tabel mutasi
+                \DB::table('mutasi')
+                    ->InsertGetId($dataMutasi);
+                
+                // Setelah itu hapus cart yang ada di cart pelanggan
+                $cartUser->delete();
+            } 
 
             return redirect()->route('ecomPages.index')->with('sukses', 'Berhasil Checkout');
         } else {

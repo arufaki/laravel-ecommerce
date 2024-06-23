@@ -46,6 +46,7 @@
                                         <th>Quantity</th>
                                         <th>Harga</th>
                                         <th>Keterangan Mutasi</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -57,6 +58,7 @@
                                             <td>{{ $record->qty ?? '-' }}</td>
                                             <td>{{ 'Rp. ' . number_format($record->harga ?? '-', 0, ',', ',') }}</td>
                                             <td>{{ $record->keterangan ?? '-' }}</td>
+                                            <td>{{ $record->status ?? '-' }}</td>
                                             <td><a href="{{ Route('mutasi.edit', $record->id_mutasi) }}"
                                                     class="btn btn-primary">Edit</a>
                                             </td>

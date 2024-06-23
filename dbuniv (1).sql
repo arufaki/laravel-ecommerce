@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 22, 2024 at 06:39 PM
+-- Generation Time: Jun 23, 2024 at 05:41 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.7
 
@@ -122,8 +122,8 @@ CREATE TABLE `jual` (
 --
 
 INSERT INTO `jual` (`id_penjualan`, `no_bukti`, `tanggal`, `keterangan`, `ekspedisi`, `bukti_pembayaran`, `status`, `id_user`) VALUES
-(31, 'OR620240622180206', '2024-06-22', 'Penjualan', 'JNE', 'bukti-pembayaran/17190793268.png', 'success', 6),
-(32, 'OR620240622182823', '2024-06-22', 'Penjualan', 'SiCepat', 'bukti-pembayaran/171908090377.png', 'success', 6);
+(41, 'OR620240623160925', '2024-06-23', 'Penjualan', 'JNE', 'bukti-pembayaran/171915896543.png', 'success', 6),
+(42, 'OR620240623162155', '2024-06-23', 'Penjualan', 'SiCepat', 'bukti-pembayaran/171915971556.png', 'rejected', 6);
 
 -- --------------------------------------------------------
 
@@ -167,6 +167,7 @@ CREATE TABLE `mutasi` (
   `qty` int NOT NULL,
   `harga` int NOT NULL,
   `keterangan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` enum('pending','success','rejected','') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
   `id_stok` bigint UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -176,9 +177,11 @@ CREATE TABLE `mutasi` (
 -- Dumping data for table `mutasi`
 --
 
-INSERT INTO `mutasi` (`id_mutasi`, `no_bukti`, `qty`, `harga`, `keterangan`, `id_stok`, `created_at`, `updated_at`) VALUES
-(33, 'OR620240622180206', 1, 10110000, 'Keluar', 59, '2024-06-22 11:23:15', '2024-06-22 11:23:15'),
-(34, 'OR620240622182823', 3, 84210000, 'Keluar', 58, '2024-06-22 11:28:38', '2024-06-22 11:28:38');
+INSERT INTO `mutasi` (`id_mutasi`, `no_bukti`, `qty`, `harga`, `keterangan`, `status`, `id_stok`, `created_at`, `updated_at`) VALUES
+(40, 'OR620240623160925', 1, 10110000, 'Keluar', 'success', 59, '2024-06-23 09:09:25', '2024-06-23 09:09:25'),
+(41, 'OR620240623160925', 1, 58150000, 'Keluar', 'success', 60, '2024-06-23 09:09:25', '2024-06-23 09:09:25'),
+(42, 'OR620240623162155', 1, 10110000, 'Masuk', 'rejected', 59, '2024-06-23 09:21:55', '2024-06-23 09:21:55'),
+(43, 'OR620240623162155', 1, 58150000, 'Masuk', 'rejected', 60, '2024-06-23 09:21:55', '2024-06-23 09:21:55');
 
 -- --------------------------------------------------------
 
@@ -346,8 +349,8 @@ INSERT INTO `tbstok` (`id_stok`, `kode_stok`, `nama_stok`, `saldo_awal`, `harga_
 (56, 1011693, 'SLIM-FIT JEANS', '10', '12550000', '13250000', '12250000', '[\"171873444586.webp\",\"171873444547.webp\",\"171873444587.webp\"]', 'Slim-Fit Jeans pria dari Zara adalah celana jeans yang dirancang untuk memberikan tampilan yang modern dan ramping. Terbuat dari bahan denim berkualitas tinggi, jeans ini menawarkan kenyamanan dan daya tahan yang luar biasa. Potongannya yang slim-fit memeluk tubuh dengan sempurna, menciptakan siluet yang stylish dan kontemporer. Cocok untuk berbagai kesempatan, dari gaya kasual sehari-hari hingga acara semi-formal, jeans ini adalah pilihan ideal untuk pria yang menginginkan tampilan yang bersih dan trendi.', 'tidak', 6, 3, 2, '2024-06-21 03:48:27', '2024-06-21 03:48:27'),
 (57, 1005602, 'BAROCCO ROBE', '12', '75202000', '77230000', '73232000', '[\"171873494770.webp\",\"171873494730.webp\",\"171873494758.webp\"]', 'Barocco Robe dari Calvin Klein adalah jubah mewah dengan motif Barocco yang khas dan sentuhan desain modern. Terbuat dari bahan yang lembut dan nyaman di kulit, jubah ini memberikan kenyamanan maksimal saat digunakan. Desainnya yang elegan dengan detail motif yang mencolok menjadikan jubah ini tidak hanya fungsional sebagai pakaian tidur atau homewear, tetapi juga sebagai pilihan gaya yang mewah di dalam rumah. Cocok untuk pria yang menghargai gaya dan kenyamanan dalam satu paket yang eksklusif.', 'tidak', 6, 7, 5, '2024-06-21 03:48:27', '2024-06-21 03:48:27'),
 (58, 1015180, 'SEA OVERSIZED DENIM JACKET', '13', '24070000', '28070000', '25070000', '[\"171873528555.webp\",\"171873528535.webp\",\"171873528521.webp\"]', 'Sea Oversized Denim Jacket dari Prada adalah jaket denim yang menampilkan gaya oversized yang trendi. Terbuat dari denim berkualitas tinggi, jaket ini memberikan tampilan yang santai namun tetap modis. Desainnya yang oversized memberikan ruang gerak lebih dan memberikan kesan kasual yang stylish. Dengan detail motif laut yang unik, jaket ini menambahkan sentuhan eksklusif dan menarik pada setiap gaya pakaian. Cocok digunakan untuk gaya kasual sehari-hari yang ingin tetap terlihat fashionable dan berbeda.', 'tidak', 6, 6, 4, '2024-06-21 03:48:27', '2024-06-21 03:48:27'),
-(59, 1012594, 'LOGO RAFFIA BUCKET HAT', '14', '8110000', '10110000', '9110000', '[\"171894352663.webp\",\"171894352795.webp\",\"171894352793.webp\"]', 'Logo Raffia Bucket Hat dari Gucci adalah aksesori yang sempurna untuk melengkapi tampilan musim panas Anda. Topi ini dibuat dengan bahan raffia alami yang memberikan tekstur unik dan kesan santai namun tetap elegan. Desain bucket hat yang klasik memastikan perlindungan optimal dari sinar matahari, menjadikannya pilihan ideal untuk hari-hari yang cerah di pantai atau berjalan-jalan di kota.', 'tidak', 6, 4, 3, '2024-06-20 21:18:46', '2024-06-20 21:18:46'),
-(60, 1015805, 'EMBELLISHED MOHAIR-BLEND BLAZER', '15', '50150000', '58150000', '52020000', '[\"171894393537.webp\",\"171894393594.webp\",\"171894393520.webp\"]', 'Embossed Mohair-Blend Blazer dari Uniqlo adalah sebuah perwujudan dari kemewahan dan keanggunan dalam dunia fashion modern. Terbuat dari campuran mohair berkualitas tinggi, blazer ini menawarkan kehangatan dan kenyamanan tanpa mengorbankan gaya. Didesain dengan detail yang memukau, blazer ini menjadi pilihan sempurna untuk berbagai acara formal maupun semi-formal.', 'tidak', 6, 2, 6, '2024-06-21 09:25:36', '2024-06-21 09:25:36');
+(59, 1012594, 'LOGO RAFFIA BUCKET HAT', '14', '8110000', '10110000', '9110000', '[\"171894352663.webp\",\"171894352795.webp\",\"171894352793.webp\"]', 'Logo Raffia Bucket Hat dari Gucci adalah aksesori yang sempurna untuk melengkapi tampilan musim panas Anda. Topi ini dibuat dengan bahan raffia alami yang memberikan tekstur unik dan kesan santai namun tetap elegan. Desain bucket hat yang klasik memastikan perlindungan optimal dari sinar matahari, menjadikannya pilihan ideal untuk hari-hari yang cerah di pantai atau berjalan-jalan di kota.', 'tidak', 6, 4, 3, '2024-06-23 16:01:55', '2024-06-23 16:01:55'),
+(60, 1015805, 'EMBELLISHED MOHAIR-BLEND BLAZER', '14', '50150000', '58150000', '52020000', '[\"171894393537.webp\",\"171894393594.webp\",\"171894393520.webp\"]', 'Embossed Mohair-Blend Blazer dari Uniqlo adalah sebuah perwujudan dari kemewahan dan keanggunan dalam dunia fashion modern. Terbuat dari campuran mohair berkualitas tinggi, blazer ini menawarkan kehangatan dan kenyamanan tanpa mengorbankan gaya. Didesain dengan detail yang memukau, blazer ini menjadi pilihan sempurna untuk berbagai acara formal maupun semi-formal.', 'tidak', 6, 2, 6, '2024-06-21 09:25:36', '2024-06-21 09:25:36');
 
 -- --------------------------------------------------------
 
@@ -504,7 +507,7 @@ ALTER TABLE `brand`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id_cart` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id_cart` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -516,7 +519,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `jual`
 --
 ALTER TABLE `jual`
-  MODIFY `id_penjualan` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_penjualan` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -528,7 +531,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `mutasi`
 --
 ALTER TABLE `mutasi`
-  MODIFY `id_mutasi` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_mutasi` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -600,7 +603,7 @@ ALTER TABLE `jual`
 -- Constraints for table `mutasi`
 --
 ALTER TABLE `mutasi`
-  ADD CONSTRAINT `mutasi_id_stok_foreign` FOREIGN KEY (`id_stok`) REFERENCES `tbstok` (`id_stok`) ON DELETE CASCADE;
+  ADD CONSTRAINT `mutasi_id_stok_foreign` FOREIGN KEY (`id_stok`) REFERENCES `tbstok` (`id_stok`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbpelanggan`
