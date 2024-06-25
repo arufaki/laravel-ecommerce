@@ -75,8 +75,7 @@ class CheckoutController extends Controller
             
             // Get data Cart then join mutasi and stok tabel for showing data
             $getDataCart = $cartUser->leftJoin('tbstok', 'cart.id_stok', "=", 'tbstok.id_stok')
-                                    ->leftJoin('mutasi', 'cart.id_stok', "=", 'mutasi.id_stok')
-                                    ->select('cart.*', 'tbstok.harga_jual as harga_jual', 'tbstok.saldo_awal as saldo_awal', 'mutasi.qty as qty_mutasi')
+                                    ->select('cart.*', 'tbstok.harga_jual as harga_jual', 'tbstok.saldo_awal as saldo_awal')
                                     ->get();
 
             // Looping data cart user yang belanja
@@ -95,6 +94,14 @@ class CheckoutController extends Controller
                 // inputkan data yang sudah dilooping ke tabel mutasi
                 \DB::table('mutasi')
                     ->InsertGetId($dataMutasi);
+                
+                // kurangi saldo awal dengan qty cart pelanggan
+                $updateSaldoAwal = $cart->saldo_awal - $cart->qty;
+
+                // update saldo awawl sesuai dengan rumus $updateSaldoAwal
+                \DB::table('tbstok')
+                ->where("id_stok", $cart->id_stok)
+                ->update(["saldo_awal" => $updateSaldoAwal]);
                 
                 // Setelah itu hapus cart yang ada di cart pelanggan
                 $cartUser->delete();

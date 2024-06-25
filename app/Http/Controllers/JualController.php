@@ -13,7 +13,9 @@ class JualController extends Controller
             ->leftJoin('users', 'jual.id_user', '=', 'users.id')
             ->select('jual.*', 'users.name as nama_pelanggan');
 
-        $recordJual = $recordsJual->get();
+        $recordJual = $recordsJual
+        ->orderBy("id_penjualan", "DESC")
+        ->get();
         $no = 1;
 
         return view('jual.list', compact('recordJual', 'no'))
@@ -78,8 +80,9 @@ class JualController extends Controller
 
         // looping data mutasi yang no_buktinya sama
         foreach($getDataMutasi as $mutasi) {
-            // kondisi ketika status sukses akan mengurangi saldo dan kalau rejected tidak berkurang atau tetap
-            $saldoCondition = $status == "success" ? $mutasi->saldo_awal - $mutasi->qty : $mutasi->saldo_awal;
+
+            // kondisi ketika status rejected akan mengurangi saldo dan kalau success tidak berkurang atau tetap karena sudah berkurang ketika si user checkout barang
+            $saldoCondition = $status == "rejected" ? $mutasi->saldo_awal + $mutasi->qty : $mutasi->saldo_awal;
 
             // update saldo awal di tabel stok
             \DB::table('tbstok')

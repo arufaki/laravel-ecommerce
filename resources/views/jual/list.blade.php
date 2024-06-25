@@ -62,7 +62,7 @@
                                                 <td>{{ $record->ekspedisi ?? '-' }}</td>
                                                 <td>{{ $record->bukti_pembayaran ?? '-' }}</td>
                                                 <td>{{ $record->status ?? '-' }}</td>
-                                                @if ($record->status != "success" || $record->status != "rejected")
+                                                @if ($record->status != "success" && $record->status != "rejected")
                                                     <td style="display: flex; flex-direction: column; gap: 5px;">
                                                         <a href="{{ Route('jual.edit', $record->id_penjualan) }}" class="btn btn-success">Accept</a>
                                                         <form action="{{ Route('jual.show', $record->id_penjualan) }}"   onsubmit="return confirm('Yakin ingin Reject Pesanan Ini ?')">
