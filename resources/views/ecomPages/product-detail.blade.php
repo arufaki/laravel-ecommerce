@@ -43,7 +43,7 @@
                                 </div>
                                 <p class="rate">4.5/5</p>
                             </div>
-                            <p style="padding-bottom: 10px;">in stock {{$selectedProduct->saldo_awal}} {{$selectedProduct->nama_satuan}}</p>
+                            <p style="padding-bottom: 10px;">in stock {{$selectedProduct->saldoakhir}} {{$selectedProduct->nama_satuan}}</p>
                             <p class="price pricing-detail">
                                 {{ 'Rp. ' . number_format($selectedProduct->harga_jual, 0, ',', '.') }}</p>
                             <p class="product-body">

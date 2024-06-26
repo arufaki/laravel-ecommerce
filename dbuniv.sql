@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Jun 25, 2024 at 02:58 PM
--- Server version: 8.0.30
--- PHP Version: 8.3.7
+-- Host: localhost
+-- Generation Time: Jun 26, 2024 at 03:07 AM
+-- Server version: 11.4.2-MariaDB
+-- PHP Version: 8.3.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,12 +28,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `beli` (
-  `id_pembelian` bigint UNSIGNED NOT NULL,
-  `no_bukti` int NOT NULL,
+  `id_pembelian` bigint(20) UNSIGNED NOT NULL,
+  `no_bukti` int(11) NOT NULL,
   `tanggal` date NOT NULL,
-  `keterangan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `id_stok` bigint UNSIGNED NOT NULL,
-  `id_pemasok` bigint UNSIGNED DEFAULT NULL,
+  `keterangan` varchar(255) NOT NULL,
+  `id_stok` bigint(20) UNSIGNED NOT NULL,
+  `id_pemasok` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -45,9 +45,9 @@ CREATE TABLE `beli` (
 --
 
 CREATE TABLE `brand` (
-  `id_brand` bigint UNSIGNED NOT NULL,
-  `nama_brand` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `id_brand` bigint(20) UNSIGNED NOT NULL,
+  `nama_brand` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `brand`
@@ -69,12 +69,12 @@ INSERT INTO `brand` (`id_brand`, `nama_brand`) VALUES
 --
 
 CREATE TABLE `cart` (
-  `id_cart` int NOT NULL,
-  `ukuran` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `qty` int NOT NULL,
-  `id_stok` bigint UNSIGNED NOT NULL,
-  `id_user` bigint UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `id_cart` int(11) NOT NULL,
+  `ukuran` varchar(100) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `id_stok` bigint(20) UNSIGNED NOT NULL,
+  `id_user` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -83,13 +83,13 @@ CREATE TABLE `cart` (
 --
 
 CREATE TABLE `failed_jobs` (
-  `id` bigint UNSIGNED NOT NULL,
-  `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -99,14 +99,14 @@ CREATE TABLE `failed_jobs` (
 --
 
 CREATE TABLE `jual` (
-  `id_penjualan` bigint UNSIGNED NOT NULL,
-  `no_bukti` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_penjualan` bigint(20) UNSIGNED NOT NULL,
+  `no_bukti` varchar(200) NOT NULL,
   `tanggal` date NOT NULL,
-  `keterangan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ekspedisi` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `bukti_pembayaran` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` enum('pending','success','rejected') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
-  `id_user` bigint UNSIGNED NOT NULL
+  `keterangan` varchar(255) NOT NULL,
+  `ekspedisi` varchar(200) NOT NULL,
+  `bukti_pembayaran` longtext NOT NULL,
+  `status` enum('pending','success','rejected') NOT NULL DEFAULT 'pending',
+  `id_user` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -115,7 +115,9 @@ CREATE TABLE `jual` (
 
 INSERT INTO `jual` (`id_penjualan`, `no_bukti`, `tanggal`, `keterangan`, `ekspedisi`, `bukti_pembayaran`, `status`, `id_user`) VALUES
 (45, 'OR620240625145121', '2024-06-25', 'Penjualan', 'SiCepat', 'bukti-pembayaran/171932708147.png', 'rejected', 6),
-(46, 'OR620240625145638', '2024-06-25', 'Penjualan', 'SiCepat', 'bukti-pembayaran/171932739823.png', 'pending', 6);
+(46, 'OR620240625145638', '2024-06-25', 'Penjualan', 'SiCepat', 'bukti-pembayaran/171932739823.png', 'success', 6),
+(47, 'OR620240626011123', '2024-06-26', 'Penjualan', 'SiCepat', 'bukti-pembayaran/171936428371.png', 'success', 6),
+(48, 'OR620240626012353', '2024-06-26', 'Penjualan', 'JNE', 'bukti-pembayaran/171936503317.png', 'pending', 6);
 
 -- --------------------------------------------------------
 
@@ -124,9 +126,9 @@ INSERT INTO `jual` (`id_penjualan`, `no_bukti`, `tanggal`, `keterangan`, `eksped
 --
 
 CREATE TABLE `migrations` (
-  `id` int UNSIGNED NOT NULL,
-  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int NOT NULL
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) NOT NULL,
+  `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -154,13 +156,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `mutasi` (
-  `id_mutasi` bigint UNSIGNED NOT NULL,
-  `no_bukti` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `qty` int NOT NULL,
-  `harga` int NOT NULL,
-  `keterangan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` enum('pending','success','rejected','') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
-  `id_stok` bigint UNSIGNED DEFAULT NULL,
+  `id_mutasi` bigint(20) UNSIGNED NOT NULL,
+  `no_bukti` varchar(200) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `harga` int(11) NOT NULL,
+  `keterangan` varchar(255) NOT NULL,
+  `status` enum('pending','success','rejected','') NOT NULL DEFAULT 'pending',
+  `id_stok` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -171,7 +173,9 @@ CREATE TABLE `mutasi` (
 
 INSERT INTO `mutasi` (`id_mutasi`, `no_bukti`, `qty`, `harga`, `keterangan`, `status`, `id_stok`, `created_at`, `updated_at`) VALUES
 (47, 'OR620240625145121', 1, 77230000, 'Masuk', 'rejected', 57, '2024-06-25 07:51:21', '2024-06-25 07:51:21'),
-(48, 'OR620240625145638', 1, 28070000, 'Keluar', 'pending', 58, '2024-06-25 07:56:38', '2024-06-25 07:56:38');
+(48, 'OR620240625145638', 2, 28070000, 'Keluar', 'success', 58, '2024-06-25 07:56:38', '2024-06-25 07:56:38'),
+(49, 'OR620240626011123', 1, 58150000, 'Keluar', 'success', 60, '2024-06-25 18:11:23', '2024-06-25 18:11:23'),
+(50, 'OR620240626012353', 5, 290750000, 'Keluar', 'success', 60, '2024-06-25 18:23:53', '2024-06-25 18:23:53');
 
 -- --------------------------------------------------------
 
@@ -180,8 +184,8 @@ INSERT INTO `mutasi` (`id_mutasi`, `no_bukti`, `qty`, `harga`, `keterangan`, `st
 --
 
 CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -192,12 +196,12 @@ CREATE TABLE `password_reset_tokens` (
 --
 
 CREATE TABLE `personal_access_tokens` (
-  `id` bigint UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tokenable_id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -211,8 +215,8 @@ CREATE TABLE `personal_access_tokens` (
 --
 
 CREATE TABLE `tbkategori` (
-  `id_kategori` bigint UNSIGNED NOT NULL,
-  `nama_kategori` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_kategori` bigint(20) UNSIGNED NOT NULL,
+  `nama_kategori` varchar(100) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -237,11 +241,11 @@ INSERT INTO `tbkategori` (`id_kategori`, `nama_kategori`, `created_at`, `updated
 --
 
 CREATE TABLE `tbpelanggan` (
-  `id_pelanggan` bigint UNSIGNED NOT NULL,
-  `alamat_pelanggan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nohp` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `top` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `id_user` bigint UNSIGNED NOT NULL,
+  `id_pelanggan` bigint(20) UNSIGNED NOT NULL,
+  `alamat_pelanggan` varchar(255) NOT NULL,
+  `nohp` varchar(255) NOT NULL,
+  `top` varchar(255) NOT NULL,
+  `id_user` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -261,12 +265,12 @@ INSERT INTO `tbpelanggan` (`id_pelanggan`, `alamat_pelanggan`, `nohp`, `top`, `i
 --
 
 CREATE TABLE `tbpemasok` (
-  `id_pemasok` bigint UNSIGNED NOT NULL,
-  `kode_pemasok` int NOT NULL,
-  `nama_pemasok` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `alamat_pemasok` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nohp` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `top` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_pemasok` bigint(20) UNSIGNED NOT NULL,
+  `kode_pemasok` int(11) NOT NULL,
+  `nama_pemasok` varchar(255) NOT NULL,
+  `alamat_pemasok` varchar(255) NOT NULL,
+  `nohp` varchar(255) NOT NULL,
+  `top` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -288,8 +292,8 @@ INSERT INTO `tbpemasok` (`id_pemasok`, `kode_pemasok`, `nama_pemasok`, `alamat_p
 --
 
 CREATE TABLE `tbsatuan` (
-  `id_satuan` bigint UNSIGNED NOT NULL,
-  `nama_satuan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_satuan` bigint(20) UNSIGNED NOT NULL,
+  `nama_satuan` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -312,19 +316,19 @@ INSERT INTO `tbsatuan` (`id_satuan`, `nama_satuan`, `created_at`, `updated_at`) 
 --
 
 CREATE TABLE `tbstok` (
-  `id_stok` bigint UNSIGNED NOT NULL,
-  `kode_stok` int NOT NULL,
-  `nama_stok` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `saldo_awal` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `harga_beli` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `harga_jual` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `harga_modal` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `deskripsi_barang` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pajang` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `id_satuan` bigint UNSIGNED NOT NULL,
-  `id_kategori` bigint UNSIGNED NOT NULL,
-  `id_brand` bigint UNSIGNED NOT NULL,
+  `id_stok` bigint(20) UNSIGNED NOT NULL,
+  `kode_stok` int(11) NOT NULL,
+  `nama_stok` varchar(255) NOT NULL,
+  `saldo_awal` varchar(255) NOT NULL,
+  `harga_beli` varchar(255) NOT NULL,
+  `harga_jual` varchar(255) NOT NULL,
+  `harga_modal` varchar(255) NOT NULL,
+  `image` longtext NOT NULL,
+  `deskripsi_barang` longtext NOT NULL,
+  `pajang` varchar(255) NOT NULL,
+  `id_satuan` bigint(20) UNSIGNED NOT NULL,
+  `id_kategori` bigint(20) UNSIGNED NOT NULL,
+  `id_brand` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL,
   `updated_at` timestamp NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -340,7 +344,7 @@ INSERT INTO `tbstok` (`id_stok`, `kode_stok`, `nama_stok`, `saldo_awal`, `harga_
 (57, 1005602, 'BAROCCO ROBE', '12', '75202000', '77230000', '73232000', '[\"171873494770.webp\",\"171873494730.webp\",\"171873494758.webp\"]', 'Barocco Robe dari Calvin Klein adalah jubah mewah dengan motif Barocco yang khas dan sentuhan desain modern. Terbuat dari bahan yang lembut dan nyaman di kulit, jubah ini memberikan kenyamanan maksimal saat digunakan. Desainnya yang elegan dengan detail motif yang mencolok menjadikan jubah ini tidak hanya fungsional sebagai pakaian tidur atau homewear, tetapi juga sebagai pilihan gaya yang mewah di dalam rumah. Cocok untuk pria yang menghargai gaya dan kenyamanan dalam satu paket yang eksklusif.', 'tidak', 6, 7, 5, '2024-06-21 03:48:27', '2024-06-21 03:48:27'),
 (58, 1015180, 'SEA OVERSIZED DENIM JACKET', '12', '24070000', '28070000', '25070000', '[\"171873528555.webp\",\"171873528535.webp\",\"171873528521.webp\"]', 'Sea Oversized Denim Jacket dari Prada adalah jaket denim yang menampilkan gaya oversized yang trendi. Terbuat dari denim berkualitas tinggi, jaket ini memberikan tampilan yang santai namun tetap modis. Desainnya yang oversized memberikan ruang gerak lebih dan memberikan kesan kasual yang stylish. Dengan detail motif laut yang unik, jaket ini menambahkan sentuhan eksklusif dan menarik pada setiap gaya pakaian. Cocok digunakan untuk gaya kasual sehari-hari yang ingin tetap terlihat fashionable dan berbeda.', 'tidak', 6, 6, 4, '2024-06-21 03:48:27', '2024-06-21 03:48:27'),
 (59, 1012594, 'LOGO RAFFIA BUCKET HAT', '14', '8110000', '10110000', '9110000', '[\"171894352663.webp\",\"171894352795.webp\",\"171894352793.webp\"]', 'Logo Raffia Bucket Hat dari Gucci adalah aksesori yang sempurna untuk melengkapi tampilan musim panas Anda. Topi ini dibuat dengan bahan raffia alami yang memberikan tekstur unik dan kesan santai namun tetap elegan. Desain bucket hat yang klasik memastikan perlindungan optimal dari sinar matahari, menjadikannya pilihan ideal untuk hari-hari yang cerah di pantai atau berjalan-jalan di kota.', 'tidak', 6, 4, 3, '2024-06-23 16:01:55', '2024-06-23 16:01:55'),
-(60, 1015805, 'EMBELLISHED MOHAIR-BLEND BLAZER', '14', '50150000', '58150000', '52020000', '[\"171894393537.webp\",\"171894393594.webp\",\"171894393520.webp\"]', 'Embossed Mohair-Blend Blazer dari Uniqlo adalah sebuah perwujudan dari kemewahan dan keanggunan dalam dunia fashion modern. Terbuat dari campuran mohair berkualitas tinggi, blazer ini menawarkan kehangatan dan kenyamanan tanpa mengorbankan gaya. Didesain dengan detail yang memukau, blazer ini menjadi pilihan sempurna untuk berbagai acara formal maupun semi-formal.', 'tidak', 6, 2, 6, '2024-06-21 09:25:36', '2024-06-21 09:25:36');
+(60, 1015805, 'EMBELLISHED MOHAIR-BLEND BLAZER', '8', '50150000', '58150000', '52020000', '[\"171894393537.webp\",\"171894393594.webp\",\"171894393520.webp\"]', 'Embossed Mohair-Blend Blazer dari Uniqlo adalah sebuah perwujudan dari kemewahan dan keanggunan dalam dunia fashion modern. Terbuat dari campuran mohair berkualitas tinggi, blazer ini menawarkan kehangatan dan kenyamanan tanpa mengorbankan gaya. Didesain dengan detail yang memukau, blazer ini menjadi pilihan sempurna untuk berbagai acara formal maupun semi-formal.', 'tidak', 6, 2, 6, '2024-06-21 09:25:36', '2024-06-21 09:25:36');
 
 -- --------------------------------------------------------
 
@@ -349,15 +353,15 @@ INSERT INTO `tbstok` (`id_stok`, `kode_stok`, `nama_stok`, `saldo_awal`, `harga_
 --
 
 CREATE TABLE `users` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `role` enum('admin','user') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user'
+  `role` enum('admin','user') NOT NULL DEFAULT 'user'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -368,6 +372,52 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 (3, 'rehan', 'rehan@gmail.com', NULL, '$2y$12$9BU2cdQVlLDzULIZ80XV9.U/4wcVrl2K8yghR14fbFpQ2BScWuDka', 'li7PmbgzJhKCWZ3n5SUzdq9nrmIwy7M4HH2e5E42uLkwWfJLhfdkKJnm9Two', '2024-01-15 10:45:56', '2024-01-15 10:45:56', 'admin'),
 (5, 'john doe', 'johndoe@gmail.com', NULL, '$2y$12$1coxVShK058Br114CCVcD.Om61YwgZsZHDm3.g6EPLpE4.mB8kkvC', NULL, '2024-01-27 06:03:00', '2024-01-27 06:03:00', 'admin'),
 (6, 'Dont Hurt Me', 'erik@gmail.com', NULL, '$2y$12$2jwbRv2Tn2MPIHwAxtDseODU9sXDgJqEvdt/koAdOOZjn2e0r847q', NULL, '2024-06-11 10:29:49', '2024-06-11 10:29:49', 'user');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vsaldo7`
+-- (See below for the actual view)
+--
+CREATE TABLE `vsaldo7` (
+`id_stok` bigint(20) unsigned
+,`totalmasuk` decimal(32,0)
+,`totalkeluar` decimal(32,0)
+,`saldo` decimal(33,0)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vsaldoakhir2`
+-- (See below for the actual view)
+--
+CREATE TABLE `vsaldoakhir2` (
+`id_stok` bigint(20) unsigned
+,`nama_stok` varchar(255)
+,`saldo_awal` varchar(255)
+,`totalmasuk` decimal(32,0)
+,`totalkeluar` decimal(32,0)
+,`saldoakhir` double
+);
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vsaldo7`
+--
+DROP TABLE IF EXISTS `vsaldo7`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vsaldo7`  AS SELECT `mutasi`.`id_stok` AS `id_stok`, sum(if(`mutasi`.`keterangan` = 'Masuk',`mutasi`.`qty`,0)) AS `totalmasuk`, sum(if(`mutasi`.`keterangan` = 'Keluar',`mutasi`.`qty`,0)) AS `totalkeluar`, sum(if(`mutasi`.`keterangan` = 'Masuk',`mutasi`.`qty`,0)) - sum(if(`mutasi`.`keterangan` = 'Keluar',`mutasi`.`qty`,0)) AS `saldo` FROM `mutasi` GROUP BY `mutasi`.`id_stok` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vsaldoakhir2`
+--
+DROP TABLE IF EXISTS `vsaldoakhir2`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vsaldoakhir2`  AS SELECT `tbstok`.`id_stok` AS `id_stok`, `tbstok`.`nama_stok` AS `nama_stok`, coalesce(`tbstok`.`saldo_awal`,0) AS `saldo_awal`, coalesce(`vsaldo7`.`totalmasuk`,0) AS `totalmasuk`, coalesce(`vsaldo7`.`totalkeluar`,0) AS `totalkeluar`, coalesce(`tbstok`.`saldo_awal`,0) + coalesce(`vsaldo7`.`totalmasuk`,0) - coalesce(`vsaldo7`.`totalkeluar`,0) AS `saldoakhir` FROM (`tbstok` left join `vsaldo7` on(`tbstok`.`id_stok` = `vsaldo7`.`id_stok`)) ;
 
 --
 -- Indexes for dumped tables
@@ -485,85 +535,85 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `beli`
 --
 ALTER TABLE `beli`
-  MODIFY `id_pembelian` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pembelian` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `brand`
 --
 ALTER TABLE `brand`
-  MODIFY `id_brand` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_brand` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id_cart` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id_cart` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `jual`
 --
 ALTER TABLE `jual`
-  MODIFY `id_penjualan` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id_penjualan` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `mutasi`
 --
 ALTER TABLE `mutasi`
-  MODIFY `id_mutasi` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id_mutasi` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbkategori`
 --
 ALTER TABLE `tbkategori`
-  MODIFY `id_kategori` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_kategori` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbpelanggan`
 --
 ALTER TABLE `tbpelanggan`
-  MODIFY `id_pelanggan` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pelanggan` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbpemasok`
 --
 ALTER TABLE `tbpemasok`
-  MODIFY `id_pemasok` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pemasok` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbsatuan`
 --
 ALTER TABLE `tbsatuan`
-  MODIFY `id_satuan` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_satuan` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbstok`
 --
 ALTER TABLE `tbstok`
-  MODIFY `id_stok` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id_stok` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
@@ -573,7 +623,7 @@ ALTER TABLE `users`
 -- Constraints for table `beli`
 --
 ALTER TABLE `beli`
-  ADD CONSTRAINT `beli_ibfk_1` FOREIGN KEY (`id_stok`) REFERENCES `tbstok` (`id_stok`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `beli_ibfk_1` FOREIGN KEY (`id_stok`) REFERENCES `tbstok` (`id_stok`),
   ADD CONSTRAINT `beli_id_pemasok_foreign` FOREIGN KEY (`id_pemasok`) REFERENCES `tbpemasok` (`id_pemasok`) ON DELETE CASCADE;
 
 --
@@ -599,13 +649,13 @@ ALTER TABLE `mutasi`
 -- Constraints for table `tbpelanggan`
 --
 ALTER TABLE `tbpelanggan`
-  ADD CONSTRAINT `tbpelanggan_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `tbpelanggan_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `tbstok`
 --
 ALTER TABLE `tbstok`
-  ADD CONSTRAINT `tbstok_ibfk_1` FOREIGN KEY (`id_brand`) REFERENCES `brand` (`id_brand`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `tbstok_ibfk_1` FOREIGN KEY (`id_brand`) REFERENCES `brand` (`id_brand`),
   ADD CONSTRAINT `tbstok_id_kategori_foreign` FOREIGN KEY (`id_kategori`) REFERENCES `tbkategori` (`id_kategori`) ON DELETE CASCADE,
   ADD CONSTRAINT `tbstok_id_satuan_foreign` FOREIGN KEY (`id_satuan`) REFERENCES `tbsatuan` (`id_satuan`) ON DELETE CASCADE;
 COMMIT;

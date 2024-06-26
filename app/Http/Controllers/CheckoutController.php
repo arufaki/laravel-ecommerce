@@ -95,13 +95,13 @@ class CheckoutController extends Controller
                 \DB::table('mutasi')
                     ->InsertGetId($dataMutasi);
                 
-                // kurangi saldo awal dengan qty cart pelanggan
-                $updateSaldoAwal = $cart->saldo_awal - $cart->qty;
+                // // kurangi saldo awal dengan qty cart pelanggan
+                // $updateSaldoAwal = $cart->saldo_awal - $cart->qty;
 
-                // update saldo awawl sesuai dengan rumus $updateSaldoAwal
-                \DB::table('tbstok')
-                ->where("id_stok", $cart->id_stok)
-                ->update(["saldo_awal" => $updateSaldoAwal]);
+                // // update saldo awawl sesuai dengan rumus $updateSaldoAwal
+                // \DB::table('tbstok')
+                // ->where("id_stok", $cart->id_stok)
+                // ->update(["saldo_awal" => $updateSaldoAwal]);
                 
                 // Setelah itu hapus cart yang ada di cart pelanggan
                 $cartUser->delete();

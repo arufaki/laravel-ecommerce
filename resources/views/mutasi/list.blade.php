@@ -59,9 +59,9 @@
                                             <td>{{ 'Rp. ' . number_format($record->harga ?? '-', 0, ',', ',') }}</td>
                                             <td>{{ $record->keterangan ?? '-' }}</td>
                                             <td>{{ $record->status ?? '-' }}</td>
-                                            <td><a href="{{ Route('mutasi.edit', $record->id_mutasi) }}"
+                                            <!-- <td><a href="{{ Route('mutasi.edit', $record->id_mutasi) }}"
                                                     class="btn btn-primary">Edit</a>
-                                            </td>
+                                            </td> -->
                                             <td>
                                                 <form action="{{ Route('mutasi.destroy', $record->id_mutasi) }}"
                                                     method="POST" onsubmit="return confirm('Yakin Ingin Menghapus ?')">
@@ -76,7 +76,7 @@
                             </table>
                             <div class="d-flex justify-content-between mt-3">
                                 <a href="{{ url('/') }}" class="btn btn-danger">Kembali</a>
-                                <a href="{{ url('mutasi/create') }}" class="btn btn-primary">Tambah Data</a>
+                                <!-- <a href="{{ url('mutasi/create') }}" class="btn btn-primary">Tambah Data</a> -->
                             </div>
                         </div>
                         <!-- /.card-body -->

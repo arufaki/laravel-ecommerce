@@ -32,10 +32,11 @@ class IndexController extends Controller
         // $user= Auth()->user();
         // dd($user);
 
-        $selectedProduct = \DB::table('tbstok')
+        $selectedProduct = \DB::table('vsaldoakhir2')
+        ->leftJoin('tbstok', 'vsaldoakhir2.id_stok', '=', 'tbstok.id_stok')
         ->leftJoin('tbsatuan', 'tbstok.id_satuan', '=', 'tbsatuan.id_satuan')
-        ->select('tbstok.*', 'tbsatuan.nama_satuan')
-        ->where('id_stok', $id_stok)->first();
+        ->select('vsaldoakhir2.*', 'tbsatuan.nama_satuan', 'tbstok.*')
+        ->where('vsaldoakhir2.id_stok', $id_stok)->first();
 
         $extractImage = json_decode($selectedProduct->image);
         

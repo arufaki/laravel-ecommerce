@@ -11,7 +11,8 @@ class MutasiController extends Controller
 
         $recordsMutasi = \DB::Table('mutasi')
             ->leftJoin('tbstok', 'mutasi.id_stok', '=', 'tbstok.id_stok')
-            ->select('mutasi.*', 'tbstok.nama_stok as nama_stok');
+            ->select('mutasi.*', 'tbstok.nama_stok as nama_stok')
+            ->orderBy('id_mutasi', 'DESC');
 
         $recordMutasi = $recordsMutasi->get();
         $no = 1;
