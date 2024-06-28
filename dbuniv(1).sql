@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 26, 2024 at 03:07 AM
+-- Generation Time: Jun 28, 2024 at 02:18 PM
 -- Server version: 11.4.2-MariaDB
 -- PHP Version: 8.3.8
 
@@ -109,16 +109,6 @@ CREATE TABLE `jual` (
   `id_user` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `jual`
---
-
-INSERT INTO `jual` (`id_penjualan`, `no_bukti`, `tanggal`, `keterangan`, `ekspedisi`, `bukti_pembayaran`, `status`, `id_user`) VALUES
-(45, 'OR620240625145121', '2024-06-25', 'Penjualan', 'SiCepat', 'bukti-pembayaran/171932708147.png', 'rejected', 6),
-(46, 'OR620240625145638', '2024-06-25', 'Penjualan', 'SiCepat', 'bukti-pembayaran/171932739823.png', 'success', 6),
-(47, 'OR620240626011123', '2024-06-26', 'Penjualan', 'SiCepat', 'bukti-pembayaran/171936428371.png', 'success', 6),
-(48, 'OR620240626012353', '2024-06-26', 'Penjualan', 'JNE', 'bukti-pembayaran/171936503317.png', 'pending', 6);
-
 -- --------------------------------------------------------
 
 --
@@ -172,10 +162,10 @@ CREATE TABLE `mutasi` (
 --
 
 INSERT INTO `mutasi` (`id_mutasi`, `no_bukti`, `qty`, `harga`, `keterangan`, `status`, `id_stok`, `created_at`, `updated_at`) VALUES
-(47, 'OR620240625145121', 1, 77230000, 'Masuk', 'rejected', 57, '2024-06-25 07:51:21', '2024-06-25 07:51:21'),
-(48, 'OR620240625145638', 2, 28070000, 'Keluar', 'success', 58, '2024-06-25 07:56:38', '2024-06-25 07:56:38'),
-(49, 'OR620240626011123', 1, 58150000, 'Keluar', 'success', 60, '2024-06-25 18:11:23', '2024-06-25 18:11:23'),
-(50, 'OR620240626012353', 5, 290750000, 'Keluar', 'success', 60, '2024-06-25 18:23:53', '2024-06-25 18:23:53');
+(53, 'OR620240628140808', 1, 77230000, 'Keluar', 'success', 57, '2024-06-28 07:08:08', '2024-06-28 07:08:08'),
+(54, 'OR620240628141209', 1, 13250000, 'Masuk', 'rejected', 56, '2024-06-28 07:12:09', '2024-06-28 07:12:09'),
+(55, 'OR620240628141209', 1, 39960000, 'Masuk', 'rejected', 54, '2024-06-28 07:12:09', '2024-06-28 07:12:09'),
+(56, 'OR620240628141209', 1, 32110000, 'Masuk', 'rejected', 55, '2024-06-28 07:12:09', '2024-06-28 07:12:09');
 
 -- --------------------------------------------------------
 
@@ -303,11 +293,7 @@ CREATE TABLE `tbsatuan` (
 --
 
 INSERT INTO `tbsatuan` (`id_satuan`, `nama_satuan`, `created_at`, `updated_at`) VALUES
-(2, 'pcs', NULL, NULL),
-(3, 'g', NULL, NULL),
-(4, 'oz', NULL, NULL),
-(5, 'ton', NULL, NULL),
-(6, 'kg', NULL, NULL);
+(6, 'pcs', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -547,7 +533,7 @@ ALTER TABLE `brand`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id_cart` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id_cart` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -559,7 +545,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `jual`
 --
 ALTER TABLE `jual`
-  MODIFY `id_penjualan` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id_penjualan` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -571,7 +557,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `mutasi`
 --
 ALTER TABLE `mutasi`
-  MODIFY `id_mutasi` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id_mutasi` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`

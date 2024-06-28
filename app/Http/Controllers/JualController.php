@@ -69,36 +69,44 @@ class JualController extends Controller
         // Update status jual sesuai dengan parameter di fungsi edit dan show
         $updateStatusJual = $callJual->update(['status' => $status]);
 
-        // kondisi mutasi dengan left join tbstok serta kondisi no_bukti disamakan dengan no_bukti di tabel jual
-        $callMutasi = \DB::table('mutasi')
-                    ->leftJoin('tbstok', 'mutasi.id_stok', "=", 'tbstok.id_stok')
-                    ->select("mutasi.*", 'tbstok.saldo_awal as saldo_awal')
-                    ->where("no_bukti", $getDataJual->no_bukti);
 
-        // ambil seluruh data mutasi yang sesuai dengan kriteria where
-        $getDataMutasi = $callMutasi->get();
-
-        // looping data mutasi yang no_buktinya sama
-        foreach($getDataMutasi as $mutasi) {
-
-            // kondisi ketika status rejected akan mengurangi saldo dan kalau success tidak berkurang atau tetap karena sudah berkurang ketika si user checkout barang
-            $saldoCondition = $status == "rejected" ? $mutasi->saldo_awal + $mutasi->qty : $mutasi->saldo_awal;
-
-            // update saldo awal di tabel stok
-            \DB::table('tbstok')
-            ->where("id_stok", $mutasi->id_stok)
-            ->update(["saldo_awal" => $saldoCondition]);
-
-            // kondisi ketika status rejected ubah keterangan jadi saldo masuk
-            if($status == "rejected") {
-                \DB::table('mutasi')
-                    ->where("no_bukti", $getDataJual->no_bukti)
-                    ->update(['keterangan' => "Masuk"]);
-            }
+        // kondisi ketika status rejected ubah keterangan jadi saldo masuk
+        if($status == "rejected") {
+            \DB::table('mutasi')
+                ->where("no_bukti", $getDataJual->no_bukti)
+                ->update(['keterangan' => "Masuk"]);
         }
 
         // update status di mutasi sesuai dengan tombol yang ditekan di tabel jual
-        $updateStatusMutasi = $callMutasi->update(['status' => $status]);
+        $updateStatusMutasi = \DB::table('mutasi')
+                    ->where("no_bukti", $getDataJual->no_bukti)
+                    ->update(['status' => $status]);
+
+
+        // // ambil seluruh data mutasi yang sesuai dengan kriteria where
+        // $getDataMutasi = $callMutasi->get();
+
+        // // looping data mutasi yang no_buktinya sama
+        // foreach($getDataMutasi as $mutasi) {
+
+        //     // kondisi ketika status rejected akan mengurangi saldo dan kalau success tidak berkurang atau tetap karena sudah berkurang ketika si user checkout barang
+        //     $saldoCondition = $status == "rejected" ? $mutasi->saldo_awal + $mutasi->qty : $mutasi->saldo_awal;
+
+        //     // update saldo awal di tabel stok
+        //     \DB::table('tbstok')
+        //     ->where("id_stok", $mutasi->id_stok)
+        //     ->update(["saldo_awal" => $saldoCondition]);
+
+        //     // kondisi ketika status rejected ubah keterangan jadi saldo masuk
+        //     if($status == "rejected") {
+        //         \DB::table('mutasi')
+        //             ->where("no_bukti", $getDataJual->no_bukti)
+        //             ->update(['keterangan' => "Masuk"]);
+        //     }
+        // }
+
+        // // update status di mutasi sesuai dengan tombol yang ditekan di tabel jual
+        // $updateStatusMutasi = $callMutasi->update(['status' => $status]);
     }
 
     // fungsi ini dijalankan ketika admin menekan tombol accept
