@@ -46,7 +46,11 @@ class IndexController extends Controller
 
 
     public function products() {
-        $newProduct = \DB::table('tbstok')->get();
+        $newProduct = \DB::table('tbstok')
+        ->leftJoin('tbkategori', 'tbstok.id_kategori', '=', 'tbkategori.id_kategori')
+        ->leftJoin('brand', 'tbstok.id_brand', '=', 'brand.id_brand')
+        ->select('tbstok.*', 'tbkategori.nama_kategori as nama_kategori', 'brand.nama_brand as nama_brand')
+        ->get();
 
         return view('ecomPages.products', compact('newProduct'));
     }
