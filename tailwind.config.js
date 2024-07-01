@@ -12,11 +12,14 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ["Figtree", ...defaultTheme.fontFamily.sans],
-                sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+                sans: ["Inter var", "Figtree", ...defaultTheme.fontFamily.sans],
             },
         },
     },
 
-    plugins: [forms, require("@tailwindcss/forms")],
+    plugins: [
+        // ...
+        forms,
+        require("@tailwindcss/forms"),
+    ],
 };

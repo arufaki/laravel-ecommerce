@@ -71,7 +71,8 @@ button {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="email"] {
     color: var(--black-opacity1);
     padding: 12px 16px 12px 36px;
     width: 100%;

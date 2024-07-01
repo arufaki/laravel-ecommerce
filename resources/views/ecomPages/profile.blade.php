@@ -4,112 +4,53 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FKH.CO | Login</title>
-    <link rel="stylesheet" href="{{ url('fkhco/css/login.css') }}" />
-    <link href="./resources/css/output.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-
+    <link rel="stylesheet" href="{{ url('fkhco/css/cart.css') }}" />
+    <link rel="stylesheet" href="{{ url('fkhco/css/checkout.css') }}" />
+    <link rel="stylesheet" href="{{ url('fkhco/css/profile.css') }}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="h-full">
+    @php
+      $userNow = Auth::user()->name;
+    @endphp
     <header>
-      <nav class="container">
-        <div class="nav-wrap nav-border">
-          <h1 class="logos login-logo">FKH.CO</h1>
-        </div>
-      </nav>
+        @include('ecomPages.component.header')
     </header>
     <main>
-      <!--
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
-<!--
-  This example requires updating your template:
-
-  ```
-  <html class="h-full bg-white">
-  <body class="h-full">
-  ```
--->
-<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-      <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
-      <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
-    </div>
-  
-    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form class="space-y-6" action="#" method="POST">
-        <div>
-          <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
-          <div class="mt-2">
-            <input id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+      @include('sweetalert::alert')
+      <section id="profile">
+        <div class="profile-wrap container">
+          <div class="header-profile">
+            <h1 class="text-base font-semibold leading-7 text-gray-900">Profile</h1>
+            <p class="mt-1 fs-6 lh-base">This information is not displayed publicly, so please remain calm.</p>
           </div>
-        </div>
-  
-        <div>
-          <div class="flex items-center justify-between">
-            <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
-            <div class="text-sm">
-              <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
+          <div class="forms-wrap">
+            <div class="sm:col-span-4 mt-10">
+              <form method="post" action="{{route('update.username')}}">
+                @csrf
+                <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Username</label>
+                <div class="mt-2 ">
+                  <div class="flex rounded-md shadow-sm  sm:max-w-md border">
+                    <input id="name" name="name" type="text" value="{{$userNow}}" required autofocus autocomplete="name" class="profile-username block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="Username">
+                  </div>
+                </div>
+                <button type="submit" class="w-[70px] mt-2 rounded-md bg-[#b1b1b1] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#7c7c7c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+              </form>
             </div>
           </div>
-          <div class="mt-2">
-            <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-          </div>
         </div>
-  
-        <div>
-          <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
+        <div class="personal-information container">
+          
         </div>
-      </form>
-  
-      <p class="mt-10 text-center text-sm text-gray-500">
-        Not a member?
-        <a href="#" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Start a 14 day free trial</a>
-      </p>
-    </div>
-  </div>
-  
+      </section>
     </main>
     <footer>
-      <div id="subscribe">
-          <div class="subscribe-wrap container">
-              <div class="subscribe-content container">
-                  <h1>STAY UPTO DATE ABOUT OUR LATEST OFFERS</h1>
-                  <div class="subscribe-form">
-                      <div class="subscribe-input-wrap">
-                          <img src="{{ url('fkhco/assets/svg/mail.svg') }}" alt="mail-icon" />
-                          <input type="text" placeholder="Enter your email address..."
-                              class="subscribe-input" />
-                      </div>
-                      <button class="subscribe-btn">Subscribe to Newsletter</button>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="footer container">
-          <div class="footer-content">
-              <h1 class="footer-logo">FKH.CO</h1>
-              <p class="footer-body">
-                  We have clothes that suits your style and which you’re proud to
-                  wear. From women to men.
-              </p>
-          </div>
-          <h5>
-              Created with ❤ by
-              <a href="https://github.com/Arufaki" target="_blank" class="creator-name">Alfakih Anggi Subekti</a>
-          </h5>
-      </div>
-  </footer>
+        @include('ecomPages.component.footer')
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <script src="{{ url('fkhco/js/app.js') }}"></script>
   </body>
 </html>

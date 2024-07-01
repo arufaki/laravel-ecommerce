@@ -74,7 +74,8 @@ class JualController extends Controller
         if($status == "rejected") {
             \DB::table('mutasi')
                 ->where("no_bukti", $getDataJual->no_bukti)
-                ->update(['keterangan' => "Masuk"]);
+                ->delete();
+                // ->update(['keterangan' => "Masuk"]);
         }
 
         // update status di mutasi sesuai dengan tombol yang ditekan di tabel jual

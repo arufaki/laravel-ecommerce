@@ -10,7 +10,7 @@
         </div>
     @endif
 
-    <section class="content">
+    {{-- <section class="content">
         <div class="container-fluid">
             <div class="row mt-4">
                 <!-- left column -->
@@ -66,5 +66,5 @@
             </div>
             <!-- /.row -->
         </div><!-- /.container-fluid -->
-    </section>
+    </section> --}}
 @stop

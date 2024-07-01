@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class IndexController extends Controller
 {
@@ -53,6 +55,30 @@ class IndexController extends Controller
         ->get();
 
         return view('ecomPages.products', compact('newProduct'));
+    }
+
+    public function updateUsername(Request $r) {
+        $user = Auth()->user();
+
+        $r->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $updateUsername = \DB::table('users')
+                            ->where('id', $user->id)
+                            ->update(['name' => $r->name]);
+
+        Alert::success('Success', 'Success Changing Username');
+        return redirect()->back();
+    }
+
+    public function storeAddress(Request $r) {
+        $user = Auth()->user();
+
+        if($user)
+
+
+
     }
 
 }

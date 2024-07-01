@@ -77,6 +77,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('profile', ProfileController::class);
     Route::resource('/cart', CartController::class);
     Route::resource('/checkout', CheckoutController::class);
+    Route::post('/update-username', [IndexController::class, 'updateUsername'])->name('update.username');
+
 });
 
 
