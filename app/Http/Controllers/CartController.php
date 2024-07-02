@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Controllers\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CartController extends Controller
 {
@@ -53,7 +54,8 @@ class CartController extends Controller
             }
             return redirect()->route('cart.index');
         } else {
-            return redirect()->back()->with('error', 'Product not found!');
+            Alert::error('Error', 'Product not found!');
+            return redirect()->back();
         }
         
     } 

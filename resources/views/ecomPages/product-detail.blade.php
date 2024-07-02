@@ -13,6 +13,7 @@
         @include('ecomPages.component.header')
     </header>
     <main>
+        @include('sweetalert::alert')
         <section id="product">
             <div class="cart-wrap container">
                 <div class="cart-wrapper">
@@ -43,18 +44,20 @@
                                 </div>
                                 <p class="rate">4.5/5</p>
                             </div>
-                            <p style="padding-bottom: 10px;">in stock {{$selectedProduct->saldoakhir}} {{$selectedProduct->nama_satuan}}</p>
+                            <p style="padding-bottom: 10px;">in stock {{ $selectedProduct->saldoakhir }}
+                                {{ $selectedProduct->nama_satuan }}</p>
                             <p class="price pricing-detail">
                                 {{ 'Rp. ' . number_format($selectedProduct->harga_jual, 0, ',', '.') }}</p>
                             <p class="product-body">
                                 {{ $selectedProduct->deskripsi_barang }}
                             </p>
                         </div>
-                        <form action="{{ url('cart')  }}" method="POST" id="cart-form">
+                        <form action="{{ url('cart') }}" method="POST" id="cart-form">
                             @csrf
                             <div class="product-size">
-                                <input type="hidden" name="id_stok" value="{{$selectedProduct->id_stok}}">
-                                <input type="hidden" class="form-control" id="id_user" name="id_user" value="{{ Auth::user() !== null ? Auth::user()->id : '' }}">
+                                <input type="hidden" name="id_stok" value="{{ $selectedProduct->id_stok }}">
+                                <input type="hidden" class="form-control" id="id_user" name="id_user"
+                                    value="{{ Auth::user() !== null ? Auth::user()->id : '' }}">
                                 <p class="choose-size">Choose Size</p>
                                 <div class="size-wrap">
                                     <div class="size">
@@ -76,14 +79,15 @@
                                     <div class="size">
                                         <input type="radio" id="ukuran" name="ukuran" value="xxl" />
                                         <p>XXL</p>
-                                    </div>      
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="cart">
                                 <div class="quantity">
                                     <span id="decrease" class="counter">-</span>
-                                    <input type="number" class="qty" name="qty" id="qty" value="1" max="{{$selectedProduct->saldo_awal}}" required   />
+                                    <input type="number" class="qty" name="qty" id="qty" value="1"
+                                        max="{{ $selectedProduct->saldo_awal }}" required />
                                     <span id="increase" class="counter">+</span>
                                 </div>
                                 <button class="add-to-cart" type="submit">Add To Cart</button>

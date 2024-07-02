@@ -72,12 +72,38 @@ class IndexController extends Controller
         return redirect()->back();
     }
 
-    public function storeAddress(Request $r) {
+    public function updateInformation(Request $r) {
         $user = Auth()->user();
 
-        if($user)
+        $r->validate([
+            'nohp' => 'nullable|string|max:300',
+            'alamat_pelanggan' => 'nullable|string|max:300',    
+        ]);
 
+        $x = array(
+            'nohp' => $r->nohp,
+            'alamat_pelanggan' => $r->alamat_pelanggan,
+        );
+        
+        $updateUserInfo = \DB::table('tbpelanggan')
+                            ->where('id_user', $user->id)
+                            ->first();
 
+        if($updateUserInfo == null) {
+            \DB::table('tbpelanggan')
+                ->where('id_user', $user->id)
+                ->insertGetId($x);
+
+             Alert::success('Success', 'Success Adding Information');
+            return redirect()->back();
+        } else {
+            \DB::table('tbpelanggan')
+                ->where('id_user', $user->id)
+                ->update($x);
+
+            Alert::success('Success', 'Success Changing Information');
+            return redirect()->back();
+        }
 
     }
 

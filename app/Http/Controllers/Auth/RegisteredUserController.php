@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
 
 class RegisteredUserController extends Controller
 {
@@ -43,6 +44,10 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
+
+        DB::table('tbpelanggan')->insert([
+        'id_user' => $user->id,
+        ]);
 
         return redirect()->route('login');
     }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 01, 2024 at 06:11 PM
+-- Generation Time: Jul 02, 2024 at 08:19 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.7
 
@@ -76,6 +76,15 @@ CREATE TABLE `cart` (
   `id_user` bigint UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id_cart`, `ukuran`, `qty`, `id_stok`, `id_user`) VALUES
+(70, 'l', 1, 57, 10),
+(74, 'm', 1, 55, 5),
+(75, 'l', 1, 56, 7);
+
 -- --------------------------------------------------------
 
 --
@@ -116,7 +125,8 @@ CREATE TABLE `jual` (
 INSERT INTO `jual` (`id_penjualan`, `no_bukti`, `tanggal`, `keterangan`, `ekspedisi`, `bukti_pembayaran`, `status`, `id_user`) VALUES
 (53, 'OR620240630124335', '2024-06-30', 'Penjualan', 'JNE', 'bukti-pembayaran/171975141588.png', 'success', 6),
 (54, 'OR620240630124452', '2024-06-30', 'Penjualan', 'J&T Kargo', 'bukti-pembayaran/171975149274.png', 'rejected', 6),
-(55, 'OR620240630124625', '2024-06-30', 'Penjualan', 'SiCepat', 'bukti-pembayaran/171975158516.png', 'rejected', 6);
+(55, 'OR620240630124625', '2024-06-30', 'Penjualan', 'SiCepat', 'bukti-pembayaran/171975158516.png', 'rejected', 6),
+(56, 'OR620240702132441', '2024-07-02', 'Penjualan', 'JNE', 'bukti-pembayaran/171992668123.png', 'pending', 6);
 
 -- --------------------------------------------------------
 
@@ -171,7 +181,8 @@ CREATE TABLE `mutasi` (
 --
 
 INSERT INTO `mutasi` (`id_mutasi`, `no_bukti`, `qty`, `harga`, `keterangan`, `status`, `id_stok`, `created_at`, `updated_at`) VALUES
-(57, 'OR620240630124335', 1, 58150000, 'Keluar', 'success', 60, '2024-06-30 05:43:36', '2024-06-30 05:43:36');
+(57, 'OR620240630124335', 1, 58150000, 'Keluar', 'success', 60, '2024-06-30 05:43:36', '2024-06-30 05:43:36'),
+(62, 'OR620240702132441', 1, 13250000, 'Keluar', 'pending', 56, '2024-07-02 06:24:42', '2024-07-02 06:24:42');
 
 -- --------------------------------------------------------
 
@@ -238,21 +249,20 @@ INSERT INTO `tbkategori` (`id_kategori`, `nama_kategori`, `created_at`, `updated
 
 CREATE TABLE `tbpelanggan` (
   `id_pelanggan` bigint UNSIGNED NOT NULL,
-  `alamat_pelanggan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nohp` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `top` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `id_user` bigint UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `alamat_pelanggan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nohp` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `top` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id_user` bigint UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbpelanggan`
 --
 
-INSERT INTO `tbpelanggan` (`id_pelanggan`, `alamat_pelanggan`, `nohp`, `top`, `id_user`, `created_at`, `updated_at`) VALUES
-(1, 'Jl. Yamagawa, Perum Mutiara Indah Blok G.24, Kec. Sarolangun, Kel. Kuvukiland, Kota Jamaica, Provinsi Osaka, 28829', '082388492829', '1', 6, '2024-06-11 17:18:50', '2024-06-11 17:18:50'),
-(4, 'Jl. Todak', '08738449283', '1', 5, '2024-06-18 13:53:57', '2024-06-18 13:53:57');
+INSERT INTO `tbpelanggan` (`id_pelanggan`, `alamat_pelanggan`, `nohp`, `top`, `id_user`) VALUES
+(1, 'Jl. Adi Sucipto No.1 kel, Sidomulyo Tim., Kec. Marpoyan Damai, Kota Pekanbaru, Riau 28125', '628738839482', '1', 6),
+(4, 'Jl. Merpati Gg. Ketitiran No.31, Tengkerang Tengah, Kec. Marpoyan Damai, Kota Pekanbaru, Riau 28125', '6285362273829', '1', 5),
+(5, 'Jl. Pandu No.151, Simpang Tiga, Kec. Bukit Raya, Kota Pekanbaru, Riau 28286', '6282387734926', NULL, 10);
 
 -- --------------------------------------------------------
 
@@ -362,9 +372,10 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `role`) VALUES
 (3, 'rehan', 'rehan@gmail.com', NULL, '$2y$12$9BU2cdQVlLDzULIZ80XV9.U/4wcVrl2K8yghR14fbFpQ2BScWuDka', 'li7PmbgzJhKCWZ3n5SUzdq9nrmIwy7M4HH2e5E42uLkwWfJLhfdkKJnm9Two', '2024-01-15 10:45:56', '2024-01-15 10:45:56', 'admin'),
-(5, 'john doe', 'johndoe@gmail.com', NULL, '$2y$12$1coxVShK058Br114CCVcD.Om61YwgZsZHDm3.g6EPLpE4.mB8kkvC', NULL, '2024-01-27 06:03:00', '2024-01-27 06:03:00', 'admin'),
+(5, 'John Doe', 'johndoe@gmail.com', NULL, '$2y$12$1coxVShK058Br114CCVcD.Om61YwgZsZHDm3.g6EPLpE4.mB8kkvC', NULL, '2024-01-27 06:03:00', '2024-01-27 06:03:00', 'admin'),
 (6, 'Dont Hurt Me', 'erik@gmail.com', NULL, '$2y$12$2jwbRv2Tn2MPIHwAxtDseODU9sXDgJqEvdt/koAdOOZjn2e0r847q', NULL, '2024-06-11 10:29:49', '2024-06-11 10:29:49', 'user'),
-(7, 'Budiono Siregar', 'kapallawd@gmail.com', NULL, '$2y$12$IbQ7tzsZwcQ013JuolihW.F5NMt5N0YO.cUGw7fF20iQQoeTFtRKO', NULL, '2024-07-01 06:40:12', '2024-07-01 06:40:12', 'user');
+(7, 'Budiono Siregar', 'kapallawd@gmail.com', NULL, '$2y$12$IbQ7tzsZwcQ013JuolihW.F5NMt5N0YO.cUGw7fF20iQQoeTFtRKO', NULL, '2024-07-01 06:40:12', '2024-07-01 06:40:12', 'user'),
+(10, 'John Dalton', 'johndalton@gmail.com', NULL, '$2y$12$wr0znhfWVIf1RlIex2K1KOSeTIO2TyR7GaEuIkMEf7UALm9kut1uq', NULL, '2024-07-02 11:16:17', '2024-07-02 11:16:17', 'user');
 
 -- --------------------------------------------------------
 
@@ -374,9 +385,9 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 --
 CREATE TABLE `vsaldo7` (
 `id_stok` bigint unsigned
-,`totalmasuk` decimal(32,0)
-,`totalkeluar` decimal(32,0)
 ,`saldo` decimal(33,0)
+,`totalkeluar` decimal(32,0)
+,`totalmasuk` decimal(32,0)
 );
 
 -- --------------------------------------------------------
@@ -389,9 +400,9 @@ CREATE TABLE `vsaldoakhir2` (
 `id_stok` bigint unsigned
 ,`nama_stok` varchar(255)
 ,`saldo_awal` varchar(255)
-,`totalmasuk` decimal(32,0)
-,`totalkeluar` decimal(32,0)
 ,`saldoakhir` double
+,`totalkeluar` decimal(32,0)
+,`totalmasuk` decimal(32,0)
 );
 
 -- --------------------------------------------------------
@@ -540,7 +551,7 @@ ALTER TABLE `brand`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id_cart` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id_cart` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -552,7 +563,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `jual`
 --
 ALTER TABLE `jual`
-  MODIFY `id_penjualan` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id_penjualan` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -564,7 +575,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `mutasi`
 --
 ALTER TABLE `mutasi`
-  MODIFY `id_mutasi` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id_mutasi` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -582,7 +593,7 @@ ALTER TABLE `tbkategori`
 -- AUTO_INCREMENT for table `tbpelanggan`
 --
 ALTER TABLE `tbpelanggan`
-  MODIFY `id_pelanggan` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pelanggan` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbpemasok`
@@ -606,7 +617,7 @@ ALTER TABLE `tbstok`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables

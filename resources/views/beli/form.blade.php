@@ -10,7 +10,7 @@
         </div>
     @endif
 
-    {{-- <section class="content">
+    <section class="content">
         <div class="container-fluid">
             <div class="row mt-4">
                 <!-- left column -->
@@ -25,10 +25,7 @@
                         <form action="{{ url('beli') }}" method="POST">
                             @csrf
                             <div class="card-body">
-                                <div class="form-group">
-                                    <label for="no_bukti">Nomor Bukti Pembelian</label>
-                                    <input type="number" class="form-control" id="no_bukti" name="no_bukti">
-                                </div>
+                               
                                 <div class="form-group">
                                     <label for="tanggal">Tanggal Pembelian</label>
                                     <input type="date" class="form-control" id="tanggal" name="tanggal">
@@ -66,5 +63,5 @@
             </div>
             <!-- /.row -->
         </div><!-- /.container-fluid -->
-    </section> --}}
+    </section>
 @stop
