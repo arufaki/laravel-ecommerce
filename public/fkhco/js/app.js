@@ -15,7 +15,7 @@ const selectCard = document.querySelectorAll(".card"),
     sizeProduct = document.querySelectorAll(".size"),
     inputUkuran = document.querySelectorAll("#ukuran"),
     btnDropdown = document.getElementById("dropdownMenuButton"),
-    dropdownMenu = document.querySelector(".dropdown-menu"),
+    dropdownMenu = document.querySelector(".dropdown-menu-wrapper"),
     cartCount = document.querySelector(".cart-count");
 
 if (logo) {

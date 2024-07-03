@@ -101,6 +101,7 @@
     <footer>
       @include('ecomPages.component.footer')
   </footer>
-    <script src="{{url("fkhco/js/products.js")}}"></script>
+    <script src="{{ url('fkhco/js/app.js') }}"></script>
+    <script src="{{url('fkhco/js/products.js')}}"></script>
   </body>
 </html>

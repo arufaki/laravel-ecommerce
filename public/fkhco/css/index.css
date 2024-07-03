@@ -127,6 +127,7 @@ img {
 .icons-wrap {
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 10px;
 }
 
@@ -389,11 +390,11 @@ footer {
     margin: 0 auto;
 }
 
-.dropdown {
+.dropdown-wrap {    
     position: relative;
 }
 
-.dropdown-menu {
+.dropdown-menu-wrapper {
     display: none;
     flex-direction: column;
     width: 90px;
@@ -410,19 +411,24 @@ footer {
     display: flex;
 }
 
-.dropdown-item {
+.dropdown-single-item {
     color: var(--black-opacity1);
     padding: 5px 5px;
     font-weight: 400;
 }
 
-.dropdown-item:hover {
+.dropdown-single-item:hover {
     background: var(--black-opacity) 50%;
 }
 
 .user-status {
     display: none;
     position: absolute;
+}
+
+.icon-img {
+    max-width: inherit!important;
+    height: inherit!important;
 }
 
 @media only screen and (max-width: 400px) {

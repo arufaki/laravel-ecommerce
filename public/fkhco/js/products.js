@@ -12,9 +12,9 @@ function multipleSortProduct(userSelected) {
             product.dataset.category === userSelected ||
             userSelected === "allCategory";
 
-        console.log(`Product: ${product.textContent}`);
-        console.log(`  Brand matches: ${sortBrand}`);
-        console.log(`  Category matches: ${sortCategory}`);
+        // console.log(`Product: ${product.textContent}`);
+        // console.log(`  Brand matches: ${sortBrand}`);
+        // console.log(`  Category matches: ${sortCategory}`);
 
         product.style.display = sortBrand || sortCategory ? "" : "none";
     });

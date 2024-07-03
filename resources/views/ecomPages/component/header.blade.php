@@ -12,33 +12,33 @@
         <h1 class="logos logo products-logo">FKH.CO<a href="{{url('/')}}" class="hidden-link"></a></h1>
         <input type="text" placeholder="Search product..." class="search-wrap" />
         <div class="icons-wrap">
-            <a href={{ url('/cart') }} class="cart-btn obj-href">
+            <a href="{{ url('/cart') }}" class="cart-btn obj-href">
                 @auth
                     <span class="cart-count">{{$cartCount}}</span>
                 @endauth
-                <img src="{{ url('fkhco/assets/svg/shopping-cart.svg') }}" alt="cart-icon" />
+                <img src="{{ url('fkhco/assets/svg/shopping-cart.svg') }}" alt="cart-icon" class="icon-img"/>
             </a>
-            <div class="dropdown">
+            <div class="dropdown-wrap">
                 <button class="btn-dropdown" id="dropdownMenuButton">
-                    <img src="{{ url('fkhco/assets/svg/user.svg') }}" alt="user-icon" />
+                    <img src="{{ url('fkhco/assets/svg/user.svg') }}" alt="user-icon" class="icon-img" />
                 </button>
                 @php
                     $userCondition = Auth::user();
                 @endphp
-                <div class="dropdown-menu">
+                <div class="dropdown-menu-wrapper">
                     @auth
-                        <a class="dropdown-item" href="{{url("/profile")}}">Profile</a>
-                        <a class="dropdown-item" href="{{url("/orders")}}">Orders</a>
+                        <a class="dropdown-single-item" href="{{url("/profile")}}">Profile</a>
+                        <a class="dropdown-single-item" href="{{url("/orders")}}">Orders</a>
                         @if(Auth::check() && $userCondition->role == "admin")
-                            <a class="dropdown-item" href="{{url("/dashboard")}}">Admin</a>
+                            <a class="dropdown-single-item" href="{{url("/dashboard")}}">Admin</a>
                         @endif
-                        <form class="dropdown-item" method="POST" action="{{ route('logout') }}">
+                        <form class="dropdown-single-item" method="POST" action="{{ route('logout') }}">
                             @csrf
                             <a href="{{route('logout')}}" onclick="event.preventDefault(); this.closest('form').submit();" role="button">Log out</a>
                         </form>
                     @endauth
                     @guest
-                        <a class="dropdown-item" href="{{url('/login')}}">Login</a>   
+                        <a class="dropdown-single-item" href="{{url('/login')}}">Login</a>   
                     @endguest
                 </div>
             </div>

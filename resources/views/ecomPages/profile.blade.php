@@ -11,19 +11,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
 
 <body class="h-full">
-    @php
-        $userNow = Auth::user();
-        $getUserInformation = \DB::table('tbpelanggan')
-            ->where('id_user', $userNow->id)
-            ->first();
-    @endphp
     <header>
         @include('ecomPages.component.header')
     </header>
     <main>
+        @php
+            $userNow = Auth::user();
+            $getUserInformation = \DB::table('tbpelanggan')
+                ->where('id_user', $userNow->id)
+                ->first();
+        @endphp
         @include('sweetalert::alert')
         <section id="profile">
             <div class="profile-wrap container">
@@ -89,6 +90,7 @@
     <footer>
         @include('ecomPages.component.footer')
     </footer>
+    <script src="{{ url('fkhco/js/app.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
@@ -98,7 +100,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
     </script>
-    <script src="{{ url('fkhco/js/app.js') }}"></script>
 </body>
 
 </html>
