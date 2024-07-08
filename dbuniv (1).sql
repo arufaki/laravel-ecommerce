@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 02, 2024 at 08:19 PM
+-- Generation Time: Jul 08, 2024 at 03:20 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.7
 
@@ -29,14 +29,22 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `beli` (
   `id_pembelian` bigint UNSIGNED NOT NULL,
-  `no_bukti` int NOT NULL,
+  `no_bukti` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tanggal` date NOT NULL,
   `keterangan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_stok` bigint UNSIGNED NOT NULL,
   `id_pemasok` bigint UNSIGNED DEFAULT NULL,
+  `qty` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `beli`
+--
+
+INSERT INTO `beli` (`id_pembelian`, `no_bukti`, `tanggal`, `keterangan`, `id_stok`, `id_pemasok`, `qty`, `created_at`, `updated_at`) VALUES
+(18, 'BUY520240708151906', '2024-07-17', 'Masuk', 56, 3, 12, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -182,7 +190,8 @@ CREATE TABLE `mutasi` (
 
 INSERT INTO `mutasi` (`id_mutasi`, `no_bukti`, `qty`, `harga`, `keterangan`, `status`, `id_stok`, `created_at`, `updated_at`) VALUES
 (57, 'OR620240630124335', 1, 58150000, 'Keluar', 'success', 60, '2024-06-30 05:43:36', '2024-06-30 05:43:36'),
-(62, 'OR620240702132441', 1, 13250000, 'Keluar', 'pending', 56, '2024-07-02 06:24:42', '2024-07-02 06:24:42');
+(62, 'OR620240702132441', 1, 13250000, 'Keluar', 'pending', 56, '2024-07-02 06:24:42', '2024-07-02 06:24:42'),
+(63, 'BUY520240708151906', 12, 150600000, 'Masuk', 'success', 56, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -539,7 +548,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `beli`
 --
 ALTER TABLE `beli`
-  MODIFY `id_pembelian` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pembelian` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `brand`
@@ -575,7 +584,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `mutasi`
 --
 ALTER TABLE `mutasi`
-  MODIFY `id_mutasi` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id_mutasi` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
