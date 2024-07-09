@@ -47,14 +47,24 @@ class IndexController extends Controller
     }
 
 
-    public function products() {
-        $newProduct = \DB::table('tbstok')
+    public function products(Request $r) {
+        $newProducts = \DB::table('tbstok')
         ->leftJoin('tbkategori', 'tbstok.id_kategori', '=', 'tbkategori.id_kategori')
         ->leftJoin('brand', 'tbstok.id_brand', '=', 'brand.id_brand')
-        ->select('tbstok.*', 'tbkategori.nama_kategori as nama_kategori', 'brand.nama_brand as nama_brand')
-        ->get();
+        ->select('tbstok.*', 'tbkategori.nama_kategori as nama_kategori', 'brand.nama_brand as nama_brand');
 
-        return view('ecomPages.products', compact('newProduct'));
+        $search = $r->input('search');
+
+        if($search) {
+            $filterSearch = $newProducts->where('tbstok.nama_stok', 'like', "%$search%")
+                                        ->orWhere('nama_kategori', 'like', "%$search%")
+                                        ->orWhere('nama_brand', 'like', "%$search%")->get();
+            return view('ecomPages.products', ['products' => $filterSearch, 'isSearch' => true]);
+        }
+
+        $newProduct = $newProducts->get();
+
+        return view('ecomPages.products', ['products' => $newProduct, 'isSearch' => false]);
     }
 
     public function updateUsername(Request $r) {
@@ -106,5 +116,15 @@ class IndexController extends Controller
         }
 
     }
+
+    // public function searchFunction(Request $r) {
+
+    //     $search = $r->input('search');
+
+    //     $dataProduct = \DB::table('tbstok')
+
+
+    //     return view('ecomPages.products');
+    // }
 
 }

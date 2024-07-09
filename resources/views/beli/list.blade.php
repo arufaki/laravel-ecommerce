@@ -41,10 +41,13 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nomor Bukti Pembelian</th>
+                                        <th>Nomor Bukti</th>
                                         <th>Tanggal Pembelian</th>
+                                        <th>Nama Barang</th>
+                                        <th>Qty</th>
                                         <th>Keterangan Pembelian</th>
                                         <th>Pemasok</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -53,11 +56,10 @@
                                             <td>{{ $no++ }}</td>
                                             <td>{{ $record->no_bukti ?? '-' }}</td>
                                             <td>{{ $record->tanggal ?? '-' }}</td>
+                                            <td>{{ $record->nama_barang ?? '-' }}</td>
+                                            <td>{{ $record->qty ?? '-' }}</td>
                                             <td>{{ $record->keterangan ?? '-' }}</td>
                                             <td>{{ $record->nama_pemasok ?? '-' }}</td>
-                                            <td><a href="{{ Route('beli.edit', $record->id_pembelian) }}"
-                                                    class="btn btn-primary">Edit</a>
-                                            </td>
                                             <td>
                                                 <form action="{{ Route('beli.destroy', $record->id_pembelian) }}"
                                                     method="POST" onsubmit="return confirm('Yakin Ingin Menghapus ?')">

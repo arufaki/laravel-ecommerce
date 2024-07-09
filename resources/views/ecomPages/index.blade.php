@@ -26,7 +26,7 @@
                         designed to bring out your individuality and cater to your sense
                         of style.
                     </p>
-                    <a href={{url("/products")}} class="shop-btn shop-now">Shop Now</a>
+                    <a href={{ url('/products') }} class="shop-btn shop-now">Shop Now</a>
                 </div>
                 <div class="banners">
                     <svg width="44" height="44" viewBox="0 0 76 76" fill="none"
@@ -49,20 +49,38 @@
         </section>
         <section id="brand">
             <div class="brand-wrapper container">
-                <div class="brand-name">
-                    <img src="{{ url('fkhco/assets/png/brand/versace.png') }}" alt="versace-logo" width="116"
-                        loading="lazy" />
-                    <img src="{{ url('fkhco/assets/png/brand/zara.png') }}" alt="zara-logo" width="63"
-                        loading="lazy" />
-                    <img src="{{ url('fkhco/assets/png/brand/gucci.png') }}" alt="gucci-logo" width="109"
-                        loading="lazy" />
-                    <img src="{{ url('fkhco/assets/png/brand/prada.png') }}" alt="prada-logo" width="127"
-                        loading="lazy" />
-                    <img src="{{ url('fkhco/assets/png/brand/calvin.png') }}" alt="calvin-logo" width="134"
-                        loading="lazy" />
-                    <img src="{{ url('fkhco/assets/png/brand/uniqlo.png') }}" alt="calvin-logo" width="105"
-                        loading="lazy" />
-                </div>
+                <form class="brand-name" action="{{ Route('product.search') }}" method="GET">
+                    <div class="brand-wrap">
+                        <img src="{{ url('fkhco/assets/png/brand/versace.png') }}" alt="versace-logo" width="116"
+                            loading="lazy" />
+                        <input type="submit" value="versace" name="search" class="brand-submit">
+                    </div>
+                    <div class="brand-wrap">
+                        <img src="{{ url('fkhco/assets/png/brand/zara.png') }}" alt="zara-logo" width="63"
+                            loading="lazy" />
+                        <input type="submit" value="zara" name="search" class="brand-submit">
+                    </div>
+                    <div class="brand-wrap">
+                        <img src="{{ url('fkhco/assets/png/brand/gucci.png') }}" alt="gucci-logo" width="109"
+                            loading="lazy" />
+                        <input type="submit" value="gucci" name="search" class="brand-submit">
+                    </div>
+                    <div class="brand-wrap">
+                        <img src="{{ url('fkhco/assets/png/brand/prada.png') }}" alt="prada-logo" width="127"
+                            loading="lazy" />
+                        <input type="submit" value="prada" name="search" class="brand-submit">
+                    </div>
+                    <div class="brand-wrap">
+                        <img src="{{ url('fkhco/assets/png/brand/calvin.png') }}" alt="calvin-logo" width="134"
+                            loading="lazy" />
+                        <input type="submit" value="calvin" name="search" class="brand-submit">
+                    </div>
+                    <div class="brand-wrap">
+                        <img src="{{ url('fkhco/assets/png/brand/uniqlo.png') }}" alt="calvin-logo" width="105"
+                            loading="lazy" />
+                        <input type="submit" value="uniqlo" name="search" class="brand-submit">
+                    </div>
+                </form>
             </div>
         </section>
         <section id="new-arrival">
@@ -116,21 +134,24 @@
                             @endphp
                             <div class="swiper-slide card">
                                 <a href="{{ Route('ecomPages.product-detail', $product->id_stok) }}">
-                                <div class="image-wrap">
-                                    <img src="{{ asset('storage/foto-produk/' . $imageCover[0]) }}" alt="product-image" loading="lazy" />
-                                </div>
-                                <div class="product-detail">
-                                    <p class="product-title">{{ $product->nama_stok }}</p>
-                                    <div class="rating">
-                                        <div class="stars">
-                                            @for ($i = 0; $i < 5; $i++)
-                                                <img src="{{ url('fkhco/assets/svg/rating.svg') }}" alt="rating" />
-                                            @endfor
-                                        </div>
-                                        <p class="rate">4.5/5</p>
+                                    <div class="image-wrap">
+                                        <img src="{{ asset('storage/foto-produk/' . $imageCover[0]) }}"
+                                            alt="product-image" loading="lazy" />
                                     </div>
-                                    <p class="price">{{ 'Rp. ' . number_format($product->harga_jual, 0, ',', '.') }}</p>
-                                </div>
+                                    <div class="product-detail">
+                                        <p class="product-title">{{ $product->nama_stok }}</p>
+                                        <div class="rating">
+                                            <div class="stars">
+                                                @for ($i = 0; $i < 5; $i++)
+                                                    <img src="{{ url('fkhco/assets/svg/rating.svg') }}"
+                                                        alt="rating" />
+                                                @endfor
+                                            </div>
+                                            <p class="rate">4.5/5</p>
+                                        </div>
+                                        <p class="price">
+                                            {{ 'Rp. ' . number_format($product->harga_jual, 0, ',', '.') }}</p>
+                                    </div>
                                 </a>
                             </div>
                         @endforeach
@@ -144,23 +165,26 @@
         <section id="category">
             <div class="category-wrap container">
                 <h1>BROWSE BY CATEGORY</h1>
-                <div class="category-cards">
-                    <div class="category-card-wrap">
-                        <h3>Casual</h3>
+                <form class="category-cards " action="{{ Route('product.search') }}" method="GET">
+                    <div class="category-card-wrap category-master-submission">
+                        <h3>Shirts</h3>
                         <img src="{{ url('fkhco/assets/png/models/casual.png') }}" alt="casual-category-image"
                             loading="lazy" />
+                        <input type="submit" value="shirts" name="search" class="category-submit">
                     </div>
-                    <div class="category-card-wrap">
-                        <h3>Formal</h3>
+                    <div class="category-card-wrap category-master-submission">
+                        <h3>Suits</h3>
                         <img src="{{ url('fkhco/assets/png/models/formal.png') }}" alt="casual-category-image"
                             loading="lazy" />
+                        <input type="submit" value="suits" name="search" class="category-submit">
                     </div>
-                    <div class="category-card-wrap">
+                    <div class="category-card-wrap category-master-submission">
                         <h3>Gym</h3>
                         <img src="{{ url('fkhco/assets/png/models/gym.png') }}" alt="casual-category-image"
                             loading="lazy" />
+                        <input type="submit" value="gym" name="search" class="category-submit">
                     </div>
-                </div>
+                </form>
             </div>
         </section>
     </main>

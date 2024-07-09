@@ -51,6 +51,9 @@ Route::get('/products', [IndexController::class, 'products']);
 // Detail Product to Cart
 Route::get('/product/{id_stok}', [IndexController::class, 'productDetail'])->name('ecomPages.product-detail');
 
+// Search Product
+Route::get('/search', [IndexController::class, 'products'])->name('product.search');
+
 
 // Admin only Accesed This Pages
 Route::middleware(['auth', 'verified', 'rolesChecker:admin'])->group(function () {

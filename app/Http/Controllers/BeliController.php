@@ -12,7 +12,8 @@ class BeliController extends Controller
 
         $recordsBeli = \DB::Table('beli')
             ->leftJoin('tbpemasok', 'beli.id_pemasok', '=', 'tbpemasok.id_pemasok')
-            ->select('beli.*', 'tbpemasok.nama_pemasok as nama_pemasok');
+            ->leftJoin('tbstok', 'beli.id_stok', '=', 'tbstok.id_stok')
+            ->select('beli.*', 'tbpemasok.nama_pemasok as nama_pemasok', 'tbstok.nama_stok as nama_barang');
 
         $recordBeli = $recordsBeli->get();
         $no = 1;
@@ -51,7 +52,7 @@ class BeliController extends Controller
             'beli.*.status' => 'required',
         ]);
 
-        foreach($r->beli as $key=> $value) {
+        foreach($r->beli as $key => $value) {
             \DB::table('beli')->insert([
                 'no_bukti' => $value['no_bukti'],
                 'tanggal' => $value['tanggal'],
@@ -68,7 +69,6 @@ class BeliController extends Controller
                 'keterangan' => $value['keterangan'],
                 'status' => $value['status'],
                 'id_stok' => $value['id_stok'],
-
             ]);
         }
 

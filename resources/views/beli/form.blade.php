@@ -157,6 +157,39 @@
         const addRow = document.getElementById('add');
         let arrCount = 0;
 
+        function initializeRow(newRow) {
+            // seleksi selectOption Stok
+            const selectStok = newRow.querySelector('.selectStok');
+            // seleksi input untuk nampung harga stok
+            const valueHargaStok = newRow.querySelector('.hargaStok');
+            // seleksi input utk nampung qty
+            const valueQty = newRow.querySelector('.qty');
+            // seleksi input utk nampung subtotal
+            const valueSubtotal = newRow.querySelector('.subTotal');
+
+            // ketika select option berubah
+            selectStok.addEventListener('change', function() {
+                // ambil index yang diklik
+                let selectedOption = this.options[this.selectedIndex];
+                // ambil atribut data-price dari option selectedOption
+                const selectedPrice = selectedOption.getAttribute('data-price');
+
+                // masukkan nilai dari data-price ke input harga stok dan konversi dalam bentuk Rp
+                // valueHargaStok.value = `Rp. ${selectedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
+                valueHargaStok.value = selectedPrice;
+            });
+
+            // ketika input qty berubah
+            valueQty.addEventListener('change', function() {
+                // ambil value qty sekarang * value dari harga stok dan konversi ke integer
+                const calcSubtotal = parseFloat(this.value) * parseFloat(valueHargaStok.value);
+
+                // masukkan nilai dari kalkulasi ke input subtotal dan konversi ke bentuk Rp
+                // valueSubtotal.value = `Rp. ${calcSubtotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
+                valueSubtotal.value = calcSubtotal;
+            });
+        }
+
         addRow.addEventListener('click', () => {
             arrCount++;
 
@@ -200,7 +233,7 @@
                                             placeholder="Harga Barang" readonly>
                                     </td>
                                     <td class="col">
-                                        <input type="text" name="beli[0][subtotal]" value=""
+                                        <input type="text" name="beli[${arrCount}][subtotal]" value=""
                                             class="form-control subTotal" placeholder="Subtotal" readonly>
                                     </td>
                                     <td class="col">
@@ -213,37 +246,42 @@
                 this.closest('tr').remove()
             });
 
+            initializeRow(newRow);
         });
 
-        // seleksi selectOption Stok
-        const selectStok = document.querySelector('.selectStok');
-        // seleksi input untuk nampung harga stok
-        const valueHargaStok = document.querySelector('.hargaStok');
-        // seleksi input utk nampung qty
-        const valueQty = document.querySelector('.qty');
-        // seleksi input utk nampung subtotal
-        const valueSubtotal = document.querySelector('.subTotal');
+        initializeRow(document);
 
-        // ketika select option berubah
-        selectStok.addEventListener('change', function() {
-            // ambil index yang diklik
-            let selectedOption = this.options[this.selectedIndex];
-            // ambil atribut data-price dari option selectedOption
-            const selectedPrice = selectedOption.getAttribute('data-price');
 
-            // masukkan nilai dari data-price ke input harga stok dan konversi dalam bentuk Rp
-            // valueHargaStok.value = `Rp. ${selectedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
-            valueHargaStok.value = selectedPrice;
-        });
 
-        // ketika input qty berubah
-        valueQty.addEventListener('change', function() {
-            // ambil value qty sekarang * value dari harga stok dan konversi ke integer
-            const calcSubtotal = this.value * valueHargaStok.value;
+        // // seleksi selectOption Stok
+        // const selectStok = document.querySelector('.selectStok');
+        // // seleksi input untuk nampung harga stok
+        // const valueHargaStok = document.querySelector('.hargaStok');
+        // // seleksi input utk nampung qty
+        // const valueQty = document.querySelector('.qty');
+        // // seleksi input utk nampung subtotal
+        // const valueSubtotal = document.querySelector('.subTotal');
 
-            // masukkan nilai dari kalkulasi ke input subtotal dan konversi ke bentuk Rp
-            // valueSubtotal.value = `Rp. ${calcSubtotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
-            valueSubtotal.value = calcSubtotal;
-        });
+        // // ketika select option berubah
+        // selectStok.addEventListener('change', function() {
+        //     // ambil index yang diklik
+        //     let selectedOption = this.options[this.selectedIndex];
+        //     // ambil atribut data-price dari option selectedOption
+        //     const selectedPrice = selectedOption.getAttribute('data-price');
+
+        //     // masukkan nilai dari data-price ke input harga stok dan konversi dalam bentuk Rp
+        //     // valueHargaStok.value = `Rp. ${selectedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
+        //     valueHargaStok.value = selectedPrice;
+        // });
+
+        // // ketika input qty berubah
+        // valueQty.addEventListener('change', function() {
+        //     // ambil value qty sekarang * value dari harga stok dan konversi ke integer
+        //     const calcSubtotal = this.value * valueHargaStok.value;
+
+        //     // masukkan nilai dari kalkulasi ke input subtotal dan konversi ke bentuk Rp
+        //     // valueSubtotal.value = `Rp. ${calcSubtotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
+        //     valueSubtotal.value = calcSubtotal;
+        // });
     </script>
 @stop

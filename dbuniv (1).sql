@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 08, 2024 at 03:20 PM
+-- Generation Time: Jul 09, 2024 at 11:23 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.7
 
@@ -44,7 +44,8 @@ CREATE TABLE `beli` (
 --
 
 INSERT INTO `beli` (`id_pembelian`, `no_bukti`, `tanggal`, `keterangan`, `id_stok`, `id_pemasok`, `qty`, `created_at`, `updated_at`) VALUES
-(18, 'BUY520240708151906', '2024-07-17', 'Masuk', 56, 3, 12, NULL, NULL);
+(20, 'BUY520240709092627', '2024-07-09', 'Masuk', 54, 2, 12, NULL, NULL),
+(21, 'BUY520240709092627', '2024-07-10', 'Masuk', 56, 4, 13, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -90,7 +91,6 @@ CREATE TABLE `cart` (
 
 INSERT INTO `cart` (`id_cart`, `ukuran`, `qty`, `id_stok`, `id_user`) VALUES
 (70, 'l', 1, 57, 10),
-(74, 'm', 1, 55, 5),
 (75, 'l', 1, 56, 7);
 
 -- --------------------------------------------------------
@@ -134,7 +134,7 @@ INSERT INTO `jual` (`id_penjualan`, `no_bukti`, `tanggal`, `keterangan`, `eksped
 (53, 'OR620240630124335', '2024-06-30', 'Penjualan', 'JNE', 'bukti-pembayaran/171975141588.png', 'success', 6),
 (54, 'OR620240630124452', '2024-06-30', 'Penjualan', 'J&T Kargo', 'bukti-pembayaran/171975149274.png', 'rejected', 6),
 (55, 'OR620240630124625', '2024-06-30', 'Penjualan', 'SiCepat', 'bukti-pembayaran/171975158516.png', 'rejected', 6),
-(56, 'OR620240702132441', '2024-07-02', 'Penjualan', 'JNE', 'bukti-pembayaran/171992668123.png', 'pending', 6);
+(56, 'OR620240702132441', '2024-07-02', 'Penjualan', 'JNE', 'bukti-pembayaran/171992668123.png', 'success', 6);
 
 -- --------------------------------------------------------
 
@@ -190,8 +190,9 @@ CREATE TABLE `mutasi` (
 
 INSERT INTO `mutasi` (`id_mutasi`, `no_bukti`, `qty`, `harga`, `keterangan`, `status`, `id_stok`, `created_at`, `updated_at`) VALUES
 (57, 'OR620240630124335', 1, 58150000, 'Keluar', 'success', 60, '2024-06-30 05:43:36', '2024-06-30 05:43:36'),
-(62, 'OR620240702132441', 1, 13250000, 'Keluar', 'pending', 56, '2024-07-02 06:24:42', '2024-07-02 06:24:42'),
-(63, 'BUY520240708151906', 12, 150600000, 'Masuk', 'success', 56, NULL, NULL);
+(62, 'OR620240702132441', 1, 13250000, 'Keluar', 'success', 56, '2024-07-02 06:24:42', '2024-07-02 06:24:42'),
+(65, 'BUY520240709092627', 12, 450000000, 'Masuk', 'success', 54, NULL, NULL),
+(66, 'BUY520240709092627', 13, 163150000, 'Masuk', 'success', 56, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -248,7 +249,8 @@ INSERT INTO `tbkategori` (`id_kategori`, `nama_kategori`, `created_at`, `updated
 (4, 'Hat', NULL, NULL),
 (5, 'Blazers', NULL, NULL),
 (6, 'Shirts', NULL, NULL),
-(7, 'Piyama', NULL, NULL);
+(7, 'Piyama', NULL, NULL),
+(8, 'Gym', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -548,7 +550,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `beli`
 --
 ALTER TABLE `beli`
-  MODIFY `id_pembelian` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_pembelian` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `brand`
@@ -584,7 +586,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `mutasi`
 --
 ALTER TABLE `mutasi`
-  MODIFY `id_mutasi` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id_mutasi` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -596,7 +598,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `tbkategori`
 --
 ALTER TABLE `tbkategori`
-  MODIFY `id_kategori` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_kategori` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbpelanggan`

@@ -124,6 +124,14 @@ img {
     background-position: 8px 10px;
 }
 
+.search-input {
+    width: 93% !important;
+}
+
+.search-form {
+    width: 100%;
+}
+
 .icons-wrap {
     display: flex;
     flex-direction: row;
@@ -205,6 +213,20 @@ img {
     grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     gap: 10px;
     justify-items: center;
+}
+
+.brand-wrap {
+    position: relative;
+}
+
+.brand-submit {
+    position: absolute;
+    opacity: 0;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    height: 25px;
+    cursor: pointer;
 }
 
 #new-arrival {
@@ -295,7 +317,7 @@ img {
     flex-direction: row;
     justify-content: space-between;
     cursor: pointer;
-    transition: transform 0.5s linear;
+    transition: transform 0.2s linear;
 }
 
 .category-card-wrap:hover {
@@ -311,6 +333,20 @@ img {
     height: 190px;
     object-fit: cover;
     object-position: center;
+}
+
+.category-master-submission {
+    position: relative;
+}
+
+.category-submit {
+    position: absolute;
+    opacity: 0;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    height: 100%;
+    cursor: pointer;
 }
 
 #subscribe {
@@ -390,7 +426,7 @@ footer {
     margin: 0 auto;
 }
 
-.dropdown-wrap {    
+.dropdown-wrap {
     position: relative;
 }
 
@@ -427,8 +463,8 @@ footer {
 }
 
 .icon-img {
-    max-width: inherit!important;
-    height: inherit!important;
+    max-width: inherit !important;
+    height: inherit !important;
 }
 
 @media only screen and (max-width: 400px) {
