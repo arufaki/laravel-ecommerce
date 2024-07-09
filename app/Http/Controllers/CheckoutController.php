@@ -107,7 +107,7 @@ class CheckoutController extends Controller
                 $cartUser->delete();
             } 
 
-            return redirect()->route('ecomPages.index')->with('sukses', 'Berhasil Checkout');
+            return redirect()->to('/orders')->with('sukses', 'Berhasil Checkout');
         } else {
             return redirect()->back()->with('gagal', 'Checkout Gagal');
         }

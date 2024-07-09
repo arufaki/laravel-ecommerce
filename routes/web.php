@@ -34,6 +34,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\OrdersController;
 
 
 // Index WebPages
@@ -80,6 +81,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('profile', ProfileController::class);
     Route::resource('/cart', CartController::class);
     Route::resource('/checkout', CheckoutController::class);
+    Route::resource('/orders', OrdersController::class);
     Route::post('/update-username', [IndexController::class, 'updateUsername'])->name('update.username');
     Route::post('/update-information', [IndexController::class, 'updateInformation'])->name('update.information');
 

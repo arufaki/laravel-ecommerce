@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 09, 2024 at 11:23 AM
+-- Generation Time: Jul 09, 2024 at 07:54 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.7
 
@@ -33,8 +33,8 @@ CREATE TABLE `beli` (
   `tanggal` date NOT NULL,
   `keterangan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_stok` bigint UNSIGNED NOT NULL,
-  `id_pemasok` bigint UNSIGNED DEFAULT NULL,
   `qty` int NOT NULL,
+  `id_pemasok` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -43,9 +43,11 @@ CREATE TABLE `beli` (
 -- Dumping data for table `beli`
 --
 
-INSERT INTO `beli` (`id_pembelian`, `no_bukti`, `tanggal`, `keterangan`, `id_stok`, `id_pemasok`, `qty`, `created_at`, `updated_at`) VALUES
-(20, 'BUY520240709092627', '2024-07-09', 'Masuk', 54, 2, 12, NULL, NULL),
-(21, 'BUY520240709092627', '2024-07-10', 'Masuk', 56, 4, 13, NULL, NULL);
+INSERT INTO `beli` (`id_pembelian`, `no_bukti`, `tanggal`, `keterangan`, `id_stok`, `qty`, `id_pemasok`, `created_at`, `updated_at`) VALUES
+(27, 'BUY520240709181425', '2024-07-10', 'Masuk', 54, 2, 2, NULL, NULL),
+(28, 'BUY520240709181425', '2024-07-11', 'Masuk', 55, 4, 3, NULL, NULL),
+(29, 'BUY520240709181425', '2024-07-10', 'Masuk', 56, 3, 4, NULL, NULL),
+(30, 'BUY520240709181425', '2024-07-10', 'Masuk', 57, 1, 5, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -90,8 +92,8 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id_cart`, `ukuran`, `qty`, `id_stok`, `id_user`) VALUES
-(70, 'l', 1, 57, 10),
-(75, 'l', 1, 56, 7);
+(75, 'l', 1, 56, 7),
+(82, 'l', 1, 59, 5);
 
 -- --------------------------------------------------------
 
@@ -134,7 +136,12 @@ INSERT INTO `jual` (`id_penjualan`, `no_bukti`, `tanggal`, `keterangan`, `eksped
 (53, 'OR620240630124335', '2024-06-30', 'Penjualan', 'JNE', 'bukti-pembayaran/171975141588.png', 'success', 6),
 (54, 'OR620240630124452', '2024-06-30', 'Penjualan', 'J&T Kargo', 'bukti-pembayaran/171975149274.png', 'rejected', 6),
 (55, 'OR620240630124625', '2024-06-30', 'Penjualan', 'SiCepat', 'bukti-pembayaran/171975158516.png', 'rejected', 6),
-(56, 'OR620240702132441', '2024-07-02', 'Penjualan', 'JNE', 'bukti-pembayaran/171992668123.png', 'success', 6);
+(56, 'OR620240702132441', '2024-07-02', 'Penjualan', 'JNE', 'bukti-pembayaran/171992668123.png', 'success', 6),
+(57, 'OR1020240709180411', '2024-07-09', 'Penjualan', 'SiCepat', 'bukti-pembayaran/17205482516.png', 'success', 10),
+(58, 'OR520240709184022', '2024-07-09', 'Penjualan', 'SiCepat', 'bukti-pembayaran/172055042268.png', 'success', 5),
+(59, 'OR520240709184139', '2024-07-09', 'Penjualan', 'SiCepat', 'bukti-pembayaran/172055049937.jpg', 'success', 5),
+(60, 'OR520240709184445', '2024-07-09', 'Penjualan', 'J&T Kargo', 'bukti-pembayaran/172055068569.png', 'pending', 5),
+(61, 'OR520240709191906', '2024-07-09', 'Penjualan', 'JNE', 'bukti-pembayaran/172055274755.png', 'pending', 5);
 
 -- --------------------------------------------------------
 
@@ -189,10 +196,17 @@ CREATE TABLE `mutasi` (
 --
 
 INSERT INTO `mutasi` (`id_mutasi`, `no_bukti`, `qty`, `harga`, `keterangan`, `status`, `id_stok`, `created_at`, `updated_at`) VALUES
-(57, 'OR620240630124335', 1, 58150000, 'Keluar', 'success', 60, '2024-06-30 05:43:36', '2024-06-30 05:43:36'),
-(62, 'OR620240702132441', 1, 13250000, 'Keluar', 'success', 56, '2024-07-02 06:24:42', '2024-07-02 06:24:42'),
-(65, 'BUY520240709092627', 12, 450000000, 'Masuk', 'success', 54, NULL, NULL),
-(66, 'BUY520240709092627', 13, 163150000, 'Masuk', 'success', 56, NULL, NULL);
+(72, 'OR1020240709180411', 1, 77230000, 'Keluar', 'success', 57, '2024-07-09 11:04:12', '2024-07-09 11:04:12'),
+(73, 'OR1020240709180411', 1, 13250000, 'Keluar', 'success', 56, '2024-07-09 11:04:12', '2024-07-09 11:04:12'),
+(74, 'BUY520240709181425', 2, 75000000, 'Masuk', 'success', 54, NULL, NULL),
+(75, 'BUY520240709181425', 4, 120000000, 'Masuk', 'success', 55, NULL, NULL),
+(76, 'BUY520240709181425', 3, 37650000, 'Masuk', 'success', 56, NULL, NULL),
+(77, 'BUY520240709181425', 1, 75202000, 'Masuk', 'success', 57, NULL, NULL),
+(78, 'OR520240709184022', 1, 10110000, 'Keluar', 'success', 59, '2024-07-09 11:40:22', '2024-07-09 11:40:22'),
+(79, 'OR520240709184139', 3, 119880000, 'Keluar', 'success', 54, '2024-07-09 11:41:39', '2024-07-09 11:41:39'),
+(80, 'OR520240709184445', 1, 32110000, 'Keluar', 'pending', 55, '2024-07-09 11:44:45', '2024-07-09 11:44:45'),
+(81, 'OR520240709191906', 1, 39960000, 'Keluar', 'pending', 54, '2024-07-09 12:19:07', '2024-07-09 12:19:07'),
+(82, 'OR520240709191906', 1, 32110000, 'Keluar', 'pending', 55, '2024-07-09 12:19:07', '2024-07-09 12:19:07');
 
 -- --------------------------------------------------------
 
@@ -396,9 +410,9 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 --
 CREATE TABLE `vsaldo7` (
 `id_stok` bigint unsigned
-,`saldo` decimal(33,0)
-,`totalkeluar` decimal(32,0)
 ,`totalmasuk` decimal(32,0)
+,`totalkeluar` decimal(32,0)
+,`saldo` decimal(33,0)
 );
 
 -- --------------------------------------------------------
@@ -411,9 +425,9 @@ CREATE TABLE `vsaldoakhir2` (
 `id_stok` bigint unsigned
 ,`nama_stok` varchar(255)
 ,`saldo_awal` varchar(255)
-,`saldoakhir` double
-,`totalkeluar` decimal(32,0)
 ,`totalmasuk` decimal(32,0)
+,`totalkeluar` decimal(32,0)
+,`saldoakhir` double
 );
 
 -- --------------------------------------------------------
@@ -443,7 +457,6 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 ALTER TABLE `beli`
   ADD PRIMARY KEY (`id_pembelian`),
-  ADD KEY `beli_id_pemasok_index` (`id_pemasok`),
   ADD KEY `id_stok` (`id_stok`);
 
 --
@@ -550,7 +563,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `beli`
 --
 ALTER TABLE `beli`
-  MODIFY `id_pembelian` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_pembelian` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `brand`
@@ -562,7 +575,7 @@ ALTER TABLE `brand`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id_cart` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id_cart` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -574,7 +587,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `jual`
 --
 ALTER TABLE `jual`
-  MODIFY `id_penjualan` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id_penjualan` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -586,7 +599,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `mutasi`
 --
 ALTER TABLE `mutasi`
-  MODIFY `id_mutasi` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id_mutasi` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -638,8 +651,7 @@ ALTER TABLE `users`
 -- Constraints for table `beli`
 --
 ALTER TABLE `beli`
-  ADD CONSTRAINT `beli_ibfk_1` FOREIGN KEY (`id_stok`) REFERENCES `tbstok` (`id_stok`),
-  ADD CONSTRAINT `beli_id_pemasok_foreign` FOREIGN KEY (`id_pemasok`) REFERENCES `tbpemasok` (`id_pemasok`) ON DELETE CASCADE;
+  ADD CONSTRAINT `beli_ibfk_1` FOREIGN KEY (`id_stok`) REFERENCES `tbstok` (`id_stok`);
 
 --
 -- Constraints for table `cart`

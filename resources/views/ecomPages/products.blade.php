@@ -112,7 +112,21 @@
                             @endif
                         </ul>
                     @else
-                        <p>product Not Found!</p>
+                        <div class="empty-cart container">
+                            <div class="empty-wrap">
+                                <div class="empty-img">
+                                    <img src="{{ url('fkhco/assets/png/payment/notfoundproduct.webp') }}"
+                                        alt="">
+                                </div>
+                                <div class="empty-desc">
+                                    <h2>Oops! No Products Found!</h2>
+                                    <p style="width:100%; font-size:18px; margin-bottom:4px;">Your Search did not match
+                                        any products.</p>
+                                    <p style="font-size:18px;">Please Try Again.</p>
+
+                                </div>
+                            </div>
+                        </div>
                     @endif
                 </div>
             </div>

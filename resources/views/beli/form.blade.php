@@ -199,7 +199,7 @@
             newRow.className = 'row mt-2 p-2';
             newRow.innerHTML = `
                                     <td class="col">
-                                         <input type="hidden" class="form-control" name="beli[${arrCount}][no_bukti]" id="no_bukti"
+                                         <input type="text" class="form-control" name="beli[${arrCount}][no_bukti]" id="no_bukti"
                                             placeholder="Nomor Bukti" value="{{ $noBukti }}" readonly required>
                                             <input type="hidden" name="beli[${arrCount}][keterangan]" value="Masuk">
                                             <input type="hidden" name="beli[${arrCount}][status]" value="success">

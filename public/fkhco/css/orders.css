@@ -1,0 +1,39 @@
+.orders-user {
+    height: 100%;
+    margin: 0;
+}
+
+.order-summary {
+    padding: 0 20px;
+}
+
+.detail-order {
+    border: none;
+    border-radius: 0;
+}
+
+.order-wrap {
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 20px 0;
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 1020px) {
+    .checkout-wrap {
+        flex: 1 85%;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .checkout-wrap {
+        flex: 1 70%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .checkout-wrap {
+        margin-bottom: 20px;
+    }
+}
