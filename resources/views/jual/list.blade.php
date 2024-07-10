@@ -46,7 +46,6 @@
                                             <th>Tanggal Penjualan</th>
                                             <th>Keterangan Penjualan</th>
                                             <th>Ekspedisi</th>
-                                            <th>Bukti Pembayaran</th>
                                             <th>Status</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -69,7 +68,7 @@
                                                 </td>
                                                 <td>{{ $record->status ?? '-' }}</td>
                                                 @if ($record->status != 'success' && $record->status != 'rejected')
-                                                    <td style="display: flex; flex-direction: column; gap: 5px;">
+                                                    <td style="display: flex; flex-direction: row; gap: 5px;">
                                                         <a href="{{ Route('jual.edit', $record->id_penjualan) }}"
                                                             class="btn btn-success">Accept</a>
                                                         <form action="{{ Route('jual.show', $record->id_penjualan) }}"
