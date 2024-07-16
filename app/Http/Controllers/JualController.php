@@ -110,13 +110,37 @@ class JualController extends Controller
         // $updateStatusMutasi = $callMutasi->update(['status' => $status]);
     }
 
+
+    public function detailPesanan($no_bukti) {
+
+        $getDetailJual = \DB::table('jual')
+                        ->leftJoin('tbpelanggan', 'jual.id_user', '=', 'tbpelanggan.id_user')
+                        ->leftJoin('users', 'jual.id_user', '=', 'users.id')
+                        ->where('no_bukti', $no_bukti)
+                        ->select('jual.*', 'tbpelanggan.alamat_pelanggan as alamat', 'tbpelanggan.nohp as nohp', 'users.name as nama_pelanggan')
+                        ->first();
+        
+        $getMutasiJual = \DB::table('mutasi')
+                        ->leftJoin('tbstok', 'mutasi.id_stok', '=', 'tbstok.id_stok')
+                        ->where('no_bukti', $no_bukti)
+                        ->select('mutasi.*', 'tbstok.nama_stok as nama_stok', 'tbstok.harga_jual as harga_jual')
+                        ->get();
+
+        $calcTotal = $getMutasiJual->sum(function($datas) {
+            return $datas->harga_jual * $datas->qty;
+        });
+
+        return view('jual.detail', compact('getDetailJual', 'getMutasiJual', 'calcTotal'));
+    }
+
+    
     // fungsi ini dijalankan ketika admin menekan tombol accept
     public function edit($id_penjualan)
     {
         // memanggil private fungsi dengan memasukkan parameter sesuai dengan button yang diklik
         // success dan keluar adalah parameter ketika button accept diklik akan update status ke success dan cart masuk ke mutasi dengan keterangan barang keluar atau terjual
         $this->orderConditionCheck($id_penjualan, "success");
-        return redirect()->route('jual.index');
+        return redirect()->back();
     }
 
         // fungsi ini dijalankan ketika admin menekan tombol reject
@@ -125,7 +149,6 @@ class JualController extends Controller
          // memanggil private fungsi dengan memasukkan parameter sesuai dengan button yang diklik
         // rejected dan masuk adalah parameter ketika button reject diklik akan update status ke rejected dan cart masuk ke mutasi dengan keterangan barang masuk atau return jual
         $this->orderConditionCheck($id_penjualan, "rejected");
-        return redirect()->route('jual.index');
+        return redirect()->back();
     }
-
 }

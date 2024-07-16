@@ -16,13 +16,22 @@
     <header>
         @include('ecomPages.component.header')
     </header>
+    ->select('tbstok.nama_stok', 'tbstok.harga_jual', 'tbstok.image',
+    'mutasi.id_stok','tbkategori.nama_kategori','brand.nama_brand', DB::raw('SUM(mutasi.qty) as total_keluar'))
+    ->where('mutasi.keterangan', '=', "Keluar")
+    ->groupBy('mutasi.id_stok', 'tbstok.nama_stok', 'tbstok.harga_jual', 'tbstok.image')
+    ->orderBy('total_keluar', 'DESC')
+    ->get();
     <main>
         @php
             $user = Auth()->user();
             $getUserOrder = \DB::table('jual')
+                ->leftJoin('mutasi', 'tbjual.no_bukti', '=', 'mutasi.no_bukti')
+                ->leftJoin('tbstok', 'mutasi.id_stok', '=', 'tbstok.id_stok')
                 ->where('id_user', $user->id)
+                ->select('jual.*', 'mutasi.no_bukti', 'tbstok.nama_stok')
                 ->orderBy('id_penjualan', 'DESC')
-                ->get();
+                ->groupBy('no_bukti');
         @endphp
         <section id="product-cart">
             <div class="cart-wrapped container">
@@ -30,15 +39,16 @@
                     <h1 style="font-weight:800; font-size:32px">YOUR ORDERS</h1>
                     <div class="swiper-checkout">
                         <div class="order-summary orders-user">
-                            @foreach ($getUserOrder as $order)
+                            @foreach ($getUserOrder as $no_bukti => $userOrderWrap)
                                 <div class="order-wrap">
-                                    <h6>ID Transaksi : {{ $order->no_bukti }}</h6>
+                                    <h6>ID Transaksi : {{ $no_bukti }}</h6>
                                     <p style="margin-bottom:5px">Tanggal Transaksi :
                                         <strong>{{ $order->tanggal }}</strong>
                                     </p>
                                     <p style="margin-bottom:5px">Ekspedisi : <strong>{{ $order->ekspedisi }}</strong>
                                     </p>
                                     <p style="margin-bottom:5px">Status : {{ $order->status }}</p>
+                                    <p>{{ $order->nama_stok }}</p>
                                 </div>
                             @endforeach
                         </div>

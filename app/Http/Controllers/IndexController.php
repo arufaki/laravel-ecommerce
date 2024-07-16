@@ -117,14 +117,30 @@ class IndexController extends Controller
 
     }
 
-    // public function searchFunction(Request $r) {
+    public function newArrival() {
 
-    //     $search = $r->input('search');
+        $products = \DB::table('tbstok')
+        ->leftJoin('tbkategori', 'tbstok.id_kategori', '=', 'tbkategori.id_kategori')
+        ->leftJoin('brand', 'tbstok.id_brand', '=', 'brand.id_brand')
+        ->select('tbstok.*', 'tbkategori.nama_kategori as nama_kategori', 'brand.nama_brand as nama_brand')
+        ->orderBy('id_stok', 'desc')
+        ->get();
+         
+        return view('ecomPages.newArrival', compact('products'));
+    }
 
-    //     $dataProduct = \DB::table('tbstok')
+    public function topSelling() {
+        $products = \DB::table('mutasi')
+            ->leftJoin('tbstok', 'mutasi.id_stok', '=', 'tbstok.id_stok')
+            ->leftJoin('tbkategori', 'tbstok.id_kategori', '=', 'tbkategori.id_kategori')
+            ->leftJoin('brand', 'tbstok.id_brand', '=', 'brand.id_brand')
+            ->select('tbstok.nama_stok', 'tbstok.harga_jual', 'tbstok.image', 'mutasi.id_stok','tbkategori.nama_kategori','brand.nama_brand', DB::raw('SUM(mutasi.qty) as total_keluar'))
+            ->where('mutasi.keterangan', '=', "Keluar")
+            ->groupBy('mutasi.id_stok', 'tbstok.nama_stok', 'tbstok.harga_jual', 'tbstok.image')
+            ->orderBy('total_keluar', 'DESC')
+            ->get();
 
-
-    //     return view('ecomPages.products');
-    // }
+        return view('ecomPages.topSelling', compact('products'));
+    }
 
 }

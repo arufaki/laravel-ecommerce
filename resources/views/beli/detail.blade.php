@@ -37,42 +37,45 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+
+                            {{-- @php
+                                    dd($beliWrap->no_bukti);
+                                @endphp --}}
+                            <h6>No Bukti : <strong>{{ $getBeli->no_bukti }}</strong></h6>
+                            <h6>Nama Pemasok : <strong>{{ $getBeli->nama_pemasok }}</strong></h6>
+                            <h6>Tanggal Pembelian : <strong>{{ $getBeli->tanggal }}</strong></h6>
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nomor Bukti</th>
-                                        <th>Tanggal Pembelian</th>
+                                        <th>Nama Barang</th>
+                                        <th>Qty</th>
                                         <th>Keterangan Pembelian</th>
-                                        <th>Pemasok</th>
-                                        <th>Aksi</th>
+                                        <th>Harga</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($recordBeli as $record)
+                                    @php
+                                        $no = 1;
+                                    @endphp
+                                    @foreach ($getMutasi as $record)
                                         <tr>
                                             <td>{{ $no++ }}</td>
-                                            <td>{{ $record->no_bukti ?? '-' }}</td>
-                                            <td>{{ $record->tanggal ?? '-' }}</td>
+                                            <td>{{ $record->nama_stok ?? '-' }}</td>
+                                            <td>{{ $record->qty ?? '-' }}</td>
                                             <td>{{ $record->keterangan ?? '-' }}</td>
-                                            <td>{{ $record->nama_pemasok ?? '-' }}</td>
-                                            <td class="d-flex flex-col justify-content-around">
-                                                <a href="{{ Route('beli.show', $record->no_bukti) }}"
-                                                    class="btn btn-success">Detail</a>
-                                                <form action="{{ Route('beli.destroy', $record->id_pembelian) }}"
-                                                    method="POST" onsubmit="return confirm('Yakin Ingin Menghapus ?')">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                                </form>
+                                            <td>{{ 'Rp. ' . number_format($record->harga, 0, ',', '.') }}
                                             </td>
                                         </tr>
                                     @endforeach
+                                    <tr class="total-row">
+                                        <td colspan="4">Total:</td>
+                                        <td><strong>{{ 'Rp. ' . number_format($calcTotal, 0, ',', '.') }}</strong></td>
+                                    </tr>
                                 </tbody>
                             </table>
                             <div class="d-flex justify-content-between mt-3">
-                                <a href="{{ url('/') }}" class="btn btn-danger">Kembali</a>
-                                <a href="{{ url('beli/create') }}" class="btn btn-primary">Tambah Data</a>
+                                <a href="{{ url('/beli') }}" class="btn btn-danger">Kembali</a>
                             </div>
                         </div>
                         <!-- /.card-body -->

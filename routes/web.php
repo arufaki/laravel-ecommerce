@@ -55,6 +55,12 @@ Route::get('/product/{id_stok}', [IndexController::class, 'productDetail'])->nam
 // Search Product
 Route::get('/search', [IndexController::class, 'products'])->name('product.search');
 
+// New Arrival
+Route::get('/new-arrival', [IndexController::class, 'newArrival']);
+
+// Top Selling
+Route::get('/top-selling', [IndexController::class, 'topSelling']);
+
 
 // Admin only Accesed This Pages
 Route::middleware(['auth', 'verified', 'rolesChecker:admin'])->group(function () {
@@ -73,6 +79,8 @@ Route::middleware(['auth', 'verified', 'rolesChecker:admin'])->group(function ()
         'kategori' => KategoriController::class,
         'mutasi' => MutasiController::class,
     ]);
+
+    Route::get('/detail-pesanan/{no_bukti}', [JualController::class, 'detailPesanan'])->name('jual.detail');
 });
 
 

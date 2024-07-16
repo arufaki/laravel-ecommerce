@@ -119,7 +119,7 @@
                     </div>
                 </div>
                 <div class="btn-wrap">
-                    <button class="view-btn">View All</button>
+                    <button class="view-btn"><a href="{{ url('new-arrival') }}">View All</a></button>
                 </div>
             </div>
         </section>
@@ -158,7 +158,7 @@
                     </div>
                 </div>
                 <div class="btn-wrap">
-                    <button class="view-btn">View All</button>
+                    <button class="view-btn"><a href="{{ url('top-selling') }}">View All</a></button>
                 </div>
             </div>
         </section>

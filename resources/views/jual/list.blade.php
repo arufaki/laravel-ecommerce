@@ -44,8 +44,6 @@
                                             <th>Nomor Bukti Penjualan</th>
                                             <th>Nama Pembeli</th>
                                             <th>Tanggal Penjualan</th>
-                                            <th>Keterangan Penjualan</th>
-                                            <th>Ekspedisi</th>
                                             <th>Status</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -57,29 +55,9 @@
                                                 <td>{{ $record->no_bukti ?? '-' }}</td>
                                                 <td>{{ $record->nama_pelanggan ?? '-' }}</td>
                                                 <td>{{ $record->tanggal ?? '-' }}</td>
-                                                <td>{{ $record->keterangan ?? '-' }}</td>
-                                                <td>{{ $record->ekspedisi ?? '-' }}</td>
-                                                <td>
-                                                    <a href="#" data-target="#exampleModalCenter" data-toggle="modal"
-                                                        class="btn btn-success text-white btn-view"
-                                                        data-order-id="{{ $record->id_penjualan }}"
-                                                        data-image="{{ $record->bukti_pembayaran }}"><i class="fas fa-eye"
-                                                            data-></i></a>
-                                                </td>
                                                 <td>{{ $record->status ?? '-' }}</td>
-                                                @if ($record->status != 'success' && $record->status != 'rejected')
-                                                    <td style="display: flex; flex-direction: row; gap: 5px;">
-                                                        <a href="{{ Route('jual.edit', $record->id_penjualan) }}"
-                                                            class="btn btn-success">Accept</a>
-                                                        <form action="{{ Route('jual.show', $record->id_penjualan) }}"
-                                                            onsubmit="return confirm('Yakin ingin Reject Pesanan Ini ?')">
-                                                            @csrf
-                                                            <button type="submit" class="btn btn-danger"
-                                                                style="width:100%;">Reject</button>
-                                                        </form>
-
-                                                    </td>
-                                                @endif
+                                                <td><a href="{{ Route('jual.detail', $record->no_bukti) }}"
+                                                        class="btn btn-success">Detail</a></td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -136,3 +114,36 @@
             });
         </script>
     @stop
+
+    {{-- 
+     @foreach ($recordJual as $record)
+                                            <tr>
+                                                <td>{{ $no++ }}</td>
+                                                <td>{{ $record->no_bukti ?? '-' }}</td>
+                                                <td>{{ $record->nama_pelanggan ?? '-' }}</td>
+                                                <td>{{ $record->tanggal ?? '-' }}</td>
+                                                <td>{{ $record->keterangan ?? '-' }}</td>
+                                                <td>{{ $record->ekspedisi ?? '-' }}</td>
+                                                <td>
+                                                    <a href="#" data-target="#exampleModalCenter" data-toggle="modal"
+                                                        class="btn btn-success text-white btn-view"
+                                                        data-order-id="{{ $record->id_penjualan }}"
+                                                        data-image="{{ $record->bukti_pembayaran }}"><i class="fas fa-eye"
+                                                            data-></i></a>
+                                                </td>
+                                                <td>{{ $record->status ?? '-' }}</td>
+                                                @if ($record->status != 'success' && $record->status != 'rejected')
+                                                    <td style="display: flex; flex-direction: row; gap: 5px;">
+                                                        <a href="{{ Route('jual.edit', $record->id_penjualan) }}"
+                                                            class="btn btn-success">Accept</a>
+                                                        <form action="{{ Route('jual.show', $record->id_penjualan) }}"
+                                                            onsubmit="return confirm('Yakin ingin Reject Pesanan Ini ?')">
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-danger"
+                                                                style="width:100%;">Reject</button>
+                                                        </form>
+
+                                                    </td>
+                                                @endif
+                                            </tr>
+                                        @endforeach --}}
