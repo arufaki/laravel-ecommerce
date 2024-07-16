@@ -20,6 +20,35 @@
     cursor: pointer;
 }
 
+.order-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-list {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    position: relative;
+}
+
+.price-product {
+    position: absolute;
+    bottom: 0;
+    right: 50px;
+    font-weight: 800;
+}
+
+.prod-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.subscribe-btn {
+    border-radius: 80px !important;
+}
+
 @media only screen and (min-width: 1020px) {
     .checkout-wrap {
         flex: 1 85%;

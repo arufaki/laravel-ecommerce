@@ -16,80 +16,74 @@
     <header>
         @include('ecomPages.component.header')
     </header>
-    ->select('tbstok.nama_stok', 'tbstok.harga_jual', 'tbstok.image',
-    'mutasi.id_stok','tbkategori.nama_kategori','brand.nama_brand', DB::raw('SUM(mutasi.qty) as total_keluar'))
-    ->where('mutasi.keterangan', '=', "Keluar")
-    ->groupBy('mutasi.id_stok', 'tbstok.nama_stok', 'tbstok.harga_jual', 'tbstok.image')
-    ->orderBy('total_keluar', 'DESC')
-    ->get();
     <main>
-        @php
-            $user = Auth()->user();
-            $getUserOrder = \DB::table('jual')
-                ->leftJoin('mutasi', 'tbjual.no_bukti', '=', 'mutasi.no_bukti')
-                ->leftJoin('tbstok', 'mutasi.id_stok', '=', 'tbstok.id_stok')
-                ->where('id_user', $user->id)
-                ->select('jual.*', 'mutasi.no_bukti', 'tbstok.nama_stok')
-                ->orderBy('id_penjualan', 'DESC')
-                ->groupBy('no_bukti');
-        @endphp
         <section id="product-cart">
             <div class="cart-wrapped container">
                 <div class="products-cart checkout-wrap">
                     <h1 style="font-weight:800; font-size:32px">YOUR ORDERS</h1>
                     <div class="swiper-checkout">
                         <div class="order-summary orders-user">
-                            @foreach ($getUserOrder as $no_bukti => $userOrderWrap)
+                            @php
+                                $user = Auth()->user();
+                                $getUserOrder = \DB::table('jual')
+                                    ->where('id_user', $user->id)
+                                    ->orderBy('id_penjualan', 'DESC')
+                                    ->get();
+                            @endphp
+                            @foreach ($getUserOrder as $order)
                                 <div class="order-wrap">
-                                    <h6>ID Transaksi : {{ $no_bukti }}</h6>
-                                    <p style="margin-bottom:5px">Tanggal Transaksi :
-                                        <strong>{{ $order->tanggal }}</strong>
-                                    </p>
-                                    <p style="margin-bottom:5px">Ekspedisi : <strong>{{ $order->ekspedisi }}</strong>
-                                    </p>
-                                    <p style="margin-bottom:5px">Status : {{ $order->status }}</p>
-                                    <p>{{ $order->nama_stok }}</p>
+                                    <div class="order-info">
+                                        <h6>ID Transaksi : {{ $order->no_bukti }}</h6>
+                                        <p style="margin-bottom:5px">Tanggal Transaksi :
+                                            <strong>{{ $order->tanggal }}</strong>
+                                        </p>
+                                        <p style="margin-bottom:5px">Ekspedisi :
+                                            <strong>{{ $order->ekspedisi }}</strong>
+                                        </p>
+                                        <p style="margin-bottom:5px">Status :
+                                            @if ($order->status == 'pending')
+                                                Menunggu Konfirmasi
+                                            @elseif($order->status == 'success')
+                                                Pesanan Berhasil
+                                            @elseif($order->status == 'rejected')
+                                                Pesanan Ditolak
+                                            @else
+                                                Status Tidak Diketahui
+                                            @endif
+                                        </p>
+                                    </div>
+                                    @php
+                                        $getMutasiJual = \DB::table('mutasi')
+                                            ->leftJoin('tbstok', 'mutasi.id_stok', '=', 'tbstok.id_stok')
+                                            ->where('no_bukti', $order->no_bukti)
+                                            ->select('mutasi.*', 'tbstok.*')
+                                            ->get();
+                                    @endphp
+                                    @foreach ($getMutasiJual as $mutasi)
+                                        <div class="product-list">
+                                            <div class="img-thumb">
+                                                @php
+                                                    $images = json_decode($mutasi->image);
+                                                @endphp
+                                                <img src="{{ asset('storage/foto-produk/' . $images[0]) }}"
+                                                    alt="" width="100">
+                                            </div>
+                                            <div class="prod-info">
+                                                <h6>{{ $mutasi->nama_stok }}</h6>
+                                                <p>{{ $mutasi->qty }}x</p>
+                                            </div>
+                                            <p class="price-product">
+                                                {{ 'Rp. ' . number_format($mutasi->harga_jual, 0, ',', '.') }}</p>
+                                        </div>
+                                    @endforeach
                                 </div>
                             @endforeach
                         </div>
                     </div>
                 </div>
-                <div class="order-summary checkout-summary detail-order">
-
-                </div>
             </div>
         </section>
 
-
-        <!-- Modal for bank payment -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Payment Method</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="bank-available">
-                            <img src="{{ url('fkhco/assets/png/payment/bca.webp') }}" alt="bca" width="100"
-                                class="bank bca bankSelected">
-                            <img src="{{ url('fkhco/assets/png/payment/bri.webp') }}" alt="bca" width="120"
-                                class="bank bri">
-                            <img src="{{ url('fkhco/assets/png/payment/bni.webp') }}" alt="bca" width="100"
-                                class="bank bni">
-                            <img src="{{ url('fkhco/assets/png/payment/mandiri.webp') }}" alt="bca" width="100"
-                                class="bank mandiri">
-                        </div>
-                        <div class="noRekening">
-                            <h2 class="accountHeader">Account Number : <span class="accountNumber"></span></h2>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
     </main>
     <footer>

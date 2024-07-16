@@ -11,7 +11,7 @@
     <div class="nav-wrap">
         <h1 class="logos logo products-logo">FKH.CO<a href="{{ url('/') }}" class="hidden-link"></a></h1>
         <form action="{{ Route('product.search') }}" method="GET" class="search-form">
-            <input type="text" placeholder="Search" class="search-wrap search-input" name="search" />
+            <input type="search" placeholder="Search" class="search-wrap search-input" name="search" />
         </form>
         {{-- <input type="text" placeholder="Search product..." class="search-wrap" /> --}}
         <div class="icons-wrap">
